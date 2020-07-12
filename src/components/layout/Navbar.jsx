@@ -8,16 +8,19 @@ import './styles/Navbar.css';
 const Navbar = (props) => {
   return (
     <div>
-      <div className="bg-gray-400 flex items-center p-2">
-        <img
-          className="h-10"
-          src={require('assets/govt-uk.png')}
-          alt="govt. logo"
-        />
-        <p className="mx-2 text-xl font-medium">
-          GOVERNMENT OF UTTARAKHAND
-          <span className="text-base"> - NATIONAL WEB PORTAL FOR JOBS</span>
-        </p>
+      <div className="top-nav bg-gray-300 flex justify-between items-end p-2">
+        <div className="flex items-end">
+          <img
+            className="h-10"
+            src={require('assets/govt-uk.png')}
+            alt="govt. logo"
+          />
+          <p className="mx-2 text-xl font-medium">
+            GOVERNMENT OF UTTARAKHAND
+            <span className="text-base"> - NATIONAL WEB PORTAL FOR JOBS</span>
+          </p>
+        </div>
+        <div id="google_translate_element"></div>
       </div>
 
       <header className="flex items-center justify-between">
@@ -29,7 +32,7 @@ const Navbar = (props) => {
               alt="Awsar Logo"
             />
           </Link>
-          <Link to="/jobs" className="mx-2 text-blue-700 hover:text-blue-800">
+          <Link to="/jobs" className="mx-3 text-blue-700 hover:text-blue-800">
             Jobs
           </Link>
           <Link to="/" className="text-blue-700 hover:text-blue-800">

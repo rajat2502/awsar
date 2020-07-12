@@ -48,7 +48,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="copyright-bar bg-blue-600">
-        <h6 className="text-sm">@2020 Team Alpha. All Rights Reserved.</h6>
+        <h6 className="text-sm">@2020 Team Hashtag. All Rights Reserved.</h6>
         <div>
           <Link to="/">About us</Link>
           <Link to="/">Contact us</Link>

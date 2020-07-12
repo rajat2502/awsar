@@ -2,6 +2,10 @@
   margin-right: 14px;
 }
 
+.footer a:hover {
+  text-decoration: underline;
+}
+
 .footer h6,
 .footer a {
   color: white;
