@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
-import './Navbar.css';
+import './styles/Navbar.css';
 
 const Navbar = (props) => {
   return (
