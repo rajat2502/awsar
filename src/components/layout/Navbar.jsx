@@ -1,14 +1,17 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
+
+import Icon from 'components/Icon';
 
 import './styles/Navbar.css';
 
 const Navbar = (props) => {
+  const print = () => window.print();
+
   return (
     <div>
-      <div className="top-nav bg-gray-300 flex justify-between items-end p-2">
+      <div className="top-nav bg-gray-300 flex justify-between items-center px-2 py-1">
         <div className="flex items-end">
           <img
             className="h-10"
@@ -20,7 +23,12 @@ const Navbar = (props) => {
             <span className="text-base"> - NATIONAL WEB PORTAL FOR JOBS</span>
           </p>
         </div>
-        <div id="google_translate_element"></div>
+        <div className="flex">
+          <button className="mx-2" onClick={print} title="Print this page">
+            <Icon name="print" />
+          </button>
+          <div id="google_translate_element"></div>
+        </div>
       </div>
 
       <header className="flex items-center justify-between">
