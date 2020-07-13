@@ -12,7 +12,7 @@ const Navbar = (props) => {
   return (
     <div>
       <div className="top-nav bg-gray-300 flex justify-between items-center px-2 py-1">
-        <div className="flex items-end">
+        <div className="flex items-center">
           <img
             className="h-10"
             src={require('assets/govt-uk.png')}

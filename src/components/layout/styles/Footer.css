@@ -11,12 +11,8 @@
   color: white;
 }
 
-.main-footer a {
-  font-size: 1.1rem;
-}
-
 .main-footer {
-  padding: 18px;
+  padding: 8px 12px;
   background: #222;
   display: flex;
   justify-content: space-between;
@@ -38,7 +34,7 @@
 }
 
 .copyright-bar {
-  padding: 10px 18px;
+  padding: 4px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
