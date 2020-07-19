@@ -9,7 +9,7 @@ export const StyledForm = styled.main.attrs({
     width: ${({ width }) => width};
 
     h1 {
-      ${tw`text-2xl font-bold text-center m-2 text-blue-600`}
+      ${tw`text-3xl font-bold text-center m-2 text-blue-600`}
     }
 
     form {
@@ -21,7 +21,15 @@ export const StyledForm = styled.main.attrs({
     }
 
     button {
-      ${tw`m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded`}
+      ${tw`my-2 mx-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded`}
+
+      &:disabled {
+        ${tw`hover:bg-blue-500 opacity-50 cursor-not-allowed`}
+      }
+
+      &.selected {
+        ${tw`bg-white text-blue-500 border border-blue-500`}
+      }
     }
 
     a {
