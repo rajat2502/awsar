@@ -31,7 +31,7 @@ const Navbar = (props) => {
         </div>
       </div>
 
-      <header className="flex items-center justify-between">
+      <header className="bg-white flex items-center justify-between">
         <div className="logo flex items-end text-lg font-bold">
           <Link className="m-1" to="/">
             <img
