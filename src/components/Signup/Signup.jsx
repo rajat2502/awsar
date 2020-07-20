@@ -1,66 +1,89 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
+import { signUp } from 'api';
 import { StyledForm } from 'components/StyledForm';
 
-function Signup() {
-  const [role, setRole] = useState('employee');
-  const [pending, setPending] = useState(false);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [passoword, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+function Signup({ setUser }) {
+  const history = useHistory();
 
-  const handleSubmit = (e) => {
-    setPending(true);
+  const [userRole, setUserRole] = useState('Employee');
+  const [pending, setPending] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
+  const [error, setError] = useState(null);
+
+  const handleValidation = () => password === password2;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setPending(false);
+    if (handleValidation()) {
+      setPending(true);
+      setError(null);
+      const data = await signUp(
+        { username: userName, password, password2, email: userEmail },
+        userRole,
+      );
+      if (data.error) setError(data.error);
+      else {
+        const { username, role, email } = data;
+        setUser({ username, role, email });
+        if (data.role === 'Employee') history.push('/jobs');
+        else history.push('/createJob');
+      }
+      setPending(false);
+    } else setError("Passwords don't match!");
   };
+
+  // if (localStorage.getItem('token')) {
+  //   return <Redirect to="/dashboard" />;
+  // }
 
   return (
     <StyledForm width="380px">
       <h1>Sign Up</h1>
       <div>
         <button
-          className={role === 'employee' ? 'selected py-1' : 'py-1'}
-          onClick={() => setRole('employee')}>
+          className={userRole === 'Employee' ? 'selected py-1' : 'py-1'}
+          onClick={() => setUserRole('Employee')}>
           Employee
         </button>
         <button
-          className={role === 'employer' ? 'selected py-1' : 'py-1'}
-          onClick={() => setRole('employer')}>
+          className={userRole === 'Employer' ? 'selected py-1' : 'py-1'}
+          onClick={() => setUserRole('Employer')}>
           Employer
         </button>
       </div>
       <form onSubmit={handleSubmit}>
         <input
-          name="username"
           type="text"
           placeholder="Username"
-          onClick={(e) => setUsername(e.target.value)}
+          onChange={(e) => setUserName(e.target.value)}
         />
         <input
-          name="email"
           type="email"
           placeholder="Email"
-          onClick={(e) => setEmail(e.target.value)}
+          onChange={(e) => setUserEmail(e.target.value)}
         />
         <input
-          name="password"
           type="password"
           placeholder="Password"
-          onClick={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <input
-          name="password2"
           type="password"
           placeholder="Confirm Password"
+          onChange={(e) => setPassword2(e.target.value)}
         />
-        <button
-          type="submit"
-          disabled={pending}
-          onClick={(e) => setPassword2(e.target.value)}>
+        <button type="submit" disabled={pending}>
           {!pending ? 'Sign Up' : 'Signing Up...'}
         </button>
+        {error && <p className="error">{error}</p>}
+        <p>
+          Already have an account? <Link to="/login">Login!</Link>
+        </p>
       </form>
     </StyledForm>
   );

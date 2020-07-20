@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
@@ -16,6 +16,8 @@ import Dashboard from 'components/Dashboard';
 import Error404 from 'components/Error404';
 
 function App() {
+  const [user, setUser] = useState({});
+
   return (
     <ThemeProvider theme={{}}>
       <div className="App">
@@ -24,9 +26,19 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/profile" component={Profile} />
+            <Route
+              exact
+              path="/login"
+              render={(props) => (
+                <Login user={user} setUser={setUser} {...props} />
+              )}
+            />
+            <Route
+              exact
+              path="/signup"
+              render={(props) => <Signup setUser={setUser} {...props} />}
+            />
+            <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/jobs" component={Jobs} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route component={Error404} />
