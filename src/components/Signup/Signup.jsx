@@ -30,8 +30,7 @@ function Signup({ setUser }) {
       else {
         const { username, role, email } = data;
         setUser({ username, role, email });
-        if (data.role === 'Employee') history.push('/jobs');
-        else history.push('/createJob');
+        history.push('/createProfile');
       }
       setPending(false);
     } else setError("Passwords don't match!");

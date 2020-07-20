@@ -53,9 +53,9 @@ const Navbar = (props) => {
         <nav>
           <ul>
             <li className="mx-2">
-              <Link to="/postresume">
+              <Link to="/createProfile">
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Post Resume
+                  Create Profile
                 </button>
               </Link>
             </li>

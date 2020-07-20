@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 import { ThemeProvider } from 'styled-components';
+
 import { GlobalStyles } from 'styles/globalStyles';
 
 // import PrivateRoute from 'components/common/PrivateRoute'; - define later
@@ -12,6 +12,8 @@ import Login from 'components/Login';
 import Signup from 'components/Signup';
 import Profile from 'components/Profile';
 import Jobs from 'components/Jobs';
+import CreateJob from 'components/CreateJob';
+import CreateProfile from 'components/CreateProfile';
 import Dashboard from 'components/Dashboard';
 import Error404 from 'components/Error404';
 
@@ -38,7 +40,13 @@ function App() {
               path="/signup"
               render={(props) => <Signup setUser={setUser} {...props} />}
             />
+            <Route
+              exact
+              path="/createProfile"
+              render={(props) => <CreateProfile user={user} {...props} />}
+            />
             <Route exact path="/profile/:id" component={Profile} />
+            <Route exact path="/createJob" component={CreateJob} />
             <Route exact path="/jobs" component={Jobs} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route component={Error404} />

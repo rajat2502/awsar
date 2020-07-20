@@ -24,6 +24,19 @@ export const signUp = async (dataObj, role) => {
     localStorage.setItem('token', data.token);
     return data;
   } catch (err) {
-    return { error: err.response.data.email[0] };
+    return { error: 'Something went wrong!' };
+  }
+};
+
+export const createProfile = async (dataObj, role) => {
+  try {
+    const reqUrl =
+      role === 'Employee'
+        ? '/profile/create-employee-profile/'
+        : '/profile/create-employer-profile/';
+    const { data } = await axios.post(`${baseUrl}${reqUrl}`, dataObj);
+    return data;
+  } catch (err) {
+    return { error: 'Something went wrong!' };
   }
 };

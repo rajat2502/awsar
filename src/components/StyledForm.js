@@ -3,10 +3,45 @@ import tw from 'twin.macro';
 
 export const StyledForm = styled.main.attrs({
   className:
-    'shadow-md rounded-lg py-12 bg-white m-auto flex justify-center flex-col items-center',
+    'shadow-md rounded-lg py-12 bg-white mx-auto my-6 flex justify-center flex-col items-center',
 })`
   & {
     width: ${({ width }) => width};
+
+    div {
+      &.input-group {
+        ${tw`my-1`}
+
+        input {
+          width: 300px;
+        }
+
+        @media (max-width: 600px) {
+          input,
+          select,
+          textarea {
+            width: 280px;
+          }
+        }
+      }
+
+      &.education,
+      .work {
+        ${tw`relative shadow-sm text-gray-600 border border-gray-400 rounded p-2 text-sm mb-2`}
+        width: 624px;
+
+        span {
+          position: absolute;
+          right: 10px;
+          top: 5px;
+          cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+          width: 280px;
+        }
+      }
+    }
 
     h1 {
       ${tw`text-3xl font-bold text-center m-2 text-blue-700`}
@@ -16,8 +51,17 @@ export const StyledForm = styled.main.attrs({
       ${tw`flex flex-col justify-center`}
     }
 
-    input {
+    label {
+      ${tw`mx-1 text-gray-600 font-medium`}
+    }
+
+    input,
+    textarea {
       ${tw`focus:outline-none focus:shadow-outline m-1 block border border-gray-300 rounded py-2 px-4 appearance-none leading-normal border-gray-400`}
+    }
+
+    select {
+      ${tw`block bg-white focus:outline-none focus:shadow-outline m-1 border border-gray-300 rounded py-2 px-4 leading-tight border-gray-400`}
     }
 
     button {
