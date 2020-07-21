@@ -1,8 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 function Profile() {
-  const { username } = useParams();
+  // const { username } = useParams();
   return <div>Profile</div>;
 }
 
