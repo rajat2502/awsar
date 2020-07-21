@@ -15,11 +15,26 @@ function Signup({ setUser }) {
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState(null);
 
-  const handleValidation = () => password === password2;
+  function passwordValidation() {
+    if (password !== password2) {
+      setError("Password don't match");
+      return false;
+    } else if (
+      password.length < 6 ||
+      password.length > 50 ||
+      password.search(/\d/) === -1 ||
+      password.search(/[a-zA-Z]/) === -1 ||
+      password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+]/) !== -1
+    ) {
+      setError('Please use a stronger password!');
+      return false;
+    }
+    return true;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (handleValidation()) {
+    if (passwordValidation()) {
       setPending(true);
       setError(null);
       const data = await signUp(
@@ -30,10 +45,11 @@ function Signup({ setUser }) {
       else {
         const { username, role, email } = data;
         setUser({ username, role, email });
+        localStorage.setItem('user', JSON.stringify({ username, role, email }));
         history.push('/createProfile');
       }
       setPending(false);
-    } else setError("Passwords don't match!");
+    }
   };
 
   // if (localStorage.getItem('token')) {
@@ -59,21 +75,25 @@ function Signup({ setUser }) {
         <input
           type="text"
           placeholder="Username"
+          required
           onChange={(e) => setUserName(e.target.value)}
         />
         <input
           type="email"
           placeholder="Email"
+          required
           onChange={(e) => setUserEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="password"
           placeholder="Confirm Password"
+          required
           onChange={(e) => setPassword2(e.target.value)}
         />
         <button type="submit" disabled={pending}>

@@ -20,6 +20,7 @@ function Login({ setUser }) {
     else {
       const { username, role, email } = data;
       setUser({ username, role, email });
+      localStorage.setItem('user', JSON.stringify({ username, role, email }));
       if (data.role === 'Employee') history.push('/jobs');
       else history.push('/createJob');
     }
@@ -37,11 +38,13 @@ function Login({ setUser }) {
         <input
           type="text"
           placeholder="Username"
+          required
           onChange={(e) => setUserName(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" disabled={pending}>

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyles } from 'styles/globalStyles';
 
-// import PrivateRoute from 'components/common/PrivateRoute'; - define later
+import PrivateRoute from 'components/common/PrivateRoute';
 import Navbar from 'components/layout/Navbar';
 import Footer from 'components/layout/Footer';
 import Home from 'components/Home';
@@ -20,12 +20,18 @@ import Error404 from 'components/Error404';
 function App() {
   const [user, setUser] = useState({});
 
+  useEffect(() => {
+    const userDetails = JSON.parse(localStorage.getItem('user'));
+    console.log(userDetails);
+    if (userDetails) setUser(userDetails);
+  }, []);
+
   return (
     <ThemeProvider theme={{}}>
       <div className="App">
         <GlobalStyles />
         <Router>
-          <Navbar />
+          <Navbar user={user} setUser={setUser} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route
@@ -40,15 +46,15 @@ function App() {
               path="/signup"
               render={(props) => <Signup setUser={setUser} {...props} />}
             />
-            <Route
+            <PrivateRoute
               exact
               path="/createProfile"
               render={(props) => <CreateProfile user={user} {...props} />}
             />
-            <Route exact path="/profile/:username" component={Profile} />
-            <Route exact path="/createJob" component={CreateJob} />
-            <Route exact path="/jobs" component={Jobs} />
-            <Route exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/profile/:username" component={Profile} />
+            <PrivateRoute exact path="/createJob" component={CreateJob} />
+            <PrivateRoute exact path="/jobs" component={Jobs} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <Route component={Error404} />
           </Switch>
           <Footer />

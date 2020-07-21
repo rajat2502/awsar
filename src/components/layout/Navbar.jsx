@@ -6,8 +6,13 @@ import Icon from 'components/Icon';
 
 import './styles/Navbar.css';
 
-const Navbar = (props) => {
+const Navbar = ({ user, setUser }) => {
   const print = () => window.print();
+
+  const signOut = () => {
+    setUser({});
+    localStorage.clear();
+  };
 
   return (
     <div>
@@ -53,9 +58,9 @@ const Navbar = (props) => {
         <nav>
           <ul>
             <li className="mx-2">
-              <Link to="/createProfile">
+              <Link to={`/profile/${user.username}`}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Create Profile
+                  Profile
                 </button>
               </Link>
             </li>
@@ -67,14 +72,19 @@ const Navbar = (props) => {
               </Link>
             </li>
             <li className="ml-2">
-              {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                Logout
-              </button> */}
-              <Link to="/login">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Login
+              {user.username ? (
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                  onClick={signOut}>
+                  Logout
                 </button>
-              </Link>
+              ) : (
+                <Link to="/login">
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Login
+                  </button>
+                </Link>
+              )}
             </li>
           </ul>
         </nav>

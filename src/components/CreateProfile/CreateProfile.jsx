@@ -603,12 +603,12 @@ function CreateProfile({ user }) {
               </div>
             </>
           )}
-          {!pending && error && <p className="error">{error}</p>}
           {(user.role === 'Employer' || step === 4) && (
             <button type="submit" disabled={pending}>
               {pending ? 'Submitting Details...' : 'Submit Details'}
             </button>
           )}
+          {!pending && error && <p className="error">{error}</p>}
         </form>
       </StyledForm>
     </div>
