@@ -3,11 +3,13 @@ import { useHistory } from 'react-router-dom';
 
 import { createProfile, uploadImage } from 'api';
 
+import Icon from 'components/Icon';
 import { StyledForm } from 'components/StyledForm';
 
 function CreateProfile({ user }) {
   const history = useHistory();
 
+  const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
   const [addAnotherEducation, setAddAnotherEducation] = useState(true);
   const [addAnotherWork, setAddAnotherWork] = useState(true);
@@ -103,6 +105,7 @@ function CreateProfile({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
     setPending(true);
     let image = null;
     if (file) image = await handleProfileImageUpload();
@@ -111,7 +114,7 @@ function CreateProfile({ user }) {
       user.role === 'Employee' ? employeeDetails : companyDetails,
     );
     const data = await createProfile(dataObj, user.role);
-    if (data.error) console.log(data.error);
+    if (data.error) setError(data.error);
     else history.push(`/profile/${user.username}`);
     setPending(false);
   };
@@ -480,13 +483,22 @@ function CreateProfile({ user }) {
               )}
               <div className="buttons flex justify-between w-full">
                 {step !== 1 && (
-                  <button type="button" onClick={decStep} disabled={pending}>
-                    Prev Step
+                  <button
+                    type="button"
+                    onClick={decStep}
+                    disabled={pending}
+                    className="flex items-center">
+                    <Icon name="chevron-left" />
+                    &nbsp; Prev Step
                   </button>
                 )}
                 {step !== 4 && (
-                  <button type="button" onClick={incStep}>
-                    Next Step
+                  <button
+                    type="button"
+                    onClick={incStep}
+                    className="flex items-center">
+                    Next Step &nbsp;
+                    <Icon name="chevron-right" />
                   </button>
                 )}
               </div>
@@ -591,6 +603,7 @@ function CreateProfile({ user }) {
               </div>
             </>
           )}
+          {!pending && error && <p className="error">{error}</p>}
           {(user.role === 'Employer' || step === 4) && (
             <button type="submit" disabled={pending}>
               {pending ? 'Submitting Details...' : 'Submit Details'}
