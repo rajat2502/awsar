@@ -16,6 +16,12 @@ export const StyledForm = styled.main.attrs({
           width: 300px;
         }
 
+        label {
+          span {
+            ${tw`text-red-600`}
+          }
+        }
+
         .file-upload {
           ${tw`cursor-pointer text-center focus:outline-none focus:shadow-outline m-1 block border border-gray-300 rounded py-2 px-4 appearance-none leading-normal border-gray-400`}
         }

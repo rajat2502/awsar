@@ -127,7 +127,7 @@ function CreateProfile({ user }) {
   return (
     <div className="rounded-lg bg-white mx-auto my-8 sm:px-8">
       <StyledForm className="shadow-none">
-        <h1>Complete your profile</h1>
+        <h1>Profile</h1>
         <form onSubmit={handleSubmit}>
           {user.role !== 'Employee' ? (
             <>
@@ -138,7 +138,9 @@ function CreateProfile({ user }) {
                   </p>
                   <div className="flex flex-col sm:flex-row">
                     <div className="input-group">
-                      <label>First Name</label>
+                      <label>
+                        First Name <span>*</span>
+                      </label>
                       <input
                         type="text"
                         placeholder="Eg: John"
@@ -148,7 +150,9 @@ function CreateProfile({ user }) {
                       />
                     </div>
                     <div className="input-group sm:ml-2">
-                      <label>Last Name</label>
+                      <label>
+                        Last Name <span>*</span>
+                      </label>
                       <input
                         type="text"
                         placeholder="Eg: Doe"
@@ -159,7 +163,9 @@ function CreateProfile({ user }) {
                     </div>
                   </div>
                   <div className="input-group sm:w-full">
-                    <label>Gender</label>
+                    <label>
+                      Gender <span>*</span>
+                    </label>
                     <select
                       className="sm:w-full"
                       name="gender"
@@ -172,7 +178,9 @@ function CreateProfile({ user }) {
                   </div>
                   <div className="flex flex-col sm:flex-row">
                     <div className="input-group">
-                      <label>DOB</label>
+                      <label>
+                        DOB <span>*</span>
+                      </label>
                       <input
                         type="date"
                         name="dob"
@@ -193,7 +201,9 @@ function CreateProfile({ user }) {
                   </div>
                   <div className="flex flex-col sm:flex-row">
                     <div className="input-group">
-                      <label>City of residence</label>
+                      <label>
+                        City of residence <span>*</span>
+                      </label>
                       <input
                         type="text"
                         placeholder="Eg: Delhi"
@@ -203,7 +213,9 @@ function CreateProfile({ user }) {
                       />
                     </div>
                     <div className="input-group sm:ml-2">
-                      <label>Title</label>
+                      <label>
+                        Title <span>*</span>
+                      </label>
                       <input
                         type="text"
                         placeholder="Eg: Product Manager"
@@ -231,7 +243,9 @@ function CreateProfile({ user }) {
                   </div>
                   <div className="flex flex-col sm:flex-row">
                     <div className="input-group">
-                      <label>Industry</label>
+                      <label>
+                        Industry <span>*</span>
+                      </label>
                       <input
                         type="text"
                         placeholder="Eg: Telecom"
@@ -241,7 +255,9 @@ function CreateProfile({ user }) {
                       />
                     </div>
                     <div className="input-group sm:ml-2">
-                      <label>Skills (comma seperated)</label>
+                      <label>
+                        Skills (comma seperated) <span>*</span>
+                      </label>
                       <input
                         type="text"
                         placeholder="Eg: Designing, Communication"
@@ -480,7 +496,9 @@ function CreateProfile({ user }) {
             <>
               <div className="flex flex-col sm:flex-row">
                 <div className="input-group">
-                  <label>Company</label>
+                  <label>
+                    Company <span>*</span>
+                  </label>
                   <input
                     type="text"
                     placeholder="Eg: IOCL"
@@ -500,7 +518,9 @@ function CreateProfile({ user }) {
               </div>
               <div className="flex flex-col sm:flex-row">
                 <div className="input-group">
-                  <label>Location</label>
+                  <label>
+                    Location <span>*</span>
+                  </label>
                   <input
                     type="text"
                     placeholder="Eg: Delhi"
@@ -509,7 +529,9 @@ function CreateProfile({ user }) {
                   />
                 </div>
                 <div className="input-group sm:ml-2">
-                  <label>Industry</label>
+                  <label>
+                    Industry <span>*</span>
+                  </label>
                   <input
                     type="text"
                     placeholder="Eg: IT sector"
@@ -520,7 +542,9 @@ function CreateProfile({ user }) {
               </div>
               <div className="flex flex-col sm:flex-row">
                 <div className="input-group">
-                  <label>Company size</label>
+                  <label>
+                    Company size <span>*</span>
+                  </label>
                   <input
                     type="number"
                     placeholder="Eg: 200"
@@ -529,7 +553,9 @@ function CreateProfile({ user }) {
                   />
                 </div>
                 <div className="input-group sm:ml-2">
-                  <label>Company type</label>
+                  <label>
+                    Company type <span>*</span>
+                  </label>
                   <input
                     type="text"
                     placeholder="Eg: Central Government"
@@ -555,7 +581,9 @@ function CreateProfile({ user }) {
                 </span>
               </div>
               <div className="textarea input-group sm:w-full">
-                <label>Description</label>
+                <label>
+                  Description <span>*</span>
+                </label>
                 <textarea
                   className="sm:w-full"
                   placeholder="Company description..."
