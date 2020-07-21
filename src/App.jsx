@@ -45,7 +45,7 @@ function App() {
               path="/createProfile"
               render={(props) => <CreateProfile user={user} {...props} />}
             />
-            <Route exact path="/profile/:id" component={Profile} />
+            <Route exact path="/profile/:username" component={Profile} />
             <Route exact path="/createJob" component={CreateJob} />
             <Route exact path="/jobs" component={Jobs} />
             <Route exact path="/dashboard" component={Dashboard} />

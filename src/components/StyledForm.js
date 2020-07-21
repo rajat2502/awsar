@@ -16,6 +16,10 @@ export const StyledForm = styled.main.attrs({
           width: 300px;
         }
 
+        .file-upload {
+          ${tw`cursor-pointer text-center focus:outline-none focus:shadow-outline m-1 block border border-gray-300 rounded py-2 px-4 appearance-none leading-normal border-gray-400`}
+        }
+
         @media (max-width: 600px) {
           input,
           select,

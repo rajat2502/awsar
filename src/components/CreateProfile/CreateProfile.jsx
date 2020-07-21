@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { createProfile } from 'api';
+import { createProfile, uploadImage } from 'api';
 
 import { StyledForm } from 'components/StyledForm';
 
@@ -12,6 +12,8 @@ function CreateProfile({ user }) {
   const [addAnotherEducation, setAddAnotherEducation] = useState(true);
   const [addAnotherWork, setAddAnotherWork] = useState(true);
   const [pending, setPending] = useState(false);
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState('No file choosen!');
   const [employeeDetails, setEmployeeDetails] = useState({
     first_name: '',
     last_name: '',
@@ -20,6 +22,12 @@ function CreateProfile({ user }) {
     industry: '',
     location: '',
     skills: '',
+    portfolio: '',
+    github: '',
+    linkedin: '',
+    twitter: '',
+    image:
+      'https://www.pngkey.com/png/full/305-3050875_employee-parking-add-employee-icon-png.png',
     workexperience: [],
     education: [],
   });
@@ -31,11 +39,22 @@ function CreateProfile({ user }) {
     company_type: '',
     industry: '',
     overview: '',
+    linkedin: '',
+    twitter: '',
+    image:
+      'https://cdn0.iconfinder.com/data/icons/building-vol-9/512/12-512.png',
   });
 
   const decStep = () => step !== 1 && setStep(step - 1);
 
   const incStep = () => step !== 3 && setStep(step + 1);
+
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setFileName(e.target.files[0].name);
+      setFile(e.target.files[0]);
+    }
+  };
 
   const addEducation = () => {
     const institution = document.getElementsByName('institution')[0].value;
@@ -81,11 +100,26 @@ function CreateProfile({ user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPending(true);
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+      const imageData = await uploadImage(formData);
+      user.role === 'Employee'
+        ? await setEmployeeDetails((state) => ({
+            ...state,
+            image: imageData.image.url,
+          }))
+        : await setCompanyDetails((state) => ({
+            ...state,
+            image: imageData.image.url,
+          }));
+    }
     const dataObj =
       user.role === 'Employee'
         ? Object.assign({ user: user.username }, employeeDetails)
         : Object.assign({ user: user.username }, companyDetails);
     const data = await createProfile(dataObj, user.role);
+    console.log(data);
     if (data.error) console.log(data.error);
     else history.push(`/profile/${user.username}`);
     setPending(false);
@@ -108,6 +142,9 @@ function CreateProfile({ user }) {
             <>
               {step === 1 && (
                 <>
+                  <p className="m-2 text-lg font-bold text-gray-600 text-center">
+                    Basic Details
+                  </p>
                   <div className="flex flex-col sm:flex-row">
                     <div className="input-group">
                       <label>First Name</label>
@@ -154,7 +191,7 @@ function CreateProfile({ user }) {
                       />
                     </div>
                     <div className="input-group sm:ml-2">
-                      <label>Designation</label>
+                      <label>Title</label>
                       <input
                         type="text"
                         placeholder="Eg: Product Manager"
@@ -163,6 +200,22 @@ function CreateProfile({ user }) {
                         onChange={(e) => handleEmployeeDetails(e)}
                       />
                     </div>
+                  </div>
+                  <div className="input-group sm:w-full">
+                    <p className="ml-1 text-gray-600">Photo</p>
+                    <label className="file-upload" htmlFor="file-upload">
+                      Choose an Image
+                    </label>
+                    <input
+                      id="file-upload"
+                      name="image"
+                      type="file"
+                      style={{ display: 'none' }}
+                      onChange={handleImageChange}
+                    />
+                    <span className="text-xs block ml-1 text-gray-600">
+                      File: {fileName}
+                    </span>
                   </div>
                   <div className="flex flex-col sm:flex-row">
                     <div className="input-group">
@@ -410,6 +463,22 @@ function CreateProfile({ user }) {
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
+              </div>
+              <div className="input-group sm:w-full">
+                <p className="ml-1 text-gray-600">Company Logo</p>
+                <label className="file-upload" htmlFor="file-upload">
+                  Choose an Image
+                </label>
+                <input
+                  id="file-upload"
+                  name="image"
+                  type="file"
+                  style={{ display: 'none' }}
+                  onChange={handleImageChange}
+                />
+                <span className="text-xs block ml-1 text-gray-600">
+                  File: {fileName}
+                </span>
               </div>
               <div className="textarea input-group sm:w-full">
                 <label>Description</label>
