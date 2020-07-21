@@ -35,7 +35,6 @@ export const createProfile = async (dataObj, role) => {
         ? '/profile/create-employee-profile/'
         : '/profile/create-employer-profile/';
     const { data } = await axios.post(`${baseUrl}${reqUrl}`, dataObj);
-    console.log(data);
     return data;
   } catch (err) {
     console.log(err.response);

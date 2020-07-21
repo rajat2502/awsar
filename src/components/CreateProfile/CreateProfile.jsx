@@ -13,7 +13,7 @@ function CreateProfile({ user }) {
   const [addAnotherWork, setAddAnotherWork] = useState(true);
   const [pending, setPending] = useState(false);
   const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState('No file choosen!');
+  const [fileName, setFileName] = useState('Choose an Image');
   const [employeeDetails, setEmployeeDetails] = useState({
     first_name: '',
     last_name: '',
@@ -228,7 +228,9 @@ function CreateProfile({ user }) {
                   <div className="input-group sm:w-full">
                     <p className="ml-1 text-gray-600">Photo</p>
                     <label className="file-upload" htmlFor="file-upload">
-                      Choose an Image
+                      {`${
+                        fileName !== 'Choose an Image' ? 'File: ' : ''
+                      }${fileName}`}
                     </label>
                     <input
                       id="file-upload"
@@ -237,9 +239,6 @@ function CreateProfile({ user }) {
                       style={{ display: 'none' }}
                       onChange={handleImageChange}
                     />
-                    <span className="text-xs block ml-1 text-gray-600">
-                      File: {fileName}
-                    </span>
                   </div>
                   <div className="flex flex-col sm:flex-row">
                     <div className="input-group">
@@ -567,7 +566,9 @@ function CreateProfile({ user }) {
               <div className="input-group sm:w-full">
                 <p className="ml-1 text-gray-600">Company Logo</p>
                 <label className="file-upload" htmlFor="file-upload">
-                  Choose an Image
+                  {`${
+                    fileName !== 'Choose an Image' ? 'File: ' : ''
+                  }${fileName}`}
                 </label>
                 <input
                   id="file-upload"
@@ -576,9 +577,6 @@ function CreateProfile({ user }) {
                   style={{ display: 'none' }}
                   onChange={handleImageChange}
                 />
-                <span className="text-xs block ml-1 text-gray-600">
-                  File: {fileName}
-                </span>
               </div>
               <div className="textarea input-group sm:w-full">
                 <label>
