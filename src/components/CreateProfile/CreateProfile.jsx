@@ -18,6 +18,9 @@ function CreateProfile({ user }) {
     first_name: '',
     last_name: '',
     gender: 'Male',
+    about: '',
+    dob: '',
+    phone_number: '',
     title: '',
     industry: '',
     location: '',
@@ -26,8 +29,6 @@ function CreateProfile({ user }) {
     github: '',
     linkedin: '',
     twitter: '',
-    image:
-      'https://www.pngkey.com/png/full/305-3050875_employee-parking-add-employee-icon-png.png',
     workexperience: [],
     education: [],
   });
@@ -39,15 +40,11 @@ function CreateProfile({ user }) {
     company_type: '',
     industry: '',
     overview: '',
-    linkedin: '',
-    twitter: '',
-    image:
-      'https://cdn0.iconfinder.com/data/icons/building-vol-9/512/12-512.png',
   });
 
   const decStep = () => step !== 1 && setStep(step - 1);
 
-  const incStep = () => step !== 3 && setStep(step + 1);
+  const incStep = () => step !== 4 && setStep(step + 1);
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -97,29 +94,23 @@ function CreateProfile({ user }) {
     setEmployeeDetails((state) => ({ ...state, workexperience: newWork }));
   };
 
+  const handleProfileImageUpload = async () => {
+    const formData = new FormData();
+    formData.append('image', file);
+    const imageData = await uploadImage(formData);
+    return imageData.image.url;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPending(true);
-    if (file) {
-      const formData = new FormData();
-      formData.append('image', file);
-      const imageData = await uploadImage(formData);
-      user.role === 'Employee'
-        ? await setEmployeeDetails((state) => ({
-            ...state,
-            image: imageData.image.url,
-          }))
-        : await setCompanyDetails((state) => ({
-            ...state,
-            image: imageData.image.url,
-          }));
-    }
-    const dataObj =
-      user.role === 'Employee'
-        ? Object.assign({ user: user.username }, employeeDetails)
-        : Object.assign({ user: user.username }, companyDetails);
+    let image = null;
+    if (file) image = await handleProfileImageUpload();
+    const dataObj = Object.assign(
+      { user: user.username, email: user.email, image },
+      user.role === 'Employee' ? employeeDetails : companyDetails,
+    );
     const data = await createProfile(dataObj, user.role);
-    console.log(data);
     if (data.error) console.log(data.error);
     else history.push(`/profile/${user.username}`);
     setPending(false);
@@ -138,7 +129,7 @@ function CreateProfile({ user }) {
       <StyledForm className="shadow-none">
         <h1>Complete your profile</h1>
         <form onSubmit={handleSubmit}>
-          {user.role === 'Employee' ? (
+          {user.role !== 'Employee' ? (
             <>
               {step === 1 && (
                 <>
@@ -178,6 +169,27 @@ function CreateProfile({ user }) {
                       <option>Female</option>
                       <option>Other</option>
                     </select>
+                  </div>
+                  <div className="flex flex-col sm:flex-row">
+                    <div className="input-group">
+                      <label>DOB</label>
+                      <input
+                        type="date"
+                        name="dob"
+                        value={employeeDetails.dob}
+                        onChange={(e) => handleEmployeeDetails(e)}
+                      />
+                    </div>
+                    <div className="input-group sm:ml-2">
+                      <label>Phone number</label>
+                      <input
+                        type="number"
+                        placeholder="Eg: 9999999999"
+                        name="phone_number"
+                        value={employeeDetails.phone_number}
+                        onChange={(e) => handleEmployeeDetails(e)}
+                      />
+                    </div>
                   </div>
                   <div className="flex flex-col sm:flex-row">
                     <div className="input-group">
@@ -238,6 +250,17 @@ function CreateProfile({ user }) {
                         onChange={(e) => handleEmployeeDetails(e)}
                       />
                     </div>
+                  </div>
+                  <div className="textarea input-group sm:w-full">
+                    <label>About Yourself</label>
+                    <textarea
+                      className="sm:w-full"
+                      placeholder="Describe yourself in 200 words"
+                      name="about"
+                      maxLength="200"
+                      value={employeeDetails.about}
+                      onChange={(e) => handleEmployeeDetails(e)}
+                    />
                   </div>
                 </>
               )}
@@ -389,13 +412,64 @@ function CreateProfile({ user }) {
                   </div>
                 </>
               )}
+              {step === 4 && (
+                <>
+                  <p className="m-2 text-lg font-bold text-gray-600 text-center">
+                    Profile Links
+                  </p>
+                  <div className="flex flex-col sm:flex-row">
+                    <div className="input-group">
+                      <label>LinkedIn</label>
+                      <input
+                        type="text"
+                        placeholder="LinkedIn profile"
+                        name="linkedin"
+                        value={employeeDetails.linkedin}
+                        onChange={(e) => handleEmployeeDetails(e)}
+                      />
+                    </div>
+                    <div className="input-group sm:ml-2">
+                      <label>Twitter</label>
+                      <input
+                        type="text"
+                        placeholder="Twitter Profile"
+                        name="twitter"
+                        value={employeeDetails.twitter}
+                        onChange={(e) => handleEmployeeDetails(e)}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row">
+                    <div className="input-group">
+                      <label>GitHub</label>
+                      <input
+                        type="text"
+                        placeholder="GitHub profile"
+                        name="github"
+                        value={employeeDetails.github}
+                        onChange={(e) => handleEmployeeDetails(e)}
+                      />
+                    </div>
+                    <div className="input-group sm:ml-2">
+                      <label>Resume Link</label>
+                      <input
+                        type="text"
+                        placeholder="Online Resume link"
+                        name="resume"
+                        value={employeeDetails.resume}
+                        onChange={(e) => handleEmployeeDetails(e)}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
               <div className="buttons flex justify-between w-full">
                 {step !== 1 && (
                   <button type="button" onClick={decStep} disabled={pending}>
                     Prev Step
                   </button>
                 )}
-                {step !== 3 && (
+                {step !== 4 && (
                   <button type="button" onClick={incStep}>
                     Next Step
                   </button>
@@ -491,7 +565,7 @@ function CreateProfile({ user }) {
               </div>
             </>
           )}
-          {(user.role === 'Employer' || step === 3) && (
+          {(user.role === 'Employer' || step === 4) && (
             <button type="submit" disabled={pending}>
               {pending ? 'Submitting Details...' : 'Submit Details'}
             </button>
