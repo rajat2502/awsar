@@ -129,7 +129,7 @@ function CreateProfile({ user }) {
       <StyledForm className="shadow-none">
         <h1>Profile</h1>
         <form onSubmit={handleSubmit}>
-          {user.role !== 'Employee' ? (
+          {user.role === 'Employee' ? (
             <>
               {step === 1 && (
                 <>
@@ -471,8 +471,8 @@ function CreateProfile({ user }) {
                       <input
                         type="text"
                         placeholder="Online Resume link"
-                        name="resume"
-                        value={employeeDetails.resume}
+                        name="portfolio"
+                        value={employeeDetails.portfolio}
                         onChange={(e) => handleEmployeeDetails(e)}
                       />
                     </div>
