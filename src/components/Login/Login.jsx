@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 
 import { login } from 'api';
 import { StyledForm } from 'components/StyledForm';
@@ -27,9 +27,9 @@ function Login({ setUser }) {
     setPending(false);
   };
 
-  // if (localStorage.getItem('token')) {
-  //   return <Redirect to="/dashboard" />;
-  // }
+  if (localStorage.getItem('token')) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <StyledForm width="360px">

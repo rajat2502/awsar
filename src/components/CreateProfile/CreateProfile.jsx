@@ -48,6 +48,14 @@ function CreateProfile({ user }) {
 
   const incStep = () => step !== 4 && setStep(step + 1);
 
+  const handleEmployeeDetails = ({ target: { name, value } }) => {
+    setEmployeeDetails((state) => ({ ...state, [name]: value }));
+  };
+
+  const handleCompanyDetails = ({ target: { name, value } }) => {
+    setCompanyDetails((state) => ({ ...state, [name]: value }));
+  };
+
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setFileName(e.target.files[0].name);
@@ -117,14 +125,6 @@ function CreateProfile({ user }) {
     if (data.error) setError(data.error);
     else history.push(`/profile/${user.username}`);
     setPending(false);
-  };
-
-  const handleEmployeeDetails = ({ target: { name, value } }) => {
-    setEmployeeDetails((state) => ({ ...state, [name]: value }));
-  };
-
-  const handleCompanyDetails = ({ target: { name, value } }) => {
-    setCompanyDetails((state) => ({ ...state, [name]: value }));
   };
 
   return (

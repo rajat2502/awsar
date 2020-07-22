@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 
 import Icon from 'components/Icon';
 
@@ -65,9 +64,9 @@ const Navbar = ({ user, setUser }) => {
               </Link>
             </li>
             <li className="mx-2">
-              <Link to="/hire">
+              <Link to="/createProfile">
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Post Job
+                  Create Profile
                 </button>
               </Link>
             </li>

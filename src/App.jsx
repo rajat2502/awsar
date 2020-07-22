@@ -4,16 +4,17 @@ import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyles } from 'styles/globalStyles';
 
-import PrivateRoute from 'components/common/PrivateRoute';
+import PrivateRoute from 'components/PrivateRoute';
 import Navbar from 'components/layout/Navbar';
 import Footer from 'components/layout/Footer';
 import Home from 'components/Home';
 import Login from 'components/Login';
 import Signup from 'components/Signup';
-import Profile from 'components/Profile';
-import Jobs from 'components/Jobs';
 import CreateJob from 'components/CreateJob';
 import CreateProfile from 'components/CreateProfile';
+import Profile from 'components/Profile';
+import OrgProfile from 'components/OrgProfile';
+import Jobs from 'components/Jobs';
 import Dashboard from 'components/Dashboard';
 import Error404 from 'components/Error404';
 
@@ -22,7 +23,6 @@ function App() {
 
   useEffect(() => {
     const userDetails = JSON.parse(localStorage.getItem('user'));
-    console.log(userDetails);
     if (userDetails) setUser(userDetails);
   }, []);
 
@@ -51,8 +51,9 @@ function App() {
               path="/createProfile"
               render={(props) => <CreateProfile user={user} {...props} />}
             />
-            <PrivateRoute exact path="/profile/:username" component={Profile} />
             <PrivateRoute exact path="/createJob" component={CreateJob} />
+            <PrivateRoute exact path="/profile/:username" component={Profile} />
+            <PrivateRoute exact path="/org/:username" component={OrgProfile} />
             <PrivateRoute exact path="/jobs" component={Jobs} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <Route component={Error404} />
