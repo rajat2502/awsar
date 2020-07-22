@@ -24,6 +24,7 @@ function Signup({ setUser }) {
       password.length > 50 ||
       password.search(/\d/) === -1 ||
       password.search(/[a-zA-Z]/) === -1 ||
+      // eslint-disable-next-line no-useless-escape
       password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+]/) !== -1
     ) {
       setError('Please use a stronger password!');

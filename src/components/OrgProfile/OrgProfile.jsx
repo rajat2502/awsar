@@ -13,6 +13,7 @@ function OrgProfile() {
     setUserData(userDetails);
   }, [username]);
 
+  console.log(userData);
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
   return <div>OrgProfile</div>;
