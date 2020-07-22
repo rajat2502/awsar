@@ -1,7 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Home() {
-  return <div>Home</div>;
+  return (
+    <Link to="/profile/rajat">
+      <span>Rajat</span>
+    </Link>
+  );
 }
 
 export default Home;
