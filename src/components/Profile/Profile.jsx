@@ -99,7 +99,7 @@ function Profile() {
                   )}
                   {userData.github && (
                     <a
-                      href={userData.linkedin}
+                      href={userData.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mx-1">
@@ -108,7 +108,7 @@ function Profile() {
                   )}
                   {userData.twitter && (
                     <a
-                      href={userData.linkedin}
+                      href={userData.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mx-1">
@@ -117,7 +117,7 @@ function Profile() {
                   )}
                   {userData.portfolio && (
                     <a
-                      href={userData.linkedin}
+                      href={userData.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mx-1">
@@ -156,7 +156,10 @@ function Profile() {
                   key={ed.start_date}
                   className="my-2 shadow-sm border border-indigo-400 rounded p-2 mb-2">
                   <p className="text-lg font-medium">
-                    {ed.institution} - {ed.degree}
+                    <span className="font-bold text-gray-800">
+                      {ed.institution}
+                    </span>{' '}
+                    - {ed.degree}
                   </p>
                   <p className="text-sm text-gray-600">
                     {ed.start_date} - {ed.end_date}
