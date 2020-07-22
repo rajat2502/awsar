@@ -8,10 +8,15 @@ import Icon from 'components/Icon';
 function Profile() {
   const { username } = useParams();
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchUserData = useCallback(async () => {
-    const userDetails = await getProfile(username, 'Employee');
-    setUserData(userDetails);
+    setError(null);
+    const data = await getProfile(username, 'Employee');
+    if (data.error) setError(data.error.detail);
+    else setUserData(data);
+    setLoading(false);
   }, [username]);
 
   useEffect(() => {
@@ -20,11 +25,12 @@ function Profile() {
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
-  if (!userData) return null; // to fix
+  if (error) return <div className="m-auto text-3xl font-bold">{error}</div>;
+  if (!userData || loading)
+    return <div className="m-auto text-3xl font-bold">Loading...</div>; // to fix
 
-  console.log(userData);
   return (
-    <div className="container m-auto px-2">
+    <div className="container mx-auto my-4 px-2">
       <div className="flex flex-wrap mx-2">
         <div className="w-full sm:w-1/3 sm:px-2">
           <div className="shadow rounded bg-white p-4">
@@ -123,8 +129,8 @@ function Profile() {
             )}
           </div>
         </div>
-        <div class="w-full my-2 sm:my-0 sm:w-2/3 sm:px-2">
-          <div class="shadow rounded bg-white py-4 px-6">
+        <div className="w-full my-4 sm:my-0 sm:w-2/3 sm:px-2">
+          <div className="shadow rounded bg-white py-4 px-6">
             <div className="mb-3">
               <p className="text-xl font-medium text-blue-600">About</p>
               <p>{userData.about}</p>
@@ -133,7 +139,9 @@ function Profile() {
               <p className="font-medium text-xl mt-2 text-blue-600">Skills</p>
               <div className="mt-1">
                 {userData.skills.split(',').map((skill) => (
-                  <button class="text-sm mr-2 bg-transparent text-indigo-700 font-semibold px-2 border border-indigo-500 rounded">
+                  <button
+                    key={skill}
+                    className="text-sm mr-2 bg-transparent text-indigo-700 font-semibold px-2 border border-indigo-500 rounded">
                     {skill}
                   </button>
                 ))}

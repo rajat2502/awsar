@@ -67,6 +67,6 @@ export const getProfile = async (username, role) => {
     const { data } = await axios.get(`${baseUrl}/profile${reqUrl}${username}`);
     return data;
   } catch (err) {
-    console.log(err.response);
+    return { error: err.response.data };
   }
 };
