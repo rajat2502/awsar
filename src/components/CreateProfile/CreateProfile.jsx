@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 import { createProfile, uploadImage } from 'api';
 
@@ -126,6 +126,8 @@ function CreateProfile({ user }) {
     else history.push(`/profile/${user.username}`);
     setPending(false);
   };
+
+  if (localStorage.getItem('token')) return <Redirect to="/dashboard" />;
 
   return (
     <div className="rounded-lg bg-white mx-auto my-8 sm:px-8">

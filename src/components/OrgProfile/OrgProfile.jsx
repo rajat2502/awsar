@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 
 import { getProfile } from 'api';
 
@@ -12,6 +12,8 @@ function OrgProfile() {
     const userDetails = getProfile(username, 'Employee');
     setUserData(userDetails);
   }, [username]);
+
+  if (localStorage.getItem('token')) return <Redirect to="/dashboard" />;
 
   return <div>OrgProfile</div>;
 }

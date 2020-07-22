@@ -52,9 +52,7 @@ function Signup({ setUser }) {
     }
   };
 
-  if (localStorage.getItem('token')) {
-    return <Redirect to="/dashboard" />;
-  }
+  if (localStorage.getItem('token')) return <Redirect to="/dashboard" />;
 
   return (
     <StyledForm width="380px">

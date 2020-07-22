@@ -4,7 +4,6 @@ import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyles } from 'styles/globalStyles';
 
-import PrivateRoute from 'components/PrivateRoute';
 import Navbar from 'components/layout/Navbar';
 import Footer from 'components/layout/Footer';
 import Home from 'components/Home';
@@ -46,16 +45,16 @@ function App() {
               path="/signup"
               render={(props) => <Signup setUser={setUser} {...props} />}
             />
-            <PrivateRoute
+            <Route
               exact
               path="/createProfile"
               render={(props) => <CreateProfile user={user} {...props} />}
             />
-            <PrivateRoute exact path="/createJob" component={CreateJob} />
-            <PrivateRoute exact path="/profile/:username" component={Profile} />
-            <PrivateRoute exact path="/org/:username" component={OrgProfile} />
-            <PrivateRoute exact path="/jobs" component={Jobs} />
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/createJob" component={CreateJob} />
+            <Route exact path="/profile/:username" component={Profile} />
+            <Route exact path="/org/:username" component={OrgProfile} />
+            <Route exact path="/jobs" component={Jobs} />
+            <Route exact path="/dashboard" component={Dashboard} />
             <Route component={Error404} />
           </Switch>
           <Footer />

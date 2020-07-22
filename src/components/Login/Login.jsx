@@ -21,15 +21,12 @@ function Login({ setUser }) {
       const { username, role, email } = data;
       setUser({ username, role, email });
       localStorage.setItem('user', JSON.stringify({ username, role, email }));
-      if (data.role === 'Employee') history.push('/jobs');
-      else history.push('/createJob');
+      history.push('/dashboard');
     }
     setPending(false);
   };
 
-  if (localStorage.getItem('token')) {
-    return <Redirect to="/dashboard" />;
-  }
+  if (localStorage.getItem('token')) return <Redirect to="/dashboard" />;
 
   return (
     <StyledForm width="360px">
