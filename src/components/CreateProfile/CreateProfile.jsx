@@ -127,7 +127,7 @@ function CreateProfile({ user }) {
     setPending(false);
   };
 
-  if (localStorage.getItem('token')) return <Redirect to="/dashboard" />;
+  if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
   return (
     <div className="rounded-lg bg-white mx-auto my-8 sm:px-8">

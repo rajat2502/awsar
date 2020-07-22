@@ -13,7 +13,7 @@ function OrgProfile() {
     setUserData(userDetails);
   }, [username]);
 
-  if (localStorage.getItem('token')) return <Redirect to="/dashboard" />;
+  if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
   return <div>OrgProfile</div>;
 }

@@ -12,7 +12,7 @@ function Profile() {
     setUserData(userDetails);
   }, [username]);
 
-  if (localStorage.getItem('token')) return <Redirect to="/dashboard" />;
+  if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
   return <div>Profile</div>;
 }
