@@ -42,6 +42,10 @@ function CreateProfile({ user }) {
     company_type: '',
     industry: '',
     overview: '',
+    pan: '',
+    full_form: '',
+    linkedin: '',
+    twitter: '',
   });
 
   const decStep = () => step !== 1 && setStep(step - 1);
@@ -123,14 +127,18 @@ function CreateProfile({ user }) {
     );
     const data = await createProfile(dataObj, user.role);
     if (data.error) setError(data.error);
-    else history.push(`/profile/${user.username}`);
+    else {
+      user.role === 'Employee'
+        ? history.push(`/profile/${user.username}`)
+        : history.push(`/org/${user.username}`);
+    }
     setPending(false);
   };
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
   return (
-    <div className="rounded-lg bg-white mx-auto my-8 sm:px-8">
+    <div className="rounded-lg bg-white mx-auto my-8 px-6 sm:px-8">
       <StyledForm className="shadow-none">
         <h1>Profile</h1>
         <form onSubmit={handleSubmit}>
@@ -510,21 +518,43 @@ function CreateProfile({ user }) {
               <div className="flex flex-col sm:flex-row">
                 <div className="input-group">
                   <label>
-                    Company <span>*</span>
+                    Organization <span>*</span>
                   </label>
                   <input
                     type="text"
-                    placeholder="Eg: IOCL"
+                    placeholder="Eg: MHRD"
                     name="company_name"
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
                 <div className="input-group sm:ml-2">
+                  <label>Org's full name (if exists)</label>
+                  <input
+                    type="text"
+                    placeholder="Eg: Oil and Natural Gas Corporation"
+                    name="full_form"
+                    onChange={(e) => handleCompanyDetails(e)}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row">
+                <div className="input-group">
                   <label>Website</label>
                   <input
                     type="text"
                     placeholder="Eg: https://abc.com"
                     name="website"
+                    onChange={(e) => handleCompanyDetails(e)}
+                  />
+                </div>
+                <div className="input-group sm:ml-2">
+                  <label>
+                    Pan number <span>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Eg: ADUPV1245D"
+                    name="pan"
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -556,7 +586,7 @@ function CreateProfile({ user }) {
               <div className="flex flex-col sm:flex-row">
                 <div className="input-group">
                   <label>
-                    Company size <span>*</span>
+                    Organization size <span>*</span>
                   </label>
                   <input
                     type="number"
@@ -567,7 +597,7 @@ function CreateProfile({ user }) {
                 </div>
                 <div className="input-group sm:ml-2">
                   <label>
-                    Company type <span>*</span>
+                    Organization type <span>*</span>
                   </label>
                   <input
                     type="text"
@@ -578,7 +608,7 @@ function CreateProfile({ user }) {
                 </div>
               </div>
               <div className="input-group sm:w-full">
-                <p className="ml-1 text-gray-600">Company Logo</p>
+                <p className="ml-1 text-gray-600">Organization Logo</p>
                 <label className="file-upload" htmlFor="file-upload">
                   {`${
                     fileName !== 'Choose an Image' ? 'File: ' : ''
@@ -602,6 +632,26 @@ function CreateProfile({ user }) {
                   name="overview"
                   onChange={(e) => handleCompanyDetails(e)}
                 />
+              </div>
+              <div className="flex flex-col sm:flex-row">
+                <div className="input-group">
+                  <label>LinkedIn</label>
+                  <input
+                    type="text"
+                    placeholder="LinkedIn profile"
+                    name="linkedin"
+                    onChange={(e) => handleCompanyDetails(e)}
+                  />
+                </div>
+                <div className="input-group sm:ml-2">
+                  <label>Twitter</label>
+                  <input
+                    type="text"
+                    placeholder="Twitter Profile"
+                    name="twitter"
+                    onChange={(e) => handleCompanyDetails(e)}
+                  />
+                </div>
               </div>
             </>
           )}
