@@ -2,9 +2,9 @@ import React from 'react';
 
 function Error404() {
   return (
-    <div>
+    <div className="text-center m-auto text-3xl font-bold">
       <h1>Error 404</h1>
-      <p>Page not found</p>
+      <p className="text-xl">Page not found!</p>
     </div>
   );
 }

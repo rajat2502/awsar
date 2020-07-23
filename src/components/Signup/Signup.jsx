@@ -57,7 +57,7 @@ function Signup({ setUser }) {
 
   return (
     <StyledForm width="380px">
-      <h1>Sign Up</h1>
+      <h1>{userRole === 'Employee' ? 'Employee' : 'Organization'}'s SignUp</h1>
       <div>
         <button
           className={userRole === 'Employee' ? 'selected py-1' : 'py-1'}
@@ -67,7 +67,7 @@ function Signup({ setUser }) {
         <button
           className={userRole === 'Employer' ? 'selected py-1' : 'py-1'}
           onClick={() => setUserRole('Employer')}>
-          Employer
+          Organization
         </button>
       </div>
       <form onSubmit={handleSubmit}>

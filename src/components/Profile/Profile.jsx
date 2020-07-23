@@ -42,11 +42,13 @@ function Profile() {
                 top: 0,
                 zIndex: 1,
               }}></div>
-            <div className="relative z-10 m-auto flex h-40 w-40 border-solid border-4 border-gray-600 rounded-full">
+            <div
+              className="relative z-10 m-auto flex border-solid border-4 border-gray-600 rounded-full"
+              style={{ width: 'fit-content' }}>
               <img
                 src={userData.image}
                 alt="user-profile"
-                className="z-10 border-solid border-2 border-white m-auto rounded-full"
+                className="h-40 w-40 z-10 border-solid border-2 border-white m-auto rounded-full"
               />
             </div>
             <h1 className="mt-2 text-center text-blue-600 text-3xl font-bold">{`${userData.first_name} ${userData.last_name}`}</h1>
