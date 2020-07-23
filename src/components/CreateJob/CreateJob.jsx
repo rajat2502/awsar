@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { uploadImage } from 'api';
+import { uploadImage, summarizeTextFromImage } from 'api';
 
 import { StyledForm } from 'components/StyledForm';
 
@@ -39,6 +39,7 @@ function CreateJob() {
       setError(true);
       setUploading(true);
       const image = await handleImageUpload();
+      summarizeTextFromImage(image);
       setImg(image);
       setStep(2);
       setUploading(false);
