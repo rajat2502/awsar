@@ -32,12 +32,21 @@ function Profile() {
     <div className="container mx-auto my-4 px-2">
       <div className="flex flex-wrap mx-2">
         <div className="w-full sm:w-1/3 sm:px-2">
-          <div className="shadow rounded bg-white p-4">
-            <div className="m-auto flex h-40 w-40 border-solid border-4 border-gray-600 rounded-full">
+          <div className="relative shadow rounded bg-white p-4">
+            <div
+              className="rounded-t h-24 bg-blue-500"
+              style={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                top: 0,
+                zIndex: 1,
+              }}></div>
+            <div className="relative z-10 m-auto flex h-40 w-40 border-solid border-4 border-gray-600 rounded-full">
               <img
                 src={userData.image}
                 alt="user-profile"
-                className="border-solid border-2 border-white m-auto rounded-full"
+                className="z-10 border-solid border-2 border-white m-auto rounded-full"
               />
             </div>
             <h1 className="mt-2 text-center text-blue-600 text-3xl font-bold">{`${userData.first_name} ${userData.last_name}`}</h1>
