@@ -28,7 +28,6 @@ function OrgProfile() {
   if (!userData || loading)
     return <div className="m-auto text-3xl font-bold">Loading...</div>;
 
-  console.log(userData);
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
   return (
@@ -111,7 +110,7 @@ function OrgProfile() {
               target="_blank"
               rel="noopener noreferrer"
               className="mx-1">
-              <Icon name="github" />
+              <Icon name="website" />
             </a>
           )}
           {userData.twitter && (

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 
-import { createProfile, uploadImage } from 'api';
+import { createProfile, uploadImage, getProfile } from 'api';
 
 import Icon from 'components/Icon';
 import { StyledForm } from 'components/StyledForm';
@@ -9,6 +9,7 @@ import { StyledForm } from 'components/StyledForm';
 function CreateProfile({ user }) {
   const history = useHistory();
 
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
   const [addAnotherEducation, setAddAnotherEducation] = useState(true);
@@ -135,7 +136,24 @@ function CreateProfile({ user }) {
     setPending(false);
   };
 
+  const fetchUserProfile = useCallback(async () => {
+    const { username, role } = user;
+    const data = await getProfile(username, role);
+    if (!data.error)
+      role === 'Employee'
+        ? history.push(`/profile/${username}`)
+        : history.push(`/org/${username}`);
+    setLoading(false);
+  }, [history, user]);
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, [fetchUserProfile]);
+
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
+
+  if (loading)
+    return <div className="m-auto text-3xl font-bold">Loading...</div>;
 
   return (
     <div className="rounded-lg bg-white mx-auto my-8 px-6 sm:px-8">
