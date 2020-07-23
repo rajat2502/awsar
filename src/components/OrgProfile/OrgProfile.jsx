@@ -32,12 +32,21 @@ function OrgProfile() {
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
   return (
-    <div className="my-6 shadow rounded p-6 m-auto w-5/6 md:w-1/3 sm:w-1/2 bg-white">
-      <div className="m-auto flex h-40 w-40 border-solid border-4 border-gray-600 rounded-full">
+    <div className="relative my-6 shadow rounded p-6 m-auto w-5/6 md:w-1/3 sm:w-1/2 bg-white">
+      <div
+        className="rounded-t h-24 bg-blue-500"
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+          zIndex: 1,
+        }}></div>
+      <div className="relative z-10 m-auto flex h-40 w-40 border-solid border-4 border-gray-600 rounded-full">
         <img
           src={userData.image}
           alt="user-profile"
-          className="border-solid border-2 border-white m-auto rounded-full"
+          className="z-10 border-solid border-2 border-white m-auto rounded-full"
         />
       </div>
       <p className="text-center uppercase text-3xl font-bold text-indigo-600">
