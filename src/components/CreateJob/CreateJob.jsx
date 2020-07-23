@@ -48,6 +48,7 @@ function CreateJob() {
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
+  console.log(img);
   return (
     <StyledForm className="w-5/6 sm:w-1/3 px-8">
       {step === 1 && (
