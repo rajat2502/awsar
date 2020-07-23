@@ -13,6 +13,7 @@ function CreateJob() {
   const [img, setImg] = useState(null);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
+  const [jobDescription, setJobDescription] = useState('');
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -39,16 +40,19 @@ function CreateJob() {
       setError(true);
       setUploading(true);
       const image = await handleImageUpload();
-      summarizeTextFromImage(image);
       setImg(image);
       setStep(2);
       setUploading(false);
+      const desciption = await summarizeTextFromImage(image);
+      setJobDescription(desciption);
+      setExtracting(false);
+      setStep(3);
     } else setError('Please choose a document!');
   };
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
-  console.log(img);
+  console.log(img, jobDescription);
   return (
     <StyledForm className="w-5/6 sm:w-1/3 px-8">
       {step === 1 && (
@@ -98,6 +102,11 @@ function CreateJob() {
                 : 'Extracting Job Description...'}
             </button>
           </form>
+        </>
+      )}
+      {step === 3 && (
+        <>
+          <h1>Edit Job Details</h1>
         </>
       )}
     </StyledForm>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Algorithmia from 'algorithmia';
+// import Algorithmia from 'algorithmia';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const algorithmiaApiKey = process.env.REACT_APP_ALGORITHMIA_KEY;
@@ -79,24 +79,23 @@ export const extractText = async (image, language = 'eng') => {
     image,
     language,
   };
-  const text = await Algorithmia.client(algorithmiaApiKey)
+  const {
+    result: { prediction },
+  } = await window.Algorithmia.client(algorithmiaApiKey)
     .algo('character_recognition/tesseract/0.3.0?timeout=300')
     .pipe(input);
-  // .then((response) => response.get());
-  return text.get();
+  return prediction;
 };
 
 export const summarizeText = async (input) => {
-  const text = await Algorithmia.client(algorithmiaApiKey)
+  const { result } = await window.Algorithmia.client(algorithmiaApiKey)
     .algo('nlp/Summarizer/0.1.8?timeout=300')
     .pipe(input);
-  // .then((response) => response.get());
-  return text.get();
+  return result;
 };
 
 export const summarizeTextFromImage = async (image, language) => {
   const text = await extractText(image, language);
-  console.log(text);
   const summarizedText = await summarizeText(text);
-  console.log(summarizedText);
+  return summarizedText;
 };
