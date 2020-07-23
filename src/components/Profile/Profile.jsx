@@ -41,43 +41,59 @@ function Profile() {
               />
             </div>
             <h1 className="mt-2 text-center text-blue-600 text-3xl font-bold">{`${userData.first_name} ${userData.last_name}`}</h1>
-            <div className="flex mx-2 mt-2">
-              <div className="w-1/2 font-bold">
-                <p>Gender</p>
-                <p>DOB</p>
-                <p>Age</p>
-                <p>Title</p>
-                <p>Industry</p>
-                <p>Phone</p>
-                <p>Email</p>
-                <p>Location</p>
-              </div>
-              <div className="w-1/2">
-                <p>{userData.gender}</p>
-                <p>{userData.dob}</p>
-                <p>
-                  {Math.floor(
-                    (new Date() - new Date(userData.dob)) / 31536000000,
-                  )}{' '}
-                  years
-                </p>
-                <p>{userData.title}</p>
-                <p>{userData.industry}</p>
-                <a
-                  href={`tel:${userData.phone_number}`}
-                  className="block text-blue-500">
-                  {userData.phone_number}
-                </a>
-                <a
-                  href={`mailto:${userData.email}`}
-                  className="block text-blue-500">
-                  {userData.email.length > 15
-                    ? `${userData.email.substring(0, 15)}...`
-                    : userData.email}
-                </a>
-                <p>{userData.location}</p>
-              </div>
-            </div>
+            <table class="table-fixed m-auto">
+              <tbody>
+                <tr>
+                  <td class="px-4 font-bold">Gender</td>
+                  <td className="px-4">{userData.gender}</td>
+                </tr>
+                <tr>
+                  <td class="px-4 font-bold">DOB</td>
+                  <td className="px-4">{userData.dob}</td>
+                </tr>
+                <tr>
+                  <td class="px-4 font-bold">Age</td>
+                  <td className="px-4">
+                    {Math.floor(
+                      (new Date() - new Date(userData.dob)) / 31536000000,
+                    )}{' '}
+                    years
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-4 font-bold">Title</td>
+                  <td className="px-4">{userData.title}</td>
+                </tr>
+                <tr>
+                  <td class="px-4 font-bold">Industry</td>
+                  <td className="px-4">{userData.industry}</td>
+                </tr>
+                <tr>
+                  <td class="px-4 font-bold">Phone</td>
+                  <td className="px-4">
+                    <a
+                      href={`tel:${userData.phone_number}`}
+                      className="block text-blue-500">
+                      {userData.phone_number}
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-4 font-bold">Email</td>
+                  <td class="px-4">
+                    <a
+                      href={`mailto:${userData.email}`}
+                      className="block text-blue-500">
+                      {userData.email}
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-4 font-bold">Location</td>
+                  <td class="px-4">{userData.location}</td>
+                </tr>
+              </tbody>
+            </table>
             {(userData.linkedin ||
               userData.twitter ||
               userData.resume ||
@@ -166,7 +182,7 @@ function Profile() {
                 </div>
               ))}
             </div>
-            {userData.workexperience && (
+            {userData.workexperience.length && (
               <div className="mb-4">
                 <p className="text-xl font-medium text-blue-600">
                   Work Experience

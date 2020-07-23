@@ -32,7 +32,7 @@ function OrgProfile() {
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
   return (
-    <div className="shadow rounded py-4 px-6 m-auto w-5/6 md:1/5 sm:w-1/2 bg-white">
+    <div className="my-6 shadow rounded p-6 m-auto w-5/6 md:w-1/3 sm:w-1/2 bg-white">
       <div className="m-auto flex h-40 w-40 border-solid border-4 border-gray-600 rounded-full">
         <img
           src={userData.image}
@@ -48,29 +48,45 @@ function OrgProfile() {
           {userData.full_form}
         </p>
       )}
-      <div className="flex justify-center mx-2 mt-2">
-        <div className="w-1/2 font-bold">
-          <p>Industry</p>
-          <p>Location</p>
-          <p>Email</p>
-          <p>Org Size</p>
-          <p>Org type</p>
-          <p>Pan number</p>
-        </div>
-        <div className="w-1/2">
-          <p>{userData.industry}</p>
-          <p>{userData.location}</p>
-          <a href={`mailto:${userData.email}`} className="block text-blue-500">
-            {userData.email}
-          </a>
-          <p>{userData.company_size}</p>
-          <p>{userData.company_type}</p>
-          <p>{userData.pan}</p>
-        </div>
+      <div className="my-2">
+        <table class="text-lg table-fixed m-auto">
+          <tbody>
+            <tr>
+              <td class="px-4 py-1 font-bold">Industry</td>
+              <td class="px-4 py-1 text-gray-800">{userData.industry}</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-1 font-bold">Location</td>
+              <td class="px-4 py-1 text-gray-800">{userData.location}</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-1 font-bold">Email</td>
+              <td class="px-4 py-1 text-gray-800">
+                <a
+                  href={`mailto:${userData.email}`}
+                  className="block text-blue-500">
+                  {userData.email}
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-1 font-bold">Org Size</td>
+              <td class="px-4 py-1 text-gray-800">{userData.company_size}</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-1 font-bold">Org type</td>
+              <td class="px-4 py-1 text-gray-800">{userData.company_type}</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-1 font-bold">Pan number</td>
+              <td class="px-4 py-1 text-gray-800">{userData.pan}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div>
-        <p className="mt-2 text-blue-600 text-xl">Important Links</p>
-        <div className="flex">
+      <div className="flex flex-col">
+        <p className="m-auto mt-2 text-blue-600 text-xl">Important Links</p>
+        <div className="flex justify-center">
           {userData.linkedin && (
             <a
               href={userData.linkedin}
