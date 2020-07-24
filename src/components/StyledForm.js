@@ -8,6 +8,14 @@ export const StyledForm = styled.main.attrs({
   & {
     width: ${({ width }) => width};
 
+    &.create-job {
+      ${tw`w-5/6 px-8`}
+
+      @media (min-width: 740px) {
+        width: 640px;
+      }
+    }
+
     div {
       &.input-group {
         ${tw`my-1`}
@@ -50,6 +58,12 @@ export const StyledForm = styled.main.attrs({
         @media (max-width: 600px) {
           width: 280px;
         }
+      }
+    }
+
+    span {
+      &.required {
+        ${tw`text-red-600`}
       }
     }
 

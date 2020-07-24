@@ -1,19 +1,38 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
-import { uploadImage, summarizeTextFromImage } from 'api';
+import { uploadImage, summarizeTextFromImage, createJob } from 'api';
 
 import { StyledForm } from 'components/StyledForm';
 
-function CreateJob() {
+function CreateJob({ user }) {
+  const history = useHistory();
+
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('Choose a Document');
   const [uploading, setUploading] = useState(false);
   const [extracting, setExtracting] = useState(false);
-  const [img, setImg] = useState(null);
+  const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
-  const [jobDescription, setJobDescription] = useState('');
+  const [jobDetails, setJobDetails] = useState({
+    user: '',
+    title: '',
+    description: '',
+    location: '',
+    type: 'Full-Time',
+    category: '',
+    last_date: '',
+    company_name: '',
+    vacancies: '',
+    doc_url: '',
+    salary: '',
+    tags: '',
+    website: '',
+    age_limit: '',
+    qualification: '',
+    experience: '',
+  });
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -40,21 +59,37 @@ function CreateJob() {
       setError(true);
       setUploading(true);
       const image = await handleImageUpload();
-      setImg(image);
+      setJobDetails((state) => ({ ...state, doc_url: image }));
       setStep(2);
       setUploading(false);
-      const desciption = await summarizeTextFromImage(image);
-      setJobDescription(desciption);
+      const { text, summarizedText } = await summarizeTextFromImage(image);
+      setJobDetails((state) => ({ ...state, summary: summarizedText }));
+      setJobDetails((state) => ({ ...state, description: text }));
       setExtracting(false);
       setStep(3);
     } else setError('Please choose a document!');
   };
 
+  const handleJobDetailsChange = ({ target: { name, value } }) =>
+    setJobDetails((state) => ({ ...state, [name]: value }));
+
+  const handleCreateJob = async (e) => {
+    e.preventDefault();
+    setPending(true);
+    const dataObj = {
+      ...jobDetails,
+      user: user.username,
+      company_name: user.username,
+    };
+    await createJob(dataObj);
+    history.push('/dashboard');
+    setPending(false);
+  };
+
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
-  console.log(img, jobDescription);
   return (
-    <StyledForm className="w-5/6 sm:w-1/3 px-8">
+    <StyledForm className="create-job">
       {step === 1 && (
         <>
           <h1>Upload Job Document</h1>
@@ -104,9 +139,164 @@ function CreateJob() {
           </form>
         </>
       )}
-      {step === 3 && (
+      {step === 3 && jobDetails.description && (
         <>
           <h1>Edit Job Details</h1>
+          <form onSubmit={handleCreateJob}>
+            <div className="mt-1 flex flex-col sm:flex-row">
+              <div>
+                <label>Job Title</label>
+                <input
+                  type="text"
+                  placeholder="Eg: Civil Enginneer"
+                  name="title"
+                  value={jobDetails.title}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+              <div className="sm:ml-2">
+                <label>Job Location</label>
+                <input
+                  type="text"
+                  placeholder="Eg: Delhi"
+                  name="location"
+                  value={jobDetails.location}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+            </div>
+            <div className="mt-1">
+              <div>
+                <label>Job type</label>
+                <select
+                  className="sm:w-full"
+                  name="type"
+                  onChange={(e) => handleJobDetailsChange(e)}
+                  value={jobDetails.type}>
+                  <option>Full-Time</option>
+                  <option>Part-Time</option>
+                  <option>Internship</option>
+                </select>
+              </div>
+            </div>
+            <div className="mt-1">
+              <div>
+                <label>Job Description</label>
+                <textarea
+                  type="text"
+                  placeholder="Please Describe the job here"
+                  name="summary"
+                  className="w-full"
+                  value={jobDetails.summary}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+            </div>
+            <div className="mt-1 flex flex-col sm:flex-row">
+              <div>
+                <label>Job Category</label>
+                <input
+                  type="text"
+                  placeholder="Eg: CS/IT"
+                  name="category"
+                  value={jobDetails.category}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+              <div className="sm:ml-2">
+                <label>Number of Vacancies</label>
+                <input
+                  type="number"
+                  placeholder="Eg: 10"
+                  name="vacancies"
+                  value={jobDetails.vacancies}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+            </div>
+            <div className="mt-1 flex flex-col sm:flex-row">
+              <div>
+                <label>Website</label>
+                <input
+                  type="text"
+                  placeholder="Eg: https://abc.com"
+                  name="website"
+                  value={jobDetails.website}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+              <div className="sm:ml-2">
+                <label>Age Limit</label>
+                <input
+                  type="text"
+                  placeholder="Eg: age >18"
+                  name="age_limit"
+                  value={jobDetails.age_limit}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+            </div>
+            <div className="mt-1 flex flex-col sm:flex-row">
+              <div>
+                <label>Min. Qualification</label>
+                <input
+                  type="text"
+                  placeholder="Eg: Intermediate"
+                  name="qualification"
+                  value={jobDetails.qualification}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+              <div className="sm:ml-2">
+                <label>Min. Experience</label>
+                <input
+                  type="number"
+                  placeholder="Eg: 2"
+                  name="experience"
+                  value={jobDetails.experience}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+            </div>
+            <div className="mt-1 flex flex-col sm:flex-row">
+              <div>
+                <label>Salary</label>
+                <input
+                  type="number"
+                  placeholder="Eg: 100000"
+                  name="salary"
+                  value={jobDetails.salary}
+                  onChange={handleJobDetailsChange}
+                />
+              </div>
+              <div className="sm:ml-2">
+                <label>Last date to apply</label>
+                <input
+                  type="datetime-local"
+                  name="last_date"
+                  value={jobDetails.last_date}
+                  onChange={handleJobDetailsChange}
+                  style={{ width: 235 }}
+                />
+              </div>
+            </div>
+            <div className="mt-1">
+              <div>
+                <label>Tags (Comma Separated)</label>
+                <input
+                  type="text"
+                  placeholder="Eg: CS, IT, MHRD"
+                  name="tags"
+                  value={jobDetails.tags}
+                  onChange={handleJobDetailsChange}
+                  className="w-full"
+                />
+              </div>
+            </div>
+            <button type="submit" disabled={pending}>
+              {!pending ? 'Create Job' : 'Creating Job...'}
+            </button>
+          </form>
         </>
       )}
     </StyledForm>

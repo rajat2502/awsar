@@ -50,7 +50,11 @@ function App() {
               path="/createProfile"
               render={(props) => <CreateProfile user={user} {...props} />}
             />
-            <Route exact path="/createJob" component={CreateJob} />
+            <Route
+              exact
+              path="/createJob"
+              render={(props) => <CreateJob user={user} {...props} />}
+            />
             <Route exact path="/profile/:username" component={Profile} />
             <Route exact path="/org/:username" component={OrgProfile} />
             <Route exact path="/jobs" component={Jobs} />
