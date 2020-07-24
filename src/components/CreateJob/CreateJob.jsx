@@ -12,6 +12,7 @@ function CreateJob({ user }) {
   const [fileName, setFileName] = useState('Choose a Document');
   const [uploading, setUploading] = useState(false);
   const [extracting, setExtracting] = useState(false);
+  const [showExtracting, setShowExtracting] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
@@ -51,6 +52,7 @@ function CreateJob({ user }) {
   const showExtractStart = (e) => {
     e.preventDefault();
     setExtracting(true);
+    setShowExtracting(true);
   };
 
   const handleSubmit = async (e) => {
@@ -139,7 +141,7 @@ function CreateJob({ user }) {
           </form>
         </>
       )}
-      {step === 3 && jobDetails.description && (
+      {step === 3 && showExtracting && (
         <>
           <h1>Edit Job Details</h1>
           <form onSubmit={handleCreateJob}>

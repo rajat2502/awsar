@@ -58,19 +58,23 @@ function Profile() {
                   <td class="px-4 font-bold">Gender</td>
                   <td className="px-4">{userData.gender}</td>
                 </tr>
-                <tr>
-                  <td class="px-4 font-bold">DOB</td>
-                  <td className="px-4">{userData.dob}</td>
-                </tr>
-                <tr>
-                  <td class="px-4 font-bold">Age</td>
-                  <td className="px-4">
-                    {Math.floor(
-                      (new Date() - new Date(userData.dob)) / 31536000000,
-                    )}{' '}
-                    years
-                  </td>
-                </tr>
+                {userData.dob && (
+                  <>
+                    <tr>
+                      <td class="px-4 font-bold">DOB</td>
+                      <td className="px-4">{userData.dob}</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 font-bold">Age</td>
+                      <td className="px-4">
+                        {Math.floor(
+                          (new Date() - new Date(userData.dob)) / 31536000000,
+                        )}{' '}
+                        years
+                      </td>
+                    </tr>
+                  </>
+                )}
                 <tr>
                   <td class="px-4 font-bold">Title</td>
                   <td className="px-4">{userData.title}</td>
