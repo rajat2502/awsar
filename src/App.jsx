@@ -62,7 +62,7 @@ function App() {
             <Route
               exact
               path="/job/:id"
-              render={(props) => <Job {...props} />}
+              render={(props) => <Job user={user} {...props} />}
             />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route component={Error404} />

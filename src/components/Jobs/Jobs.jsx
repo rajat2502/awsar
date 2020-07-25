@@ -175,7 +175,9 @@ function Jobs() {
                     </p>
                     <p className="text-gray-700">
                       Salary:{' '}
-                      <span className="font-bold">{job.salary} (per year)</span>
+                      <span className="font-bold">
+                        {job.salary} (per month)
+                      </span>
                     </p>
                     <p className="text-gray-700">
                       Vacancies:{' '}

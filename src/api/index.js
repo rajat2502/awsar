@@ -75,7 +75,6 @@ export const getProfile = async (username, role) => {
 
 export const createJob = async (jobData) => {
   try {
-    console.log(jobData);
     const { data } = await axios.post(`${baseUrl}/jobs/create-job/`, jobData);
     return data;
   } catch (err) {
@@ -86,6 +85,24 @@ export const createJob = async (jobData) => {
 export const getAllJobs = async () => {
   try {
     const { data } = await axios.get(`${baseUrl}/jobs/jobs/`);
+    return data;
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+export const getJob = async (id) => {
+  try {
+    const { data } = await axios.get(`${baseUrl}/jobs/jobs/${id}`);
+    return data;
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+export const applyJob = async (obj) => {
+  try {
+    const data = await axios.post(`${baseUrl}/jobs/apply-job/${obj.job}`, obj);
     return data;
   } catch (err) {
     console.log(err.response);

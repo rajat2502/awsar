@@ -54,20 +54,20 @@ function Profile() {
               />
             </div>
             <h1 className="mt-2 text-center text-blue-600 text-3xl font-bold">{`${userData.first_name} ${userData.last_name}`}</h1>
-            <table class="table-fixed m-auto">
+            <table className="table-fixed m-auto">
               <tbody>
                 <tr>
-                  <td class="px-4 font-bold">Gender</td>
+                  <td className="px-4 font-bold">Gender</td>
                   <td className="px-4">{userData.gender}</td>
                 </tr>
                 {userData.dob && (
                   <>
                     <tr>
-                      <td class="px-4 font-bold">DOB</td>
+                      <td className="px-4 font-bold">DOB</td>
                       <td className="px-4">{userData.dob}</td>
                     </tr>
                     <tr>
-                      <td class="px-4 font-bold">Age</td>
+                      <td className="px-4 font-bold">Age</td>
                       <td className="px-4">
                         {Math.floor(
                           (new Date() - new Date(userData.dob)) / 31536000000,
@@ -78,15 +78,15 @@ function Profile() {
                   </>
                 )}
                 <tr>
-                  <td class="px-4 font-bold">Title</td>
+                  <td className="px-4 font-bold">Title</td>
                   <td className="px-4">{userData.title}</td>
                 </tr>
                 <tr>
-                  <td class="px-4 font-bold">Industry</td>
+                  <td className="px-4 font-bold">Industry</td>
                   <td className="px-4">{userData.industry}</td>
                 </tr>
                 <tr>
-                  <td class="px-4 font-bold">Phone</td>
+                  <td className="px-4 font-bold">Phone</td>
                   <td className="px-4">
                     <a
                       href={`tel:${userData.phone_number}`}
@@ -96,8 +96,8 @@ function Profile() {
                   </td>
                 </tr>
                 <tr>
-                  <td class="px-4 font-bold">Email</td>
-                  <td class="px-4">
+                  <td className="px-4 font-bold">Email</td>
+                  <td className="px-4">
                     <a
                       href={`mailto:${userData.email}`}
                       className="block text-blue-500">
@@ -106,8 +106,8 @@ function Profile() {
                   </td>
                 </tr>
                 <tr>
-                  <td class="px-4 font-bold">Location</td>
-                  <td class="px-4">{userData.location}</td>
+                  <td className="px-4 font-bold">Location</td>
+                  <td className="px-4">{userData.location}</td>
                 </tr>
               </tbody>
             </table>
@@ -183,9 +183,9 @@ function Profile() {
               <p className="text-xl font-medium text-blue-600">
                 Education Qualification
               </p>
-              {userData.education.map((ed) => (
+              {userData.education.map((ed, i) => (
                 <div
-                  key={ed.start_date}
+                  key={i}
                   className="my-2 shadow-sm border border-indigo-400 rounded p-2 mb-2">
                   <p className="text-lg font-medium">
                     <span className="font-bold text-gray-800">
@@ -204,9 +204,9 @@ function Profile() {
                 <p className="text-xl font-medium text-blue-600">
                   Work Experience
                 </p>
-                {userData.workexperience.map((we) => (
+                {userData.workexperience.map((we, i) => (
                   <div
-                    key={we.start_date}
+                    key={i}
                     className="my-2 shadow-sm border border-indigo-400 rounded p-2 mb-2">
                     <p className="text-lg font-medium">
                       <span className="font-bold text-gray-800">

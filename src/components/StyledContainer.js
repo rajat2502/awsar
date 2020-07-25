@@ -21,8 +21,9 @@ export const StyledContainer = styled.div.attrs({
       }
 
       .job {
-        ${tw`relative cursor-pointer border border-l-4 border-blue-600 px-4 py-2 text-sm mb-4 hover:shadow-md`}
+        ${tw`relative cursor-pointer border border-blue-600 px-4 py-2 text-sm mb-4 hover:shadow-md`}
 
+        border-left-width: 6px;
         border-bottom-right-radius: 5px;
         border-top-right-radius: 5px;
 
@@ -68,7 +69,7 @@ export const StyledContainer = styled.div.attrs({
     }
 
     &.clear-filters {
-      ${tw`bg-white font-medium text-gray-700 py-0 px-2 border border-gray-400`}
+      ${tw`py-1 text-white font-medium bg-gray-700 border border-gray-400`}
     }
   }
 
