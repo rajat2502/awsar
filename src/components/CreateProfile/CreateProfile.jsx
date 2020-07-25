@@ -153,7 +153,9 @@ function CreateProfile({ user }) {
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
   if (loading)
-    return <div className="m-auto text-3xl font-bold">Loading...</div>;
+    return (
+      <img className="loader" alt="loader" src={require('assets/loader.gif')} />
+    );
 
   return (
     <div className="rounded-lg bg-white mx-auto my-8 px-6 sm:px-8">

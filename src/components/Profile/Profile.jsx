@@ -26,7 +26,9 @@ function Profile() {
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
   if (error) return <div className="m-auto text-3xl font-bold">{error}</div>;
   if (!userData || loading)
-    return <div className="m-auto text-3xl font-bold">Loading...</div>;
+    return (
+      <img className="loader" alt="loader" src={require('assets/loader.gif')} />
+    );
 
   return (
     <div className="container mx-auto my-4 px-2">

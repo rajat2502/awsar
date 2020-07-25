@@ -14,6 +14,7 @@ import CreateProfile from 'components/CreateProfile';
 import Profile from 'components/Profile';
 import OrgProfile from 'components/OrgProfile';
 import Jobs from 'components/Jobs';
+import Job from 'components/Job';
 import Dashboard from 'components/Dashboard';
 import Error404 from 'components/Error404';
 
@@ -58,6 +59,11 @@ function App() {
             <Route exact path="/profile/:username" component={Profile} />
             <Route exact path="/org/:username" component={OrgProfile} />
             <Route exact path="/jobs" component={Jobs} />
+            <Route
+              exact
+              path="/job/:id"
+              render={(props) => <Job {...props} />}
+            />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route component={Error404} />
           </Switch>

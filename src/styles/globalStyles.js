@@ -16,4 +16,9 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: space-between;
     background: #ececec;
   }
+
+  .loader {
+    width: 110px;
+    margin:auto;
+  }
 `;

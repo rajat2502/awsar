@@ -83,6 +83,15 @@ export const createJob = async (jobData) => {
   }
 };
 
+export const getAllJobs = async () => {
+  try {
+    const { data } = await axios.get(`${baseUrl}/jobs/jobs/`);
+    return data;
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
 // external APIs
 export const extractText = async (image, language = 'eng') => {
   const input = {
