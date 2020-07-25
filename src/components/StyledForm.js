@@ -11,6 +11,13 @@ export const StyledForm = styled.main.attrs({
     &.create-job {
       ${tw`w-5/6 px-8`}
 
+      @media (max-width:600px) {
+        input,
+        select {
+          width: 100%;
+        }
+      }
+
       @media (min-width: 740px) {
         width: 640px;
       }
@@ -81,7 +88,7 @@ export const StyledForm = styled.main.attrs({
 
     input,
     textarea {
-      ${tw`focus:outline-none focus:shadow-outline m-1 block border border-gray-300 rounded py-2 px-4 appearance-none leading-normal border-gray-400`}
+      ${tw`focus:outline-none focus:shadow-outline m-1 block border border-gray-300 rounded py-2 px-4 leading-normal border-gray-400`}
     }
 
     select {

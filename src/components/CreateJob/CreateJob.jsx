@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 
+import { getDomains } from 'utils';
 import { uploadImage, summarizeTextFromImage, createJob } from 'api';
 
 import { StyledForm } from 'components/StyledForm';
@@ -12,7 +13,7 @@ function CreateJob({ user }) {
   const [fileName, setFileName] = useState('Choose a Document');
   const [uploading, setUploading] = useState(false);
   const [extracting, setExtracting] = useState(false);
-  const [showExtracting, setShowExtracting] = useState(false);
+  const [showExtracting, setShowExtracting] = useState(true);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
@@ -28,11 +29,13 @@ function CreateJob({ user }) {
     vacancies: '',
     doc_url: '',
     salary: '',
-    tags: '',
+    tags: 'Medical',
     website: '',
     age_limit: '',
     qualification: '',
     experience: '',
+    job_for_women: false,
+    job_for_disabled: false,
   });
 
   const handleImageChange = (e) => {
@@ -72,6 +75,9 @@ function CreateJob({ user }) {
     } else setError('Please choose a document!');
   };
 
+  const handleCheckboxChange = ({ target: { name } }) =>
+    setJobDetails((state) => ({ ...state, [name]: !jobDetails[name] }));
+
   const handleJobDetailsChange = ({ target: { name, value } }) =>
     setJobDetails((state) => ({ ...state, [name]: value }));
 
@@ -106,7 +112,9 @@ function CreateJob({ user }) {
             <div className="input-group sm:w-full">
               <p className="ml-1 text-gray-600">
                 Please upload the document from which job description has to be
-                read (format can be image or .pdf or .docx)
+                read <br />
+                (format can be image or .pdf or .docx) <br /> This document will
+                be processed and you will get an editable description.
               </p>
               <label className="file-upload" htmlFor="file-upload">
                 {`${
@@ -174,7 +182,7 @@ function CreateJob({ user }) {
                 />
               </div>
             </div>
-            <div className="mt-1">
+            <div className="mt-2">
               <div>
                 <label>Job type</label>
                 <select
@@ -188,20 +196,38 @@ function CreateJob({ user }) {
                 </select>
               </div>
             </div>
-            <div className="mt-1">
+            <div className="mt-2 flex flex-col sm:flex-row">
+              <label className="flex text-gray-500 font-bold">
+                <input
+                  type="checkbox"
+                  name="job_for_women"
+                  onChange={handleCheckboxChange}
+                />
+                <span>Jobs for Women</span>
+              </label>
+              <label className="flex text-gray-500 font-bold">
+                <input
+                  type="checkbox"
+                  name="job_for_disabled"
+                  onChange={handleCheckboxChange}
+                />
+                <span>Jobs for Disabled people</span>
+              </label>
+            </div>
+            <div className="mt-2">
               <div>
                 <label>Job Description</label>
                 <textarea
                   type="text"
                   placeholder="Please Describe the job here"
                   name="summary"
-                  className="w-full"
+                  className="h-24 w-full"
                   value={jobDetails.summary}
                   onChange={handleJobDetailsChange}
                 />
               </div>
             </div>
-            <div className="mt-1 flex flex-col sm:flex-row">
+            <div className="mt-2 flex flex-col sm:flex-row">
               <div>
                 <label>Job Category</label>
                 <input
@@ -223,7 +249,7 @@ function CreateJob({ user }) {
                 />
               </div>
             </div>
-            <div className="mt-1 flex flex-col sm:flex-row">
+            <div className="mt-2 flex flex-col sm:flex-row">
               <div>
                 <label>Website</label>
                 <input
@@ -245,7 +271,7 @@ function CreateJob({ user }) {
                 />
               </div>
             </div>
-            <div className="mt-1 flex flex-col sm:flex-row">
+            <div className="mt-2 flex flex-col sm:flex-row">
               <div>
                 <label>Min. Qualification</label>
                 <input
@@ -267,12 +293,12 @@ function CreateJob({ user }) {
                 />
               </div>
             </div>
-            <div className="mt-1 flex flex-col sm:flex-row">
+            <div className="mt-2 flex flex-col sm:flex-row">
               <div>
                 <label>Salary</label>
                 <input
                   type="number"
-                  placeholder="Eg: 100000"
+                  placeholder="Eg: 100000 (per year)"
                   name="salary"
                   value={jobDetails.salary}
                   onChange={handleJobDetailsChange}
@@ -285,24 +311,25 @@ function CreateJob({ user }) {
                   name="last_date"
                   value={jobDetails.last_date}
                   onChange={handleJobDetailsChange}
-                  style={{ width: 235 }}
+                  style={{ width: 243 }}
                 />
               </div>
             </div>
-            <div className="mt-1">
+            <div className="mt-2">
               <div>
-                <label>Tags (Comma Separated)</label>
-                <input
-                  type="text"
-                  placeholder="Eg: CS, IT, MHRD"
+                <label>Tags</label>
+                <select
+                  className="sm:w-full"
                   name="tags"
-                  value={jobDetails.tags}
                   onChange={handleJobDetailsChange}
-                  className="w-full"
-                />
+                  value={jobDetails.tags}>
+                  {getDomains().map((d) => (
+                    <option key={d}>{d}</option>
+                  ))}
+                </select>
               </div>
             </div>
-            <button type="submit" disabled={pending}>
+            <button className="mt-1" type="submit" disabled={pending}>
               {!pending ? 'Create Job' : 'Creating Job...'}
             </button>
           </form>

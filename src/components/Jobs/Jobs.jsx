@@ -17,7 +17,7 @@ function Jobs() {
 
   useEffect(() => {
     getJobs();
-  });
+  }, [getJobs]);
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
@@ -52,8 +52,8 @@ function Jobs() {
                       <span>Category: {job.category}</span>
                     </p>
                     <p className="job-desc">
-                      {job.description.length > 200
-                        ? `${job.description.substring(0, 200)}...`
+                      {job.description.length > 250
+                        ? `${job.description.substring(0, 250)}...`
                         : job.description}
                     </p>
                     <button>Apply Now</button>

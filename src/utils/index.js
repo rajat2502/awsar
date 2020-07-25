@@ -1,3 +1,35 @@
 export const getToken = () => {
   return localStorage.getItem('token');
 };
+
+export const getDomains = () => [
+  'Medical',
+  'Engineering',
+  'Law',
+  'Sales',
+  'Hotel Management',
+  'Nurse',
+  'Pharmacy',
+  'Health Care Services',
+  'Transport',
+  'Dental',
+  'Aviation',
+  'IT',
+  'Teacher Training',
+  'Administrative',
+  'Finance',
+  'Sports Quota',
+  'Architecture',
+  'ITI / Diploma',
+  'Arts',
+  'Agriculture',
+  'Naval',
+  'Human Resources and Development',
+  'Marketing',
+  'Accounts',
+  'Telecom',
+  'Communication',
+  'Travel and Tourism',
+  'Bank',
+  'Other',
+];

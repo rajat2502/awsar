@@ -9,8 +9,8 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="main-footer">
-        <div>
-          <div className="flex my-4">
+        <div className="my-2">
+          <div className="flex mb-1">
             <Link to="/">
               <img
                 src="https://i.ibb.co/F8xjMks/uttrakhand-logo.png"

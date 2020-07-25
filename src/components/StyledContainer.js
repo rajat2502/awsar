@@ -9,11 +9,11 @@ export const StyledContainer = styled.div.attrs({
       ${tw`flex flex-wrap mx-2`}
 
       .left-card {
-        ${tw`w-full my-4 sm:my-0 sm:w-1/3 sm:px-2`}
+        ${tw`w-full my-4 sm:my-0 sm:w-1/4 sm:px-2`}
       }
 
       .right-card {
-        ${tw`w-full my-4 sm:my-0 sm:w-2/3 sm:px-2`}
+        ${tw`w-full my-4 sm:my-0 sm:w-3/4 sm:px-2`}
       }
 
       .grid-card {
@@ -23,8 +23,8 @@ export const StyledContainer = styled.div.attrs({
       .job {
         ${tw`cursor-pointer border border-l-4 border-blue-600 px-4 py-2 text-sm mb-4 hover:shadow-md`}
 
-        border-bottom-right-radius: 4px;
-        border-top-right-radius: 4px;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
 
         .job-main {
           ${tw`text-lg`}
