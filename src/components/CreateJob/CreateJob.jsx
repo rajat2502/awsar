@@ -16,7 +16,7 @@ function CreateJob({ user }) {
   const [showExtracting, setShowExtracting] = useState(true);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
   const [jobDetails, setJobDetails] = useState({
     user: '',
     title: '',
@@ -113,7 +113,7 @@ function CreateJob({ user }) {
               <p className="ml-1 text-gray-600">
                 Please upload the document from which job description has to be
                 read <br />
-                (format can be image or .pdf or .docx) <br /> This document will
+                (format can be image or .pdf or .docx) <br /> The document will
                 be processed and you will get an editable description.
               </p>
               <label className="file-upload" htmlFor="file-upload">
@@ -202,6 +202,7 @@ function CreateJob({ user }) {
                   type="checkbox"
                   name="job_for_women"
                   onChange={handleCheckboxChange}
+                  style={{ width: 'fit-content' }}
                 />
                 <span>Jobs for Women</span>
               </label>
@@ -210,6 +211,7 @@ function CreateJob({ user }) {
                   type="checkbox"
                   name="job_for_disabled"
                   onChange={handleCheckboxChange}
+                  style={{ width: 'fit-content' }}
                 />
                 <span>Jobs for Disabled people</span>
               </label>
@@ -298,7 +300,7 @@ function CreateJob({ user }) {
                 <label>Salary</label>
                 <input
                   type="number"
-                  placeholder="Eg: 100000 (per year)"
+                  placeholder="Eg: 100000"
                   name="salary"
                   value={jobDetails.salary}
                   onChange={handleJobDetailsChange}

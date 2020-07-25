@@ -61,19 +61,19 @@ function OrgProfile() {
         </p>
       )}
       <div className="my-2">
-        <table class="text-lg table-fixed m-auto">
+        <table className="text-lg table-fixed m-auto">
           <tbody>
             <tr>
-              <td class="px-4 py-1 font-bold">Industry</td>
-              <td class="px-4 py-1 text-gray-800">{userData.industry}</td>
+              <td className="px-4 py-1 font-bold">Industry</td>
+              <td className="px-4 py-1 text-gray-800">{userData.industry}</td>
             </tr>
             <tr>
-              <td class="px-4 py-1 font-bold">Location</td>
-              <td class="px-4 py-1 text-gray-800">{userData.location}</td>
+              <td className="px-4 py-1 font-bold">Location</td>
+              <td className="px-4 py-1 text-gray-800">{userData.location}</td>
             </tr>
             <tr>
-              <td class="px-4 py-1 font-bold">Email</td>
-              <td class="px-4 py-1 text-gray-800">
+              <td className="px-4 py-1 font-bold">Email</td>
+              <td className="px-4 py-1 text-gray-800">
                 <a
                   href={`mailto:${userData.email}`}
                   className="block text-blue-500">
@@ -82,16 +82,20 @@ function OrgProfile() {
               </td>
             </tr>
             <tr>
-              <td class="px-4 py-1 font-bold">Org Size</td>
-              <td class="px-4 py-1 text-gray-800">{userData.company_size}</td>
+              <td className="px-4 py-1 font-bold">Org Size</td>
+              <td className="px-4 py-1 text-gray-800">
+                {userData.company_size}
+              </td>
             </tr>
             <tr>
-              <td class="px-4 py-1 font-bold">Org type</td>
-              <td class="px-4 py-1 text-gray-800">{userData.company_type}</td>
+              <td className="px-4 py-1 font-bold">Org type</td>
+              <td className="px-4 py-1 text-gray-800">
+                {userData.company_type}
+              </td>
             </tr>
             <tr>
-              <td class="px-4 py-1 font-bold">Pan number</td>
-              <td class="px-4 py-1 text-gray-800">{userData.pan}</td>
+              <td className="px-4 py-1 font-bold">Pan number</td>
+              <td className="px-4 py-1 text-gray-800">{userData.pan}</td>
             </tr>
           </tbody>
         </table>
