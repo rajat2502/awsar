@@ -41,10 +41,10 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-links">
-          <Link to="/postresume">Post Resume</Link>
+          <Link to="/createProfile">Create Profile</Link>
           <Link to="/">Find Organization</Link>
           <Link to="/jobs">Find a Job</Link>
-          <Link to="/hire">Post Job</Link>
+          <Link to="/createJob">Post Job</Link>
         </div>
       </div>
       <div className="copyright-bar bg-blue-600">

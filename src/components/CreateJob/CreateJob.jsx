@@ -90,6 +90,13 @@ function CreateJob({ user }) {
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
+  if (user.role === 'Employee')
+    return (
+      <div className="text-red-600 text-3xl font-bold m-auto">
+        Please login as a Government organization to create a new Job.
+      </div>
+    );
+
   return (
     <StyledForm className="create-job">
       {step === 1 && (
