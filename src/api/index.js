@@ -109,6 +109,15 @@ export const applyJob = async (obj) => {
   }
 };
 
+export const getOrgJobs = async (username) => {
+  try {
+    const data = await axios.get(`${baseUrl}/jobs/employer/${username}/`);
+    console.log(data);
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
 // external APIs
 export const extractText = async (image, language = 'eng') => {
   const input = {

@@ -15,7 +15,8 @@ import Profile from 'components/Profile';
 import OrgProfile from 'components/OrgProfile';
 import Jobs from 'components/Jobs';
 import Job from 'components/Job';
-import Dashboard from 'components/Dashboard';
+import EmployeeDashboard from 'components/EmployeeDashboard';
+import OrgDashboard from 'components/OrgDashboard';
 import Error404 from 'components/Error404';
 
 function App() {
@@ -64,7 +65,17 @@ function App() {
               path="/job/:id"
               render={(props) => <Job user={user} {...props} />}
             />
-            <Route exact path="/dashboard" component={Dashboard} />
+            <Route
+              exact
+              path="/dashboard"
+              render={(props) =>
+                user.role === 'Employee' ? (
+                  <EmployeeDashboard user={user} {...props} />
+                ) : (
+                  <OrgDashboard user={user} {...props} />
+                )
+              }
+            />
             <Route component={Error404} />
           </Switch>
           <Footer />

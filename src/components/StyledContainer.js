@@ -69,7 +69,7 @@ export const StyledContainer = styled.div.attrs({
     }
 
     &.clear-filters {
-      ${tw`py-1 text-white font-medium bg-gray-700 border border-gray-400`}
+      ${tw`py-1 text-white font-medium bg-gray-700 border border-gray-400 rounded-full`}
     }
   }
 
