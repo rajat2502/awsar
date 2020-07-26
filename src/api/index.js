@@ -118,9 +118,10 @@ export const getOrgJobs = async (username) => {
   }
 };
 
-export const getOrgJob = async (id) => {
+export const getJobApplicants = async (id) => {
   try {
-    const data = await axios.get(`${baseUrl}/jobs/applicants/${id}`);
+    const { data } = await axios.get(`${baseUrl}/jobs/applicants/${id}`);
+    return data;
   } catch (err) {
     console.log(err.response);
   }

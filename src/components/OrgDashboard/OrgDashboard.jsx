@@ -101,7 +101,7 @@ function OrgDashboard({ user }) {
                   </p>
                   {(job.job_for_women || job.job_for_disabled) && (
                     <p>
-                      <span className="font-bold">Special Categories: </span>
+                      {/* <span className="font-bold">Special Categories: </span> */}
                       {job.job_for_women && (
                         <button className="women-job">Jobs for Women</button>
                       )}

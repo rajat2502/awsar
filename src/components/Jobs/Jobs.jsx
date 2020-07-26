@@ -174,14 +174,12 @@ function Jobs() {
                       </Link>
                     </p>
                     <p className="text-gray-700">
-                      Salary:{' '}
-                      <span className="font-bold">
-                        {job.salary} (per month)
-                      </span>
+                      <span className="font-bold">Salary: </span>
+                      {job.salary} (per month)
                     </p>
                     <p className="text-gray-700">
-                      Vacancies:{' '}
-                      <span className="font-bold">{job.vacancies}</span>
+                      <span className="font-bold">Vacancies: </span>
+                      {job.vacancies}
                     </p>
                     <p className="job-desc sm:w-3/4">
                       {job.description.length > 160

@@ -69,7 +69,7 @@ export const StyledContainer = styled.div.attrs({
     }
 
     &.women-job {
-      ${tw`bg-white mt-2 rounded-sm text-white px-1 py-0 text-pink-600 border border-pink-600`}
+      ${tw`bg-white mt-2 mr-2 rounded-sm text-white px-1 py-0 text-pink-600 border border-pink-600`}
     }
 
     &.disabled-job {
@@ -83,5 +83,62 @@ export const StyledContainer = styled.div.attrs({
 
   select {
     ${tw`my-1 w-full block bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded py-1 px-2 border-gray-400`}
+  }
+
+  table {
+    ${tw`rounded shadow-lg w-full table-auto`}
+
+    th,
+    td {
+      ${tw`text-center px-4 py-4`}
+
+      a {
+        ${tw`text-blue-600 hover:underline`}
+      }
+    }
+
+    td {
+      ${tw`text-gray-700`}
+
+      span {
+        &.status {
+          ${tw`cursor-pointer text-sm font-bold py-1 px-4 rounded-full`}
+
+          .change-status {
+            z-index: 1;
+            transform: scale(0.8);
+            transition: all 0.25s;
+            opacity: 0;
+
+            li {
+              ${tw`my-1 cursor-pointer font-medium text-gray-700 hover:text-blue-600`}
+            }
+          }
+
+          &:hover {
+            .change-status {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+        }
+
+        &.Applied {
+          ${tw`text-blue-700 bg-blue-300`}
+        }
+      }
+    }
+
+    &.job-status {
+      cursor: pointer;
+    }
+
+    thead {
+      ${tw`text-white bg-gray-700 shadow`}
+    }
+
+    tbody {
+      ${tw`bg-white`}
+    }
   }
 `;

@@ -128,6 +128,7 @@ function Job({ user }) {
           href={job.doc_url}
           target="_blank"
           rel="noopener noreferrer"
+          download={job.title}
           style={{ right: 30, top: 30 }}>
           <img
             title="Job document"
