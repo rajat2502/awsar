@@ -15,7 +15,7 @@ function Job({ user }) {
   const applyToJob = async () => {
     if (profile) {
       setPending(true);
-      await applyJob({ user: user.username, job: id });
+      await applyJob({ employee: user.username, job: id });
       setPending(false);
       history.push('/dashboard');
     } else setError('no profile');
@@ -28,9 +28,11 @@ function Job({ user }) {
   }, [id]);
 
   const fetchUserProfile = useCallback(async () => {
-    const profile = await getProfile(user.username, 'Employee');
-    if (profile.error.detail === 'Not found.') setProfile(null);
-    else setProfile(profile);
+    if (user.role === 'Employee') {
+      const profile = await getProfile(user.username, 'Employee');
+      if (profile.error) setProfile(null);
+      else setProfile(profile);
+    }
   }, [user]);
 
   useEffect(() => {
@@ -102,19 +104,21 @@ function Job({ user }) {
           <span className="font-bold">Last updated on: </span>
           {job.updated_at.substring(0, 10)}
         </p>
-        <p>
-          <span className="font-bold">Special Categories: </span>
-          {job.job_for_women && (
-            <button className="mt-2 rounded-sm text-white px-2 text-pink-600 border border-pink-600">
-              Jobs for Women
-            </button>
-          )}
-          {job.job_for_disabled && (
-            <button className="mt-2 rounded-sm text-white px-2 text-green-600 border border-green-600">
-              Jobs for Disabled
-            </button>
-          )}
-        </p>
+        {(job.job_for_women || job.job_for_disabled) && (
+          <p>
+            <span className="font-bold">Special Categories: </span>
+            {job.job_for_women && (
+              <button className="mt-2 rounded-sm text-white px-2 text-pink-600 border border-pink-600">
+                Jobs for Women
+              </button>
+            )}
+            {job.job_for_disabled && (
+              <button className="mt-2 rounded-sm text-white px-2 text-green-600 border border-green-600">
+                Jobs for Disabled
+              </button>
+            )}
+          </p>
+        )}
         <p className="mt-1 sm:w-5/6">
           <span className="font-bold">Job Description: </span>
           {job.summary}
@@ -134,13 +138,15 @@ function Job({ user }) {
           <span className="font-bold md:text-center block">Job Document</span>
         </a>
       </div>
-      <button
-        onClick={applyToJob}
-        className="mt-3 w-full rounded-sm text-white py-1 px-4 bg-blue-600 hover:bg-blue-700 border border-blue-600"
-        style={pending ? { opacity: 0.5, cursor: 'not-allowed' } : {}}
-        disabled={pending}>
-        {pending ? 'Applying to the Job...' : 'Apply to Job'}
-      </button>
+      {user.role === 'Employee' && (
+        <button
+          onClick={applyToJob}
+          className="mt-3 w-full rounded-sm text-white py-1 px-4 bg-blue-600 hover:bg-blue-700 border border-blue-600"
+          style={pending ? { opacity: 0.5, cursor: 'not-allowed' } : {}}
+          disabled={pending}>
+          {pending ? 'Applying to the Job...' : 'Apply to Job'}
+        </button>
+      )}
       {error === 'no profile' && (
         <p className="mt-1 text-sm text-red-600">
           Please{' '}

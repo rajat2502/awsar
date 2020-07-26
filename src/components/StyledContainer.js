@@ -68,6 +68,14 @@ export const StyledContainer = styled.div.attrs({
       }
     }
 
+    &.women-job {
+      ${tw`bg-white mt-2 rounded-sm text-white px-1 py-0 text-pink-600 border border-pink-600`}
+    }
+
+    &.disabled-job {
+      ${tw`bg-white mt-2 rounded-sm text-white px-1 py-0 text-green-600 border border-green-600`}
+    }
+
     &.clear-filters {
       ${tw`py-1 text-white font-medium bg-gray-700 border border-gray-400 rounded-full`}
     }
