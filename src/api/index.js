@@ -118,6 +118,15 @@ export const getOrgJobs = async (username) => {
   }
 };
 
+export const getEmployeeJobs = async (username) => {
+  try {
+    const { data } = await axios.get(`${baseUrl}/jobs/applied/${username}`);
+    return data;
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
 export const getJobApplicants = async (id) => {
   try {
     const { data } = await axios.get(`${baseUrl}/jobs/applicants/${id}`);

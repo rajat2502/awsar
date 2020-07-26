@@ -129,10 +129,6 @@ export const StyledContainer = styled.div.attrs({
       }
     }
 
-    &.job-status {
-      cursor: pointer;
-    }
-
     thead {
       ${tw`text-white bg-gray-700 shadow`}
     }
