@@ -197,21 +197,21 @@ function CreateJob({ user }) {
               </div>
             </div>
             <div className="mt-2 flex flex-col sm:flex-row">
-              <label className="flex text-gray-500 font-bold">
+              <label className="cursor-pointer flex text-gray-500 font-bold">
                 <input
                   type="checkbox"
                   name="job_for_women"
                   onChange={handleCheckboxChange}
-                  style={{ width: 'fit-content' }}
+                  style={{ width: 'fit-content', cursor: 'pointer' }}
                 />
                 <span>Jobs for Women</span>
               </label>
-              <label className="flex text-gray-500 font-bold">
+              <label className="cursor-pointer flex text-gray-500 font-bold">
                 <input
                   type="checkbox"
                   name="job_for_disabled"
                   onChange={handleCheckboxChange}
-                  style={{ width: 'fit-content' }}
+                  style={{ width: 'fit-content', cursor: 'pointer' }}
                 />
                 <span>Jobs for Disabled people</span>
               </label>
@@ -276,13 +276,6 @@ function CreateJob({ user }) {
             <div className="mt-2 flex flex-col sm:flex-row">
               <div>
                 <label>Min. Qualification</label>
-                {/* <input
-                  type="text"
-                  placeholder="Eg: Intermediate"
-                  name="qualification"
-                  value={jobDetails.qualification}
-                  onChange={handleJobDetailsChange}
-                /> */}
                 <select
                   name="qualification"
                   value={jobDetails.qualification}

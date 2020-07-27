@@ -99,9 +99,8 @@ function OrgDashboard({ user }) {
                     <span className="font-bold">Salary: </span>
                     {job.salary} (₹) (per month)
                   </p>
-                  {(job.job_for_women || job.job_for_disabled) && (
-                    <p>
-                      {/* <span className="font-bold">Special Categories: </span> */}
+                  {job.job_for_women || job.job_for_disabled ? (
+                    <>
                       {job.job_for_women && (
                         <button className="women-job">Jobs for Women</button>
                       )}
@@ -110,12 +109,14 @@ function OrgDashboard({ user }) {
                           Jobs for Disabled
                         </button>
                       )}
-                    </p>
+                    </>
+                  ) : (
+                    <button className="general">General</button>
                   )}
                   <Link
-                    to="/updateJob"
+                    to={`/updateJob/${job.id}`}
                     title="Edit Job"
-                    className="absolute bg-gray-700 rounded-full h-8 w-8 flex items-center justify-center"
+                    className="transition ease-in duration-100 absolute bg-gray-700 hover:bg-gray-900 rounded-full h-8 w-8 flex items-center justify-center"
                     style={{ top: 20, right: 20 }}>
                     <Icon name="edit" />
                   </Link>

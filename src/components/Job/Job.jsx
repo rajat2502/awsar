@@ -82,6 +82,14 @@ function Job({ user }) {
             {job.company_name}
           </Link>
         </p>
+        {job.website && (
+          <p className="mt-1">
+            <span className="font-bold">Website: </span>
+            <a href={job.website} className="text-blue-600 hover:underline">
+              {job.website}
+            </a>
+          </p>
+        )}
         <p className="mt-1">
           <span className="font-bold">Salary: </span>
           {job.salary} (₹) (per month)

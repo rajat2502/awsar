@@ -10,6 +10,7 @@ import Home from 'components/Home';
 import Login from 'components/Login';
 import Signup from 'components/Signup';
 import CreateJob from 'components/CreateJob';
+import UpdateJob from 'components/UpdateJob';
 import CreateProfile from 'components/CreateProfile';
 import Profile from 'components/Profile';
 import OrgProfile from 'components/OrgProfile';
@@ -57,6 +58,11 @@ function App() {
               exact
               path="/createJob"
               render={(props) => <CreateJob user={user} {...props} />}
+            />
+            <Route
+              exact
+              path="/updateJob/:id"
+              render={(props) => <UpdateJob user={user} {...props} />}
             />
             <Route exact path="/profile/:username" component={Profile} />
             <Route exact path="/org/:username" component={OrgProfile} />

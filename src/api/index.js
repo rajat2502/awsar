@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import Algorithmia from 'algorithmia';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const algorithmiaApiKey = process.env.REACT_APP_ALGORITHMIA_KEY;
@@ -94,6 +93,17 @@ export const getAllJobs = async () => {
 export const getJob = async (id) => {
   try {
     const { data } = await axios.get(`${baseUrl}/jobs/update/${id}`);
+    return data;
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+export const updateJob = async (id, dataObj) => {
+  try {
+    console.log(dataObj);
+    const { data } = await axios.put(`${baseUrl}/jobs/update/${id}/`, dataObj);
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err.response);

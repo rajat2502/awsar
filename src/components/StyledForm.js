@@ -8,7 +8,8 @@ export const StyledForm = styled.main.attrs({
   & {
     width: ${({ width }) => width};
 
-    &.create-job {
+    &.create-job,
+    &.update-job {
       ${tw`w-5/6 px-8`}
 
       @media (max-width:600px) {
