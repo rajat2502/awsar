@@ -28,35 +28,44 @@ function EmployeeDashboard({ user }) {
 
   return (
     <StyledContainer>
-      <h1>My Applications</h1>
-      <table className="w-full mt-4">
-        <thead>
-          <tr>
-            <th>Job Title</th>
-            <th>Organization</th>
-            <th>Job Type</th>
-            <th>Applied On</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {jobs.map((j) => (
-            <tr>
-              <td>{j.job.title}</td>
-              <td>
-                <Link to={`/org/${j.job.company_name}`}>
-                  {j.job.company_name}
-                </Link>
-              </td>
-              <td>{j.job.type}</td>
-              <td>{j.applied_at.substring(0, 10)}</td>
-              <td>
-                <span className={`status ${j.status}`}>{j.status}</span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {!jobs.length ? (
+        <h1>
+          You have not applied for any Jobs yet. Visit{' '}
+          <Link to="/jobs">Jobs</Link> to get started.
+        </h1>
+      ) : (
+        <>
+          <h1>My Applications</h1>
+          <table className="w-full mt-4">
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Organization</th>
+                <th>Job Type</th>
+                <th>Applied On</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {jobs.map((j) => (
+                <tr>
+                  <td>{j.job.title}</td>
+                  <td>
+                    <Link to={`/org/${j.job.company_name}`}>
+                      {j.job.company_name}
+                    </Link>
+                  </td>
+                  <td>{j.job.type}</td>
+                  <td>{j.applied_at.substring(0, 10)}</td>
+                  <td>
+                    <span className={`status ${j.status}`}>{j.status}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>{' '}
+        </>
+      )}
     </StyledContainer>
   );
 }

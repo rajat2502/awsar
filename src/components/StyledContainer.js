@@ -69,15 +69,15 @@ export const StyledContainer = styled.div.attrs({
     }
 
     &.women-job {
-      ${tw`bg-white mt-2 mr-2 rounded-sm text-white px-1 py-0 text-pink-600 border border-pink-600`}
+      ${tw`text-xs bg-white mt-1 mr-2 rounded-sm text-white px-1 py-0 text-pink-600 border border-pink-600`}
     }
 
     &.disabled-job {
-      ${tw`bg-white mt-2 rounded-sm text-white px-1 py-0 text-green-600 border border-green-600`}
+      ${tw`text-xs bg-white mt-1 rounded-sm text-white px-1 py-0 text-green-600 border border-green-600`}
     }
 
     &.general {
-      ${tw`bg-white mt-2 rounded-sm text-white px-1 py-0 text-blue-600 border border-blue-600`}
+      ${tw`text-xs bg-white mt-1 rounded-sm text-white px-1 py-0 text-blue-600 border border-blue-600`}
     }
 
     &.clear-filters {
@@ -107,28 +107,30 @@ export const StyledContainer = styled.div.attrs({
       span {
         &.status {
           ${tw`cursor-pointer text-sm font-bold py-1 px-4 rounded-full`}
-
-          .change-status {
-            z-index: 1;
-            transform: scale(0.8);
-            transition: all 0.25s;
-            opacity: 0;
-
-            li {
-              ${tw`my-1 cursor-pointer font-medium text-gray-700 hover:text-blue-600`}
-            }
-          }
-
-          &:hover {
-            .change-status {
-              opacity: 1;
-              transform: scale(1);
-            }
-          }
         }
 
         &.Applied {
           ${tw`text-blue-700 bg-blue-300`}
+        }
+
+        &.Shortlisted {
+          ${tw`text-green-700 bg-green-200`}
+        }
+
+        &.Selected {
+          ${tw`text-green-800 bg-green-400`}
+        }
+
+        &.Ineligible {
+          ${tw`text-yellow-700 bg-yellow-300`}
+        }
+
+        &.Rejected {
+          ${tw`text-red-700 bg-red-300`}
+        }
+
+        &.change-status {
+          ${tw`text-xs cursor-pointer hover:underline text-blue-600`}
         }
       }
     }

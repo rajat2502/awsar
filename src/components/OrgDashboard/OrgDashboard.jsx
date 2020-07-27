@@ -34,6 +34,7 @@ function OrgDashboard({ user }) {
       <img className="loader" alt="loader" src={require('assets/loader.gif')} />
     );
 
+  console.log(jobs);
   return (
     <StyledContainer className="p-6">
       <div className="flex flex-col sm:flex-row">
@@ -100,7 +101,7 @@ function OrgDashboard({ user }) {
                     {job.salary} (₹) (per month)
                   </p>
                   {job.job_for_women || job.job_for_disabled ? (
-                    <>
+                    <div className="mt-1">
                       {job.job_for_women && (
                         <button className="women-job">Jobs for Women</button>
                       )}
@@ -109,7 +110,7 @@ function OrgDashboard({ user }) {
                           Jobs for Disabled
                         </button>
                       )}
-                    </>
+                    </div>
                   ) : (
                     <button className="general">General</button>
                   )}

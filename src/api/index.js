@@ -146,6 +146,14 @@ export const getJobApplicants = async (id) => {
   }
 };
 
+export const updateApplicationStatus = async (id, dataObj) => {
+  try {
+    await axios.patch(`${baseUrl}/jobs/status/${id}`, dataObj);
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
 // external APIs
 export const extractText = async (image, language = 'eng') => {
   const input = {
