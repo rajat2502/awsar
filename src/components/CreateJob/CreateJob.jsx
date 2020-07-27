@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 
-import { getDomains } from 'utils';
+import { getDomains, getQualifications } from 'utils';
 import { uploadImage, summarizeTextFromImage, createJob } from 'api';
 
 import { StyledForm } from 'components/StyledForm';
@@ -32,7 +32,7 @@ function CreateJob({ user }) {
     tags: 'Medical',
     website: '',
     age_limit: '',
-    qualification: '',
+    qualification: 'Intermediate (10+2)',
     experience: '',
     job_for_women: false,
     job_for_disabled: false,
@@ -276,13 +276,22 @@ function CreateJob({ user }) {
             <div className="mt-2 flex flex-col sm:flex-row">
               <div>
                 <label>Min. Qualification</label>
-                <input
+                {/* <input
                   type="text"
                   placeholder="Eg: Intermediate"
                   name="qualification"
                   value={jobDetails.qualification}
                   onChange={handleJobDetailsChange}
-                />
+                /> */}
+                <select
+                  name="qualification"
+                  value={jobDetails.qualification}
+                  onChange={handleJobDetailsChange}
+                  className="qual">
+                  {getQualifications().map((q) => (
+                    <option>{q}</option>
+                  ))}
+                </select>
               </div>
               <div className="sm:ml-2">
                 <label>Min. Experience</label>
@@ -313,7 +322,7 @@ function CreateJob({ user }) {
                   name="last_date"
                   value={jobDetails.last_date}
                   onChange={handleJobDetailsChange}
-                  style={{ width: 243 }}
+                  className="last_date"
                 />
               </div>
             </div>

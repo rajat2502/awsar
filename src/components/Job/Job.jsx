@@ -56,6 +56,20 @@ function Job({ user }) {
         {job.title}
       </p>
       <div className="mt-2 text-gray-700 text-sm">
+        {(job.job_for_women || job.job_for_disabled) && (
+          <p>
+            {job.job_for_women && (
+              <button className="mr-2 mt-2 rounded-sm text-white px-2 text-pink-600 border border-pink-600">
+                Jobs for Women
+              </button>
+            )}
+            {job.job_for_disabled && (
+              <button className="mt-2 rounded-sm text-white px-2 text-green-600 border border-green-600">
+                Jobs for Disabled
+              </button>
+            )}
+          </p>
+        )}
         <p className="mt-1">
           <span className="font-bold">Job ID: </span>
           {id}
@@ -63,8 +77,8 @@ function Job({ user }) {
         <p className="mt-1">
           <span className="font-bold">Company Name: </span>
           <Link
-            to={`org/${job.company_name}`}
-            className="font-bold text-blue-600 hover:underline">
+            to={`/org/${job.company_name}`}
+            className="uppercase font-bold text-blue-600 hover:underline">
             {job.company_name}
           </Link>
         </p>
@@ -104,21 +118,6 @@ function Job({ user }) {
           <span className="font-bold">Last updated on: </span>
           {job.updated_at.substring(0, 10)}
         </p>
-        {(job.job_for_women || job.job_for_disabled) && (
-          <p>
-            <span className="font-bold">Special Categories: </span>
-            {job.job_for_women && (
-              <button className="mt-2 rounded-sm text-white px-2 text-pink-600 border border-pink-600">
-                Jobs for Women
-              </button>
-            )}
-            {job.job_for_disabled && (
-              <button className="mt-2 rounded-sm text-white px-2 text-green-600 border border-green-600">
-                Jobs for Disabled
-              </button>
-            )}
-          </p>
-        )}
         <p className="mt-1 sm:w-5/6">
           <span className="font-bold">Job Description: </span>
           {job.summary}

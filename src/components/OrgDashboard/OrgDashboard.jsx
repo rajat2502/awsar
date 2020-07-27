@@ -69,7 +69,7 @@ function OrgDashboard({ user }) {
       </div>
 
       <h1 className="mt-2 text-xl text-blue-600 text-center">
-        Jobs by {user.username}
+        Jobs by <span className="uppercase">{user.username}</span>
       </h1>
       {jobs.length ? (
         <div className="flex flex-col sm:flex-row">

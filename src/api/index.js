@@ -93,7 +93,7 @@ export const getAllJobs = async () => {
 
 export const getJob = async (id) => {
   try {
-    const { data } = await axios.get(`${baseUrl}/jobs/jobs/${id}`);
+    const { data } = await axios.get(`${baseUrl}/jobs/update/${id}`);
     return data;
   } catch (err) {
     console.log(err.response);

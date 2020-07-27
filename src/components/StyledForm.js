@@ -20,6 +20,11 @@ export const StyledForm = styled.main.attrs({
 
       @media (min-width: 740px) {
         width: 640px;
+
+        .qual,
+        .last_date {
+          width: 237px;
+        }
       }
     }
 

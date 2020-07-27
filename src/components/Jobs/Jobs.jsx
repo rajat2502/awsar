@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
 import { getAllJobs } from 'api';
-import { getDomains } from 'utils';
+import { getDomains, removeDuplicate, getQualifications } from 'utils';
 import { StyledContainer } from 'components/StyledContainer';
 
-function Jobs() {
+function Jobs({ user }) {
   const [loading, setLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -14,11 +14,18 @@ function Jobs() {
   const [location, setLocation] = useState('select an option');
   const [womenJobs, setWomenJobs] = useState(false);
   const [disabledJobs, setDisabledJobs] = useState(false);
+  const [verifiedJobs, setVerifiedJobs] = useState(false); // to be implemented
+  const [org, setOrg] = useState('select an option');
+  const [lastDate, setLastDate] = useState('select an option');
+  const [qual, setQual] = useState('select an option');
 
   const clearFilters = () => {
     setCategory('select an option');
     setType('select an option');
     setLocation('select an option');
+    setOrg('select an option');
+    setLastDate('select an option');
+    setQual('select an option');
     setWomenJobs(false);
     setDisabledJobs(false);
     setFilteredJobs(jobs);
@@ -32,16 +39,37 @@ function Jobs() {
       allJobs = allJobs.filter((j) => j.type === type);
     if (category !== 'select an option')
       allJobs = allJobs.filter((j) => j.category === category);
+    if (org !== 'select an option')
+      allJobs = allJobs.filter((j) => j.company_name.toUpperCase() === org);
+    if (lastDate !== 'select an option')
+      allJobs = allJobs.filter(
+        (j) => j.last_date.substring(0, 10) === lastDate,
+      );
+    if (qual !== 'select an option')
+      allJobs = allJobs.filter(
+        (j) => j.qualification.toUpperCase() === qual.toUpperCase(),
+      );
     if (womenJobs)
       allJobs = allJobs.filter((j) => j.job_for_women === womenJobs);
     if (disabledJobs)
       allJobs = allJobs.filter((j) => j.job_for_disabled === disabledJobs);
     setFilteredJobs(allJobs);
-  }, [category, disabledJobs, jobs, location, type, womenJobs]);
+  }, [
+    category,
+    disabledJobs,
+    jobs,
+    lastDate,
+    location,
+    org,
+    qual,
+    type,
+    womenJobs,
+  ]);
 
   const handleCheckboxChange = ({ target: { name } }) => {
     if (name === 'job_for_women') {
       setWomenJobs((state) => !state);
+    } else if (name === 'verifiedJobs') {
     } else {
       setDisabledJobs((state) => !state);
     }
@@ -50,6 +78,9 @@ function Jobs() {
   const handleChange = ({ target: { name, value } }) => {
     if (name === 'location') setLocation(value);
     else if (name === 'type') setType(value);
+    else if (name === 'org') setOrg(value);
+    else if (name === 'lastDate') setLastDate(value);
+    else if (name === 'qual') setQual(value);
     else setCategory(value);
   };
 
@@ -116,15 +147,46 @@ function Jobs() {
                 <option disabled selected>
                   select an option
                 </option>
-                {jobs
-                  .map((job) => job.location)
-                  .reduce(function (a, b) {
-                    if (a.indexOf(b) < 0) a.push(b);
-                    return a;
-                  }, [])
-                  .map((l) => (
-                    <option>{l}</option>
-                  ))}
+                {removeDuplicate(jobs.map((job) => job.location)).map((l) => (
+                  <option>{l}</option>
+                ))}
+              </select>
+            </div>
+            <div className="mt-3">
+              <p className="font-bold text-sm">Organization:</p>
+              <select value={org} name="org" onChange={handleChange}>
+                <option disabled selected>
+                  select an option
+                </option>
+                {removeDuplicate(jobs.map((job) => job.company_name)).map(
+                  (l) => (
+                    <option>{l.toUpperCase()}</option>
+                  ),
+                )}
+              </select>
+            </div>
+            <div className="mt-3">
+              <p className="font-bold text-sm">Last date to apply:</p>
+              <select value={lastDate} name="lastDate" onChange={handleChange}>
+                <option disabled selected>
+                  select an option
+                </option>
+                {removeDuplicate(
+                  jobs.map((job) => job.last_date.substring(0, 10)),
+                ).map((l) => (
+                  <option>{l}</option>
+                ))}
+              </select>
+            </div>
+            <div className="mt-3">
+              <p className="font-bold text-sm">Qualification:</p>
+              <select value={qual} name="qual" onChange={handleChange}>
+                <option disabled selected>
+                  select an option
+                </option>
+                {getQualifications().map((l) => (
+                  <option>{l}</option>
+                ))}
               </select>
             </div>
             <div className="mt-3">
@@ -146,6 +208,15 @@ function Jobs() {
                   onChange={handleCheckboxChange}
                 />
                 <span className="ml-1 text-sm">Jobs for Disabled</span>
+              </label>
+              <label className="block cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={verifiedJobs}
+                  name="verifiedJobs"
+                  onChange={handleCheckboxChange}
+                />
+                <span className="ml-1 text-sm">Jobs by Verified Orgs</span>
               </label>
             </div>
           </div>
@@ -169,7 +240,7 @@ function Jobs() {
                       <span> ({job.type})</span>, <span>{job.location}</span> -{' '}
                       <Link
                         to={`org/${job.company_name}`}
-                        className="text-blue-600 hover:underline">
+                        className="uppercase text-blue-600 hover:underline">
                         {job.company_name}
                       </Link>
                     </p>
@@ -182,9 +253,9 @@ function Jobs() {
                       {job.vacancies}
                     </p>
                     <p className="job-desc sm:w-3/4">
-                      {job.description.length > 160
-                        ? `${job.description.substring(0, 160)}...`
-                        : job.description}
+                      {job.summary.length > 160
+                        ? `${job.summary.substring(0, 160)}...`
+                        : job.summary}
                     </p>
                     <div className="flex justify-between sm:flex-wrap">
                       <p className="text-blue-600 hover:underline">
@@ -194,9 +265,11 @@ function Jobs() {
                         Posted on {job.updated_at.slice(0, 10)}
                       </p>
                     </div>
-                    <button className="apply-button relative sm:absolute">
-                      Apply Now
-                    </button>
+                    {user.role === 'Employee' && (
+                      <button className="apply-button relative sm:absolute">
+                        Apply Now
+                      </button>
+                    )}
                   </div>
                 </Link>
               ))

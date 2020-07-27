@@ -2,6 +2,12 @@ export const getToken = () => {
   return localStorage.getItem('token');
 };
 
+export const removeDuplicate = (arr) =>
+  arr.reduce(function (a, b) {
+    if (a.indexOf(b) < 0) a.push(b);
+    return a;
+  }, []);
+
 export const getDomains = () => [
   'Medical',
   'Engineering',
@@ -32,4 +38,31 @@ export const getDomains = () => [
   'Travel and Tourism',
   'Bank',
   'Other',
+];
+
+export const getQualifications = () => [
+  '8th',
+  '10th',
+  'Intermediate (10+2)',
+  'B.Sc',
+  'B.Pharm',
+  'Diploma',
+  'BDS',
+  'B.Ed',
+  'DMLT',
+  'BUMS',
+  'B.V.Sc',
+  'GNM',
+  'ITI',
+  'M.Tech',
+  'B.Tech',
+  'M.Sc',
+  'MBA',
+  'MS / MD',
+  'PGDM',
+  'MCA',
+  'B.A',
+  'M.A',
+  'GATE',
+  'ANM',
 ];

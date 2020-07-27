@@ -60,7 +60,11 @@ function App() {
             />
             <Route exact path="/profile/:username" component={Profile} />
             <Route exact path="/org/:username" component={OrgProfile} />
-            <Route exact path="/jobs" component={Jobs} />
+            <Route
+              exact
+              path="/jobs"
+              render={(props) => <Jobs user={user} {...props} />}
+            />
             <Route
               exact
               path="/job/:id"
