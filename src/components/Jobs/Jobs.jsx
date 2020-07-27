@@ -106,6 +106,7 @@ function Jobs({ user }) {
       <img className="loader" alt="loader" src={require('assets/loader.gif')} />
     );
 
+  console.log(setVerifiedJobs);
   return (
     <StyledContainer>
       <div className="cards-grid">
