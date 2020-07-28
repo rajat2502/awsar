@@ -181,6 +181,17 @@ export const summarizeTextFromImage = async (image, language) => {
   return { text, summarizedText };
 };
 
+export const getNews = async () => {
+  try {
+    const { data } = await axios.get(
+      `http://newsapi.org/v2/everything?q=govt-india-job&sortBy=publishedAt&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`,
+    );
+    return data.articles;
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
 // export const sendEmail = async () => {
 //   window.Email.send({
 //     SecureToken: '00b62de4-c992-467c-8efc-3cfd3d8b207c',

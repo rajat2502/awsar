@@ -71,8 +71,8 @@ function OrgProfile({ user }) {
       </div>
       <p className="relative text-center uppercase text-3xl font-bold text-indigo-600">
         {userData.company_name}{' '}
-        <span className="absolute" style={{ top: 2 }}>
-          <Icon name="verified" width="20" height="20" />
+        <span className="absolute" style={{ top: 7 }}>
+          <Icon name="verified" width="18" height="18" />
         </span>
       </p>
       {userData.full_form && (

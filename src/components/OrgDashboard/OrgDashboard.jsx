@@ -92,12 +92,12 @@ function OrgDashboard({ user }) {
         Jobs by <span className="uppercase">{user.username}</span>
       </h1>
       {jobs.length ? (
-        <div className="flex flex-col sm:flex-row">
+        <div>
           {jobs.map((job) => (
             <Link
               to={`job/applicants/${job.id}`}
               key={job.id}
-              className="relative w-full sm:1/2 md:w-1/3">
+              className="relative w-full sm:inline-block sm:w-1/2 md:w-1/4 ">
               <div className="text-gray-800 bg-white mx-4 my-2 sm:m-2 p-6 shadow rounded">
                 <p className="text-lg font-bold text-center text-blue-600">
                   {job.title}
@@ -137,7 +137,7 @@ function OrgDashboard({ user }) {
                     to={`/updateJob/${job.id}`}
                     title="Edit Job"
                     className="transition ease-in duration-100 absolute bg-gray-700 hover:bg-gray-900 rounded-full h-8 w-8 flex items-center justify-center"
-                    style={{ top: 20, right: 20 }}>
+                    style={{ top: 18, right: 18 }}>
                     <Icon name="edit" />
                   </Link>
                   <Link
@@ -151,16 +151,16 @@ function OrgDashboard({ user }) {
           ))}
         </div>
       ) : (
-        <>
+        <div className="text-xl font-medium text-center">
           <p>No Jobs found!</p>
           <p>
             Click{' '}
-            <Link to="/createJob" className="underline">
+            <Link to="/createJob" className="text-blue-600 hover:underline">
               here
             </Link>{' '}
             to create a Job
           </p>
-        </>
+        </div>
       )}
     </StyledContainer>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Redirect, Link, useParams } from 'react-router-dom';
 
-import { getJobApplicants, updateApplicationStatus, sendEmail } from 'api';
+import { getJobApplicants, updateApplicationStatus } from 'api';
 
 import { useModal } from 'utils/customHooks/useModal';
 import { getEmailTemplate } from 'utils';
@@ -43,15 +43,25 @@ function JobApplicants({ user }) {
     setCandidate(ap);
   };
 
+  const closeModal = () => {
+    setCandidate('');
+    setJobStatus('Select a Status');
+    hideModal();
+  };
+
   const handleStatusUpdate = async (e) => {
     e.preventDefault();
     setPending(true);
     await updateApplicationStatus(candidate.id, { status: jobStatus });
     setPending(false);
-    hideModal();
+    closeModal();
     setLoading(true);
     fetchJobApplicants();
   };
+
+  useEffect(() => {
+    setContent(null);
+  }, [hideModal]);
 
   useEffect(() => {
     fetchJobApplicants();
@@ -94,7 +104,7 @@ function JobApplicants({ user }) {
               <div className="mt-2">
                 <label>Email (and SMS) content:</label>
                 <textarea
-                  className="h-20"
+                  className="h-32"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="This content will be send to the job seeker via Email and SMS."></textarea>
@@ -108,7 +118,9 @@ function JobApplicants({ user }) {
           </Modal>
         )}
         {!applicants.length ? (
-          <h1>No Applications are found for this Job</h1>
+          <p className="text-center text-2xl font-bold text-gray-800">
+            No Applications are found for this Job
+          </p>
         ) : (
           <>
             <h1>Applications for this Job</h1>

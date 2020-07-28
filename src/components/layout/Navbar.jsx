@@ -50,6 +50,9 @@ const Navbar = ({ user, setUser }) => {
           <Link to="/dashboard" className="text-blue-700 hover:text-blue-800">
             Dashboard
           </Link>
+          <Link to="/news" className="ml-3 text-blue-700 hover:text-blue-800">
+            News
+          </Link>
         </div>
 
         <input id="nav" type="checkbox" />

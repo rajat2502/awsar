@@ -16,7 +16,7 @@ function CreateJob({ user }) {
   const [showExtracting, setShowExtracting] = useState(true);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
   const [jobDetails, setJobDetails] = useState({
     user: '',
     title: '',

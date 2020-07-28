@@ -1,5 +1,16 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import tw from 'twin.macro';
+
+const modalAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
 
 export const StyledModal = styled.main.attrs({
   className: 'w-full h-full absolute flex justify-center items-center',
@@ -14,6 +25,8 @@ export const StyledModal = styled.main.attrs({
 
   .content {
     ${tw`w-1/3 relative p-8 rounded bg-white`}
+
+    animation: ${modalAnimation} 0.25s;
   }
 
   .heading {

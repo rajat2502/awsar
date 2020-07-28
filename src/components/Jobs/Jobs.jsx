@@ -114,11 +114,6 @@ function Jobs({ user }) {
             <p className="text-center text-lg text-blue-600 font-bold">
               Filter Jobs
             </p>
-            {filteredJobs.length !== jobs.length && (
-              <button className="clear-filters" onClick={clearFilters}>
-                Clear Filters
-              </button>
-            )}
             <div className="mt-3">
               <p className="font-bold text-sm">Category:</p>
               <select value={category} name="category" onChange={handleChange}>
@@ -126,7 +121,7 @@ function Jobs({ user }) {
                   select an option
                 </option>
                 {getDomains().map((d) => (
-                  <option>{d}</option>
+                  <option key={d}>{d}</option>
                 ))}
               </select>
             </div>
@@ -148,7 +143,7 @@ function Jobs({ user }) {
                   select an option
                 </option>
                 {removeDuplicate(jobs.map((job) => job.location)).map((l) => (
-                  <option>{l}</option>
+                  <option key={l}>{l}</option>
                 ))}
               </select>
             </div>
@@ -160,7 +155,7 @@ function Jobs({ user }) {
                 </option>
                 {removeDuplicate(jobs.map((job) => job.company_name)).map(
                   (l) => (
-                    <option>{l.toUpperCase()}</option>
+                    <option key={l}>{l.toUpperCase()}</option>
                   ),
                 )}
               </select>
@@ -174,7 +169,7 @@ function Jobs({ user }) {
                 {removeDuplicate(
                   jobs.map((job) => job.last_date.substring(0, 10)),
                 ).map((l) => (
-                  <option>{l}</option>
+                  <option key={l}>{l}</option>
                 ))}
               </select>
             </div>
@@ -185,7 +180,7 @@ function Jobs({ user }) {
                   select an option
                 </option>
                 {getQualifications().map((l) => (
-                  <option>{l}</option>
+                  <option key={l}>{l}</option>
                 ))}
               </select>
             </div>
@@ -219,11 +214,19 @@ function Jobs({ user }) {
                 <span className="ml-1 text-sm">Jobs by Verified Orgs</span>
               </label>
             </div>
+            {filteredJobs.length !== jobs.length && (
+              <button className="clear-filters" onClick={clearFilters}>
+                Clear Filters
+              </button>
+            )}
           </div>
         </div>
         <div className="right-card">
           <div className="grid-card">
             <h1>Available Jobs</h1>
+            <p className="mb-2 font-bold text-gray-800 text-sm">
+              Total Results: {filteredJobs.length}
+            </p>
             {filteredJobs.length ? (
               filteredJobs.map((job) => (
                 <Link key={job.id} to={`/job/${job.id}`}>

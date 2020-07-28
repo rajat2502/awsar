@@ -54,6 +54,28 @@ export const StyledContainer = styled.div.attrs({
     ${tw`text-3xl font-bold text-center m-2 text-blue-700`}
   }
 
+  a {
+    &.news-item {
+      ${tw`relative block m-4 bg-white p-6 rounded shadow`}
+
+      .news-title {
+        ${tw`font-bold text-lg text-gray-700 hover:underline`}
+      }
+
+      .news-description {
+        ${tw`mt-1 sm:mb-5 text-sm`}
+      }
+
+      .publishedAt {
+        ${tw`flex justify-between text-sm sm:absolute`}
+
+        left:24px;
+        right: 24px;
+        bottom: 20px;
+      }
+    }
+  }
+
   button {
     ${tw`my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition ease-in duration-200`}
 
@@ -81,7 +103,7 @@ export const StyledContainer = styled.div.attrs({
     }
 
     &.clear-filters {
-      ${tw`py-1 text-white font-medium bg-gray-700 border border-gray-400 rounded-full`}
+      ${tw`w-full block mt-2 py-1 text-white font-medium bg-gray-700 border border-gray-400 rounded`}
     }
   }
 
@@ -110,23 +132,23 @@ export const StyledContainer = styled.div.attrs({
         }
 
         &.Applied {
-          ${tw`text-blue-700 bg-blue-300`}
+          ${tw`text-blue-600 bg-blue-200`}
         }
 
         &.Shortlisted {
-          ${tw`text-green-700 bg-green-200`}
+          ${tw`text-purple-600 bg-purple-200`}
         }
 
         &.Selected {
-          ${tw`text-green-800 bg-green-400`}
+          ${tw`text-green-600 bg-green-200`}
         }
 
         &.Ineligible {
-          ${tw`text-yellow-700 bg-yellow-300`}
+          ${tw`text-orange-500 bg-orange-200`}
         }
 
         &.Rejected {
-          ${tw`text-red-700 bg-red-300`}
+          ${tw`text-red-600 bg-red-200`}
         }
 
         &.change-status {
