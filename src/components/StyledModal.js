@@ -17,11 +17,11 @@ export const StyledModal = styled.main.attrs({
   }
 
   .heading {
-    ${tw`uppercase tracking-wide m-auto font-bold text-center text-blue-600 text-xl sm:text-2xl`}
+    ${tw`mb-2 uppercase tracking-wide m-auto font-bold text-center text-blue-600 text-xl sm:text-2xl`}
   }
 
   .close-icon {
-    ${tw`cursor-pointer flex items-center justify-center transition ease-in duration-300 w-6 h-6 rounded bg-gray-700 hover:bg-gray-900 text-white font-bold absolute`}
+    ${tw`cursor-pointer text-lg flex items-center justify-center transition ease-in duration-300 w-8 h-8 rounded bg-gray-700 hover:bg-gray-900 text-white font-bold absolute`}
 
     top: 10px;
     right: 10px;

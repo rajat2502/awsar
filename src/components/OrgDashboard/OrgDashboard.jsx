@@ -34,15 +34,34 @@ function OrgDashboard({ user }) {
       <img className="loader" alt="loader" src={require('assets/loader.gif')} />
     );
 
-  console.log(jobs);
   return (
     <StyledContainer className="p-6">
       <div className="flex flex-col sm:flex-row">
         <div className="relative w-full sm:1/2 md:w-1/4">
           <div className="flex text-xl justify-center items-center text-gray-800 flex-col font-bold bg-white my-2 mx-4 sm:mx-2 p-6 shadow rounded">
-            <Icon name="verified" />
-            <p>Verified Account</p>
-          </div>{' '}
+            {jobs.length ? (
+              jobs[0].user.verified ? (
+                <>
+                  <Icon name="verified" />
+                  <p>Verified Account</p>
+                </>
+              ) : (
+                <>
+                  <Icon name="unverified" />
+                  <a className="text-blue-600" href="mailto:support@awsar.com">
+                    <p title="Verify me">Unverified</p>
+                  </a>
+                </>
+              )
+            ) : (
+              <>
+                <Icon name="unverified" />
+                <a className="text-blue-600" href="mailto:support@awsar.com">
+                  <p title="Verify me">Unverified</p>
+                </a>
+              </>
+            )}
+          </div>
         </div>
         <div className="relative w-full sm:1/2 md:w-1/4">
           <div className="flex text-xl justify-center items-center text-gray-800 flex-col font-bold bg-white my-2 mx-4 sm:mx-2 p-6 shadow rounded">

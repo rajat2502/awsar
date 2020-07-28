@@ -53,6 +53,8 @@ function Jobs({ user }) {
       allJobs = allJobs.filter((j) => j.job_for_women === womenJobs);
     if (disabledJobs)
       allJobs = allJobs.filter((j) => j.job_for_disabled === disabledJobs);
+    if (verifiedJobs)
+      allJobs = allJobs.filter((j) => j.user.verified === verifiedJobs);
     setFilteredJobs(allJobs);
   }, [
     category,
@@ -63,16 +65,14 @@ function Jobs({ user }) {
     org,
     qual,
     type,
+    verifiedJobs,
     womenJobs,
   ]);
 
   const handleCheckboxChange = ({ target: { name } }) => {
-    if (name === 'job_for_women') {
-      setWomenJobs((state) => !state);
-    } else if (name === 'verifiedJobs') {
-    } else {
-      setDisabledJobs((state) => !state);
-    }
+    if (name === 'job_for_women') setWomenJobs((state) => !state);
+    else if (name === 'verifiedJobs') setVerifiedJobs((state) => !state);
+    else setDisabledJobs((state) => !state);
   };
 
   const handleChange = ({ target: { name, value } }) => {
@@ -106,7 +106,6 @@ function Jobs({ user }) {
       <img className="loader" alt="loader" src={require('assets/loader.gif')} />
     );
 
-  console.log(setVerifiedJobs);
   return (
     <StyledContainer>
       <div className="cards-grid">

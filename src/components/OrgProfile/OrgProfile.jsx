@@ -52,8 +52,11 @@ function OrgProfile() {
           className="h-40 w-40 z-10 border-solid border-2 border-white m-auto rounded-full"
         />
       </div>
-      <p className="text-center uppercase text-3xl font-bold text-indigo-600">
-        {userData.company_name}
+      <p className="relative text-center uppercase text-3xl font-bold text-indigo-600">
+        {userData.company_name}{' '}
+        <span className="absolute" style={{ top: 2 }}>
+          <Icon name="verified" width="20" height="20" />
+        </span>
       </p>
       {userData.full_form && (
         <p className="text-center text-lg font-bold text-blue-500">

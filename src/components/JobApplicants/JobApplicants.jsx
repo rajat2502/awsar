@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Redirect, Link, useParams } from 'react-router-dom';
 
-import { getJobApplicants, updateApplicationStatus } from 'api';
+import { getJobApplicants, updateApplicationStatus, sendEmail } from 'api';
 
 import { useModal } from 'utils/customHooks/useModal';
 import { getEmailTemplate } from 'utils';
@@ -55,6 +55,7 @@ function JobApplicants({ user }) {
 
   useEffect(() => {
     fetchJobApplicants();
+    // sendEmail();
   }, [fetchJobApplicants]);
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
@@ -142,7 +143,7 @@ function JobApplicants({ user }) {
                       )}
                     </td>
                     <td>
-                      <a href={`tel:${ap.employee}`}>
+                      <a href={`tel:${ap.employee.phone_number}`}>
                         {ap.employee.phone_number}
                       </a>
                     </td>
