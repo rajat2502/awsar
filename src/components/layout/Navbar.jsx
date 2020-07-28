@@ -68,13 +68,13 @@ const Navbar = ({ user, setUser }) => {
                 </button>
               </Link>
             </li>
-            <li className="mx-2">
+            {/* <li className="mx-2">
               <Link to="/createProfile">
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                   Create Profile
                 </button>
               </Link>
-            </li>
+            </li> */}
             <li className="ml-2">
               {user.username ? (
                 <button

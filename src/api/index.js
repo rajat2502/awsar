@@ -181,12 +181,12 @@ export const summarizeTextFromImage = async (image, language) => {
   return { text, summarizedText };
 };
 
-export const sendEmail = async () => {
-  window.Email.send({
-    SecureToken: '00b62de4-c992-467c-8efc-3cfd3d8b207c',
-    To: 'rajatverma@jssaten.ac.in',
-    From: 'rajatverma5885045@gmail.com',
-    Subject: 'This is the subject',
-    Body: 'And this is the body',
-  }).then((message) => console.log(message));
-};
+// export const sendEmail = async () => {
+//   window.Email.send({
+//     SecureToken: '00b62de4-c992-467c-8efc-3cfd3d8b207c',
+//     To: 'rajatverma@jssaten.ac.in',
+//     From: 'rajatverma5885045@gmail.com',
+//     Subject: 'This is the subject',
+//     Body: 'And this is the body',
+//   }).then((message) => console.log(message));
+// };

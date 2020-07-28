@@ -64,8 +64,16 @@ function App() {
               path="/updateJob/:id"
               render={(props) => <UpdateJob user={user} {...props} />}
             />
-            <Route exact path="/profile/:username" component={Profile} />
-            <Route exact path="/org/:username" component={OrgProfile} />
+            <Route
+              exact
+              path="/profile/:username"
+              render={(props) => <Profile user={user} {...props} />}
+            />
+            <Route
+              exact
+              path="/org/:username"
+              render={(props) => <OrgProfile user={user} {...props} />}
+            />
             <Route
               exact
               path="/jobs"

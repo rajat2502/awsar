@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams, Redirect, Link } from 'react-router-dom';
 
 import { getProfile } from 'api';
 
 import Icon from 'components/Icon';
 
-function OrgProfile() {
+function OrgProfile({ user }) {
   const { username } = useParams();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,24 @@ function OrgProfile() {
   }, [fetchUserData]);
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
-  if (error) return <div className="m-auto text-3xl font-bold">{error}</div>;
+
+  if (error)
+    return (
+      <div className="text-center m-auto text-xl font-bold">
+        {error === 'Not found.' && username === user.username ? (
+          <p>
+            Profile doesn't exist! <br />{' '}
+            <Link className="text-blue-600 hover:underline" to="/createProfile">
+              Click here
+            </Link>{' '}
+            to create your profile.
+          </p>
+        ) : (
+          'Profile not found!'
+        )}
+      </div>
+    );
+
   if (!userData || loading)
     return (
       <img className="loader" alt="loader" src={require('assets/loader.gif')} />
