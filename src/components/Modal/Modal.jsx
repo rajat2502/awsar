@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { StyledModal } from 'components/StyledModal';
+import { StyledModal } from './StyledModal';
 
 const Modal = ({ title, closeModal, children }) => {
   const hideModal = (e) => {

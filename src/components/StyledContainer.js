@@ -48,6 +48,33 @@ export const StyledContainer = styled.div.attrs({
         }
       }
     }
+
+    &.course {
+      ${tw`inline-block w-full sm:w-1/3 md:w-1/4 p-3`}
+
+      a {
+        ${tw`inline-block text-gray-800 text-sm bg-white rounded shadow p-6`}
+      }
+
+      img {
+        ${tw`mb-2 w-full`}
+
+        height: 9rem;
+      }
+
+      .title {
+        ${tw`text-center text-lg text-blue-600 font-bold hover:underline`}
+      }
+
+      span {
+        font-weight: bold;
+      }
+
+      .instructor,
+      .institute {
+        ${tw`capitalize`}
+      }
+    }
   }
 
   h1 {

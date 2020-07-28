@@ -141,9 +141,9 @@ function Job({ user }) {
             title="Job document"
             src={job.doc_url}
             alt="document"
-            className="mt-2 md:mt-0 h-48 w-40 border-2 border-gray-600 rounded"
+            className="mx-auto mt-2 md:mx-0 md:mt-0 h-48 w-40 border-2 border-gray-600 rounded"
           />
-          <span className="font-bold md:text-center block">Job Document</span>
+          <span className="font-bold text-center block">Job Document</span>
         </a>
       </div>
       {user.role === 'Employee' && (

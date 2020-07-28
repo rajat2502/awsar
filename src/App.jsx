@@ -20,6 +20,7 @@ import EmployeeDashboard from 'components/EmployeeDashboard';
 import OrgDashboard from 'components/OrgDashboard';
 import JobApplicants from 'components/JobApplicants';
 import News from 'components/News';
+import Courses from 'components/Courses';
 import Error404 from 'components/Error404';
 
 function App() {
@@ -102,6 +103,7 @@ function App() {
               render={(props) => <JobApplicants user={user} {...props} />}
             />
             <Route exact path="/news" component={News} />
+            <Route exact path="/courses" component={Courses} />
             <Route component={Error404} />
           </Switch>
           <Footer />
