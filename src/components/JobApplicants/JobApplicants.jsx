@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Redirect, Link, useParams } from 'react-router-dom';
 
-import { getJobApplicants, updateApplicationStatus } from 'api';
+import { getJobApplicants, updateApplicationStatus, sendEmail } from 'api';
 
 import { useModal } from 'utils/customHooks/useModal';
 import { getEmailTemplate } from 'utils';
@@ -52,7 +52,20 @@ function JobApplicants({ user }) {
   const handleStatusUpdate = async (e) => {
     e.preventDefault();
     setPending(true);
-    await updateApplicationStatus(candidate.id, { status: jobStatus });
+    const emailPromise = sendEmail(
+      candidate.employee.email,
+      user.username,
+      getEmailTemplate(
+        jobStatus,
+        candidate.employee.first_name,
+        applicants[0].job.company_name,
+        applicants[0].job.title,
+      )[0].template,
+    );
+    const statusPromise = await updateApplicationStatus(candidate.id, {
+      status: jobStatus,
+    });
+    await Promise.all([emailPromise, statusPromise]);
     setPending(false);
     closeModal();
     setLoading(true);
@@ -65,7 +78,6 @@ function JobApplicants({ user }) {
 
   useEffect(() => {
     fetchJobApplicants();
-    // sendEmail();
   }, [fetchJobApplicants]);
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;

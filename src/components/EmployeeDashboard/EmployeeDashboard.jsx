@@ -48,8 +48,10 @@ function EmployeeDashboard({ user }) {
             </thead>
             <tbody>
               {jobs.map((j) => (
-                <tr>
-                  <td>{j.job.title}</td>
+                <tr key={j.job.id}>
+                  <td>
+                    <Link to={`/job/${j.job.id}`}>{j.job.title}</Link>
+                  </td>
                   <td>
                     <Link to={`/org/${j.job.company_name}`}>
                       {j.job.company_name}

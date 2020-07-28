@@ -22,7 +22,7 @@ function Courses() {
   return (
     <StyledContainer>
       <h1>Job Oriented Courses</h1>
-      <p className="mx-3 mb-2 font-bold text-gray-800 text-sm">
+      <p className="mx-3 mb-1 font-bold text-gray-800 text-sm">
         Total Results: {courses.edges.length} courses
       </p>
       <div>
@@ -54,12 +54,8 @@ function Courses() {
                 <span>Duration:</span> {n.weeks} weeks
               </p>
               <p className="font-bold mt-1 text-center text-gray-800 text-xs">
-                (
-                {`From ${n.startDate.substring(0, 10)} to ${n.endDate.substring(
-                  0,
-                  10,
-                )}`}
-                )
+                ({`From ${n.startDate.substring(0, 10)}`}
+                {n.endDate && <span> to {n.endDate.substring(0, 10)}</span>})
               </p>
             </a>
           </div>
