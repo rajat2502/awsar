@@ -61,31 +61,31 @@ const Navbar = ({ user, setUser }) => {
         <label htmlFor="nav" />
         <nav>
           <ul>
-            <li className="mx-2">
-              <Link
-                to={
-                  user.role === 'Employee'
-                    ? `/profile/${user.username}`
-                    : `/org/${user.username}`
-                }>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Profile
-                </button>
-              </Link>
-            </li>
-            {/* <li className="mx-2">
-              <Link to="/createProfile">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Create Profile
-                </button>
-              </Link>
-            </li> */}
-            <li className="ml-2">
+            <li>
               {user.username ? (
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                  onClick={signOut}>
-                  Logout
+                <button className="profile-button">
+                  <span className="font-bold text-blue-600">
+                    {user.username}
+                  </span>
+                  &nbsp;
+                  <Icon style={{ display: 'inline' }} name="down-arrow" />
+                  <ul className="flex flex-col">
+                    <li className="text-sm hover:text-blue-600">
+                      <Link
+                        to={
+                          user.role === 'Employee'
+                            ? `/profile/${user.username}`
+                            : `/org/${user.username}`
+                        }>
+                        Profile
+                      </Link>
+                    </li>
+                    <li
+                      className="text-sm hover:text-blue-600"
+                      onClick={signOut}>
+                      Sign Out
+                    </li>
+                  </ul>
                 </button>
               ) : (
                 <Link to="/login">

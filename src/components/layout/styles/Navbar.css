@@ -81,6 +81,25 @@ nav a {
   }
 }
 
+.profile-button ul {
+  opacity: 0;
+  transition: all 0.25s;
+  position: absolute;
+  right: 25px;
+  transform: scale(0.75);
+  transform-origin: top right;
+  background: #fff;
+  padding: 12px 20px;
+  display: flex;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.profile-button:hover ul {
+  opacity: 1;
+  transform: scale(1);
+}
+
 @media only screen and (max-width: 600px) {
   .top-nav {
     flex-wrap: wrap;

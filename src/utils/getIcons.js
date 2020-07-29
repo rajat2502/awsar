@@ -815,4 +815,31 @@ export const getIcons = () => [
     x: '0px',
     y: '0px',
   },
+  {
+    id: 17,
+    name: 'down-arrow',
+    svg: (
+      <g
+        style={{ mixBlendMode: 'normal' }}
+        fill="none"
+        fontFamily="none"
+        fillRule="nonzero"
+        fontSize="none"
+        stroke="none"
+        strokeDasharray=""
+        strokeLinecap="butt"
+        strokeWidth="1"
+        textAnchor="none">
+        <path d="M0,172v-172h172v172z" fill="none" />
+        <g fill="#3182d7">
+          <path d="M19.03646,44.79167l-9.40625,10.75l71.66667,64.5l4.70313,4.25521l4.70313,-4.25521l71.66667,-64.5l-9.40625,-10.75l-66.96354,60.24479z" />
+        </g>
+      </g>
+    ),
+    height: '12',
+    width: '12',
+    viewBox: '0 0 172 172',
+    x: '0px',
+    y: '0px',
+  },
 ];
