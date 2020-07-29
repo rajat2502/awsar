@@ -86,19 +86,24 @@ export const StyledContainer = styled.div.attrs({
       ${tw`relative block m-4 bg-white p-6 rounded shadow`}
 
       .news-title {
-        ${tw`font-bold text-lg text-gray-700 hover:underline`}
+        ${tw`font-bold text-lg text-gray-800 hover:underline`}
       }
 
       .news-description {
-        ${tw`mt-1 sm:mb-5 text-sm`}
+        ${tw`mt-1 sm:mb-2 text-sm`}
+      }
+
+      .source,
+      .author {
+        ${tw`text-sm text-gray-700`}
+
+        span {
+          font-weight: bold;
+        }
       }
 
       .publishedAt {
-        ${tw`flex justify-between text-sm sm:absolute`}
-
-        left:24px;
-        right: 24px;
-        bottom: 20px;
+        ${tw`mt-1 flex justify-between text-sm`}
       }
     }
   }
@@ -155,7 +160,9 @@ export const StyledContainer = styled.div.attrs({
 
       span {
         &.status {
-          ${tw`cursor-pointer text-sm font-bold py-1 px-4 rounded-full`}
+          ${tw`inline-flex justify-center cursor-pointer text-sm font-bold py-1 px-4 rounded-full`}
+
+          width: 94px;
         }
 
         &.Applied {
@@ -167,7 +174,7 @@ export const StyledContainer = styled.div.attrs({
         }
 
         &.Selected {
-          ${tw`text-green-600 bg-green-200`}
+          ${tw`px-2 text-green-600 bg-green-200`}
         }
 
         &.Ineligible {

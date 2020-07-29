@@ -3,10 +3,12 @@ import { Link, useHistory, Redirect } from 'react-router-dom';
 
 import { signUp } from 'api';
 import { StyledForm } from 'components/StyledForm';
+import Icon from 'components/Icon';
 
 function Signup({ setUser }) {
   const history = useHistory();
 
+  const [step, setStep] = useState(1);
   const [userRole, setUserRole] = useState('Employee');
   const [pending, setPending] = useState(false);
   const [userName, setUserName] = useState('');
@@ -57,52 +59,77 @@ function Signup({ setUser }) {
 
   return (
     <StyledForm width="380px">
-      <h1>{userRole === 'Employee' ? 'JobSeeker' : 'Organization'}'s SignUp</h1>
-      <div>
-        <button
-          className={userRole === 'Employee' ? 'selected py-1' : 'py-1'}
-          onClick={() => setUserRole('Employee')}>
-          JobSeeker
-        </button>
-        <button
-          className={userRole === 'Employer' ? 'selected py-1' : 'py-1'}
-          onClick={() => setUserRole('Employer')}>
-          Organization
-        </button>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          required
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          required
-          onChange={(e) => setUserEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          required
-          onChange={(e) => setPassword2(e.target.value)}
-        />
-        <button type="submit" disabled={pending}>
-          {!pending ? 'Sign Up' : 'Signing Up...'}
-        </button>
-        {error && <p className="error">{error}</p>}
-        <p>
-          Already have an account? <Link to="/login">Login!</Link>
-        </p>
-      </form>
+      {step === 1 && (
+        <div>
+          <h1>Choose your Role</h1>
+          <div className="w-full flex flex-col justify-center">
+            <button
+              className="w-full mx-auto py-1"
+              style={{ margin: '0.35rem auto' }}
+              onClick={() => {
+                setUserRole('Employee');
+                setStep(2);
+              }}>
+              <Icon style={{ display: 'inline' }} name="job-seeker" />
+              &nbsp; Sign Up as a Job Seeker
+            </button>
+            <button
+              className="w-full mx-auto py-1"
+              style={{ margin: '0.35rem auto' }}
+              onClick={() => {
+                setUserRole('Employer');
+                setStep(2);
+              }}>
+              <Icon style={{ display: 'inline' }} name="org" />
+              &nbsp; Sign Up as an Organization
+            </button>
+          </div>
+        </div>
+      )}
+      {step === 2 && (
+        <>
+          <button
+            className="absolute h-8 w-8 flex justify-center items-center bg-blue-600 hover:blue-700"
+            style={{ top: 10, left: 15, borderRadius: '50%' }}
+            onClick={() => setStep(1)}>
+            <Icon name="go-back" />
+          </button>
+          <h1>Sign Up</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Username"
+              required
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              required
+              onChange={(e) => setUserEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              required
+              onChange={(e) => setPassword2(e.target.value)}
+            />
+            <button type="submit" disabled={pending}>
+              {!pending ? 'Sign Up' : 'Signing Up...'}
+            </button>
+            {error && <p className="error">{error}</p>}
+            <p>
+              Already have an account? <Link to="/login">Login!</Link>
+            </p>
+          </form>
+        </>
+      )}
     </StyledForm>
   );
 }

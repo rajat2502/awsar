@@ -122,9 +122,7 @@ function JobApplicants({ user }) {
                   placeholder="This content will be send to the job seeker via Email and SMS."></textarea>
               </div>
               <button type="submit" disabled={pending}>
-                {pending
-                  ? 'Changing Application Status...'
-                  : 'Change Application Status'}
+                {pending ? 'Notifying Candiate...' : 'Notify Candiate'}
               </button>
             </form>
           </Modal>
@@ -148,45 +146,49 @@ function JobApplicants({ user }) {
                 </tr>
               </thead>
               <tbody>
-                {applicants.map((ap) => (
-                  <tr key={ap.employee.id}>
-                    <td>
-                      <Link to={`/profile/${ap.employee.user}`}>
-                        {ap.employee.first_name} {ap.employee.last_name}
-                      </Link>
-                    </td>
-                    <td>
-                      <a href={`mailto:${ap.employee.email}`}>
-                        {ap.employee.email}
-                      </a>
-                    </td>
-                    <td className="capitalize">{ap.employee.gender}</td>
-                    <td>
-                      {Math.floor(
-                        (new Date() - new Date(ap.employee.dob)) / 31536000000,
-                      )}
-                    </td>
-                    <td>
-                      <a href={`tel:${ap.employee.phone_number}`}>
-                        {ap.employee.phone_number}
-                      </a>
-                    </td>
-                    <td>
-                      <span className={`relative status ${ap.status}`}>
-                        {ap.status}
-                      </span>
-                      {(ap.status === 'Applied' ||
-                        ap.status === 'Shortlisted') && (
-                        <span
-                          className="block mt-1 change-status"
-                          title="Change Status"
-                          onClick={() => openModal(ap)}>
-                          (Change Status)
+                {applicants
+                  .slice()
+                  .reverse()
+                  .map((ap) => (
+                    <tr key={ap.employee.id}>
+                      <td>
+                        <Link to={`/profile/${ap.employee.user}`}>
+                          {ap.employee.first_name} {ap.employee.last_name}
+                        </Link>
+                      </td>
+                      <td>
+                        <a href={`mailto:${ap.employee.email}`}>
+                          {ap.employee.email}
+                        </a>
+                      </td>
+                      <td className="capitalize">{ap.employee.gender}</td>
+                      <td>
+                        {Math.floor(
+                          (new Date() - new Date(ap.employee.dob)) /
+                            31536000000,
+                        )}
+                      </td>
+                      <td>
+                        <a href={`tel:${ap.employee.phone_number}`}>
+                          {ap.employee.phone_number}
+                        </a>
+                      </td>
+                      <td>
+                        <span className={`relative status ${ap.status}`}>
+                          {ap.status}
                         </span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
+                        {(ap.status === 'Applied' ||
+                          ap.status === 'Shortlisted') && (
+                          <span
+                            className="block mt-1 change-status"
+                            title="Change Status"
+                            onClick={() => openModal(ap)}>
+                            (Change Status)
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </>

@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 export const StyledForm = styled.main.attrs({
   className:
-    'shadow-md rounded-lg py-12 bg-white mx-auto my-6 flex justify-center flex-col items-center',
+    'relative shadow-md rounded-lg py-12 bg-white mx-auto my-6 flex justify-center flex-col items-center',
 })`
   & {
     width: ${({ width }) => width};

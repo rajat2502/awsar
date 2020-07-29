@@ -47,23 +47,26 @@ function EmployeeDashboard({ user }) {
               </tr>
             </thead>
             <tbody>
-              {jobs.map((j) => (
-                <tr key={j.job.id}>
-                  <td>
-                    <Link to={`/job/${j.job.id}`}>{j.job.title}</Link>
-                  </td>
-                  <td>
-                    <Link to={`/org/${j.job.company_name}`}>
-                      {j.job.company_name}
-                    </Link>
-                  </td>
-                  <td>{j.job.type}</td>
-                  <td>{j.applied_at.substring(0, 10)}</td>
-                  <td>
-                    <span className={`status ${j.status}`}>{j.status}</span>
-                  </td>
-                </tr>
-              ))}
+              {jobs
+                .slice()
+                .reverse()
+                .map((j) => (
+                  <tr key={j.job.id}>
+                    <td>
+                      <Link to={`/job/${j.job.id}`}>{j.job.title}</Link>
+                    </td>
+                    <td>
+                      <Link to={`/org/${j.job.company_name}`}>
+                        {j.job.company_name}
+                      </Link>
+                    </td>
+                    <td>{j.job.type}</td>
+                    <td>{j.applied_at.substring(0, 10)}</td>
+                    <td>
+                      <span className={`status ${j.status}`}>{j.status}</span>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>{' '}
         </>

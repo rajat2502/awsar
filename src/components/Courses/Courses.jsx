@@ -21,7 +21,7 @@ function Courses() {
 
   return (
     <StyledContainer>
-      <h1>Job Oriented Courses</h1>
+      <h1>Recommended courses for Government Jobs</h1>
       <p className="mx-3 mb-1 font-bold text-gray-800 text-sm">
         Total Results: {courses.edges.length} courses
       </p>

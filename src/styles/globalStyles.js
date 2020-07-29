@@ -22,6 +22,12 @@ export const GlobalStyles = createGlobalStyle`
     background: #ececec;
   }
 
+  button {
+    &:focus {
+      outline: none;
+    }
+  }
+
   .loader {
     width: 110px;
     margin:auto;
