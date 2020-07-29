@@ -99,6 +99,19 @@ export const getJob = async (id) => {
   }
 };
 
+export const getJobsByFilters = async (location, title) => {
+  try {
+    const { data } = await axios.get(
+      `${baseUrl}/jobs/search?location=${location}&title=${title}`,
+    );
+
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
 export const updateJob = async (id, dataObj) => {
   try {
     console.log(dataObj);
