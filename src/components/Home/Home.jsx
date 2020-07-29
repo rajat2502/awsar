@@ -18,6 +18,7 @@ function Home() {
   const fetchJobs = async (e) => {
     e.preventDefault();
     if (location && title) {
+      setError(null);
       setLoading(true);
       const filteredData = await getJobsByFilters(location, title);
       setJobs(filteredData);
@@ -51,7 +52,7 @@ function Home() {
           {
             resolve: autoplayPlugin,
             options: {
-              interval: 1500,
+              interval: 3000,
             },
           },
         ]}
@@ -68,7 +69,7 @@ function Home() {
           className="flex flex-col sm:flex-row justify-center"
           onSubmit={fetchJobs}>
           <div className="flex flex-col">
-            <label className="mx-1 text-gray-800 font-medium">Location</label>
+            <label className="mx-1 text-gray-800 font-bold">Location</label>
             <input
               type="text"
               placeholder="Eg: Delhi"
@@ -77,7 +78,7 @@ function Home() {
             />
           </div>
           <div className="flex flex-col">
-            <label className="mx-1 text-gray-800 font-medium">Job Title</label>
+            <label className="mx-1 text-gray-800 font-bold">Job Title</label>
             <input
               type="text"
               placeholder="Eg: Medical Officer"
@@ -93,7 +94,7 @@ function Home() {
             {loading ? 'Searching Jobs...' : 'Search Jobs'}
           </button>
         </form>
-        {error && <p>{error}</p>}
+        {error && <p className="text-center text-red-600">{error}</p>}
         <br />
         {loading ? (
           <img
@@ -102,56 +103,64 @@ function Home() {
             src={require('assets/loader.gif')}
           />
         ) : jobs.length ? (
-          jobs.map((job) => (
-            <Link
-              to={`job/applicants/${job.id}`}
-              key={job.id}
-              className="relative w-full sm:inline-block sm:w-1/2 md:w-1/4 ">
-              <div className="text-gray-800 bg-white mx-4 my-2 sm:m-2 p-6 shadow rounded">
-                <p className="text-lg font-bold text-center text-blue-600">
-                  {job.title}
-                </p>
-                <div className="mt-1 text-sm">
-                  <p>
-                    <span className="font-bold">Vacancies: </span>
-                    {job.vacancies}
+          <div>
+            {jobs.map((job) => (
+              <Link
+                to={`job/applicants/${job.id}`}
+                key={job.id}
+                className="relative w-full sm:inline-block sm:w-1/2 md:w-1/4 ">
+                <div className="text-gray-800 bg-white mx-4 my-2 sm:m-2 p-6 shadow rounded">
+                  <p className="text-lg font-bold text-center text-blue-600">
+                    {job.title}
                   </p>
-                  <p>
-                    <span className="font-bold">Location: </span>
-                    {job.location}
-                  </p>
-                  <p>
-                    <span className="font-bold">Salary: </span>
-                    {job.salary} (₹) (per month)
-                  </p>
-                  {job.job_for_women || job.job_for_disabled ? (
-                    <div className="mt-1">
-                      {job.job_for_women && (
-                        <button className="women-job">Jobs for Women</button>
-                      )}
-                      {job.job_for_disabled && (
-                        <button className="disabled-job">
-                          Jobs for Disabled
-                        </button>
-                      )}
-                    </div>
-                  ) : (
-                    <button className="general">General</button>
-                  )}
-                  <Link
-                    to={`job/${job.id}`}
-                    className="block transition duration-15 ease-in-out rounded mt-1 py-1 px-2 border border-blue-600 text-center bg-blue-600 text-white hover:bg-white hover:text-blue-600">
-                    See Job Details
-                  </Link>
+                  <div className="mt-1 text-sm">
+                    <p>
+                      <span className="font-bold">Vacancies: </span>
+                      {job.vacancies}
+                    </p>
+                    <p>
+                      <span className="font-bold">Location: </span>
+                      {job.location}
+                    </p>
+                    <p>
+                      <span className="font-bold">Salary: </span>
+                      {job.salary} (₹) (per month)
+                    </p>
+                    {job.job_for_women || job.job_for_disabled ? (
+                      <div className="mt-1">
+                        {job.job_for_women && (
+                          <button className="women-job">Jobs for Women</button>
+                        )}
+                        {job.job_for_disabled && (
+                          <button className="disabled-job">
+                            Jobs for Disabled
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      <button className="general">General</button>
+                    )}
+                    <Link
+                      to={`job/${job.id}`}
+                      className="block transition duration-15 ease-in-out rounded mt-1 py-1 px-2 border border-blue-600 text-center bg-blue-600 text-white hover:bg-white hover:text-blue-600">
+                      See Job Details
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              </Link>
+            ))}
+            <Link
+              to={'/jobs'}
+              style={{ width: 300 }}
+              className="mx-auto mt-2 flex justify-center transition duration-15 ease-in-out rounded py-2 px-2 font-bold border border-blue-600 text-center bg-blue-600 text-white hover:bg-blue-700">
+              See All Jobs
             </Link>
-          ))
+          </div>
         ) : (
           <p className="text-center text-2xl font-bold">No Jobs found!</p>
         )}
       </StyledContainer>
-      <div className="mt-4 py-2 bg-white">
+      <div className="mt-4 p-4 sm:px-24 sm:py-8 bg-white">
         <h1 className="my-2 font-bold text-center text-3xl text-blue-600">
           Organizations hiring with us
         </h1>

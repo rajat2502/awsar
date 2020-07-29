@@ -133,6 +133,14 @@ function CreateJob({ user }) {
               {!uploading ? 'Upload Document' : 'Uploading Document...'}
             </button>
             {error && <p className="error">{error}</p>}
+            <p className="mx-1 text-gray-700">
+              <span
+                className="cursor-pointer underline"
+                onClick={() => setStep(3)}>
+                Click here
+              </span>{' '}
+              to create job by manually filling out the details
+            </p>
           </form>
         </>
       )}

@@ -69,7 +69,7 @@ const Navbar = ({ user, setUser }) => {
                   </span>
                   &nbsp;
                   <Icon style={{ display: 'inline' }} name="down-arrow" />
-                  <ul className="flex flex-col">
+                  <ul className="flex flex-col py-6 px-6">
                     <li className="text-sm hover:text-blue-600">
                       <Link
                         to={
@@ -88,11 +88,18 @@ const Navbar = ({ user, setUser }) => {
                   </ul>
                 </button>
               ) : (
-                <Link to="/login">
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                    Login
-                  </button>
-                </Link>
+                <>
+                  <Link to="/signup">
+                    <button className="mx-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Sign Up
+                    </button>
+                  </Link>
+                  <Link to="/login">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                      Login
+                    </button>
+                  </Link>
+                </>
               )}
             </li>
           </ul>

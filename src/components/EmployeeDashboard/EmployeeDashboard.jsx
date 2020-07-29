@@ -55,7 +55,7 @@ function EmployeeDashboard({ user }) {
                     <td>
                       <Link to={`/job/${j.job.id}`}>{j.job.title}</Link>
                     </td>
-                    <td>
+                    <td className="uppercase">
                       <Link to={`/org/${j.job.company_name}`}>
                         {j.job.company_name}
                       </Link>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { StyledModal } from './StyledModal';
 
-const Modal = ({ title, closeModal, children }) => {
+const Modal = ({ title, closeModal, children, modal }) => {
   const hideModal = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
@@ -11,7 +11,7 @@ const Modal = ({ title, closeModal, children }) => {
   };
 
   return ReactDOM.createPortal(
-    <StyledModal onClick={hideModal}>
+    <StyledModal className={modal ? 'modal-open' : ''} onClick={hideModal}>
       <div className="content">
         <p className="heading">{title}</p>
         <span className="close-icon" onClick={closeModal} title="close">

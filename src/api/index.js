@@ -114,9 +114,16 @@ export const getJobsByFilters = async (location, title) => {
 
 export const updateJob = async (id, dataObj) => {
   try {
-    console.log(dataObj);
     const { data } = await axios.put(`${baseUrl}/jobs/update/${id}/`, dataObj);
-    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+export const deleteJob = async (id) => {
+  try {
+    const { data } = await axios.delete(`${baseUrl}/jobs/update/${id}/`);
     return data;
   } catch (err) {
     console.log(err.response);

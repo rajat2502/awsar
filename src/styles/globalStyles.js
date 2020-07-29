@@ -14,6 +14,11 @@ export const GlobalStyles = createGlobalStyle`
     font-family: proximaNova, sans-serif;
   }
 
+  body.modal-open {
+    height: 100vh;
+    overflow-y: hidden;
+  }
+
   .App {
     min-height: 100vh;
     display: flex;
@@ -25,6 +30,10 @@ export const GlobalStyles = createGlobalStyle`
   button {
     &:focus {
       outline: none;
+    }
+
+    &.BrainhubCarousel__arrows {
+      background-color: #4299e1 !important;
     }
   }
 
