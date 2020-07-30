@@ -647,7 +647,7 @@ function CreateProfile({ user }) {
                   Description <span>*</span>
                 </label>
                 <textarea
-                  className="sm:w-full"
+                  className="h-20 sm:w-full"
                   placeholder="Company description..."
                   name="overview"
                   onChange={(e) => handleCompanyDetails(e)}

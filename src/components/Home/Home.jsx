@@ -105,8 +105,7 @@ function Home() {
         ) : jobs.length ? (
           <div>
             {jobs.map((job) => (
-              <Link
-                to={`job/applicants/${job.id}`}
+              <div
                 key={job.id}
                 className="relative w-full sm:inline-block sm:w-1/2 md:w-1/4 ">
                 <div className="text-gray-800 bg-white mx-4 my-2 sm:m-2 p-6 shadow rounded">
@@ -147,7 +146,7 @@ function Home() {
                     </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
             <Link
               to={'/jobs'}

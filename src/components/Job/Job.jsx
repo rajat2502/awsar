@@ -121,11 +121,11 @@ function Job({ user }) {
           </p>
           <p className="mt-1">
             <span className="font-bold">Last date to apply: </span>
-            {job.last_date.substring(0, 10)}
+            {new Date(job.last_date.substring(0, 10)).toLocaleDateString()}
           </p>
           <p className="mt-1">
             <span className="font-bold">Last updated on: </span>
-            {job.updated_at.substring(0, 10)}
+            {new Date(job.updated_at.substring(0, 10)).toLocaleDateString()}
           </p>
           <p className="mt-1">
             <span className="font-bold">Job Description: </span>

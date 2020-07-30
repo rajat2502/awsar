@@ -69,7 +69,12 @@ function News() {
                   <p className="text-sm text-blue-500 hover:underline">
                     Read more...
                   </p>
-                  <p>Published on: {n.publishedAt.substring(0, 10)}</p>
+                  <p>
+                    Published on:{' '}
+                    {new Date(
+                      n.publishedAt.substring(0, 10),
+                    ).toLocaleDateString()}
+                  </p>
                 </div>
               </a>
             ))}

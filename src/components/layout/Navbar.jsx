@@ -35,7 +35,7 @@ const Navbar = ({ user, setUser }) => {
         </div>
       </div>
 
-      <header className="bg-white flex items-center justify-between">
+      <header className="bg-white flex items-end justify-between">
         <div className="logo flex items-end text-lg font-bold">
           <Link className="m-1" to="/">
             <img
@@ -65,7 +65,7 @@ const Navbar = ({ user, setUser }) => {
               {user.username && user.role === 'Employer' ? (
                 <Link
                   to="/createJob"
-                  className="mx-2 font-bold text-blue-600 hover:text-blue-700">
+                  className="sm:mr-3 font-bold text-blue-600 hover:text-blue-700">
                   Post Job
                 </Link>
               ) : null}

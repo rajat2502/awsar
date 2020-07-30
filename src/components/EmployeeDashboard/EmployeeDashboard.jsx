@@ -92,7 +92,7 @@ function EmployeeDashboard({ user }) {
                 .slice()
                 .reverse()
                 .map((j) => (
-                  <tr key={j.job.id}>
+                  <tr key={j.applied_at}>
                     <td>
                       <Link to={`/job/${j.job.id}`}>{j.job.title}</Link>
                     </td>

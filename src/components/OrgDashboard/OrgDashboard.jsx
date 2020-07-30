@@ -9,9 +9,9 @@ import Icon from 'components/Icon';
 import { StyledContainer } from 'components/StyledContainer';
 
 function OrgDashboard({ user }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
-  const [modal, showModal, hideModal] = useModal(false);
+  const [modal, showModal, hideModal] = useModal();
   const [jobId, setJobId] = useState(null);
   const [pending, setPending] = useState(false);
 

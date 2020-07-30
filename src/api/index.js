@@ -119,8 +119,6 @@ export const getJobsByFilters = async (location, title) => {
     const { data } = await axios.get(
       `${baseUrl}/jobs/search?location=${location}&title=${title}`,
     );
-
-    console.log(data);
     return data;
   } catch (err) {
     console.log(err.response);
