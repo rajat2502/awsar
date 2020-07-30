@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 
 import { getDomains, getQualifications } from 'utils';
-import { uploadImage, summarizeTextFromImage, createJob } from 'api';
+import {
+  uploadImage,
+  summarizeTextFromImage,
+  createJob,
+  getProfile,
+} from 'api';
 
 import { StyledForm } from 'components/StyledForm';
 
 function CreateJob({ user }) {
   const history = useHistory();
 
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState({});
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('Choose a Document');
   const [uploading, setUploading] = useState(false);
@@ -60,19 +67,21 @@ function CreateJob({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (file) {
-      setError(true);
-      setUploading(true);
-      const image = await handleImageUpload();
-      setJobDetails((state) => ({ ...state, doc_url: image }));
-      setStep(2);
-      setUploading(false);
-      const { text, summarizedText } = await summarizeTextFromImage(image);
-      setJobDetails((state) => ({ ...state, summary: summarizedText }));
-      setJobDetails((state) => ({ ...state, description: text }));
-      setExtracting(false);
-      setStep(3);
-    } else setError('Please choose a document!');
+    if (!userData.error) {
+      if (file) {
+        setError(true);
+        setUploading(true);
+        const image = await handleImageUpload();
+        setJobDetails((state) => ({ ...state, doc_url: image }));
+        setStep(2);
+        setUploading(false);
+        const { text, summarizedText } = await summarizeTextFromImage(image);
+        setJobDetails((state) => ({ ...state, summary: summarizedText }));
+        setJobDetails((state) => ({ ...state, description: text }));
+        setExtracting(false);
+        setStep(3);
+      } else setError('Please choose a document!');
+    } else setError('Please create your profile before posting a Job.');
   };
 
   const handleCheckboxChange = ({ target: { name } }) =>
@@ -83,16 +92,29 @@ function CreateJob({ user }) {
 
   const handleCreateJob = async (e) => {
     e.preventDefault();
-    setPending(true);
-    const dataObj = {
-      ...jobDetails,
-      user: user.username,
-      company_name: user.username,
-    };
-    await createJob(dataObj);
-    history.push('/dashboard');
-    setPending(false);
+    if (!userData.error) {
+      setPending(true);
+      const dataObj = {
+        ...jobDetails,
+        user: user.username,
+        company_name: user.username,
+      };
+      await createJob(dataObj);
+      history.push('/dashboard');
+      setPending(false);
+    } else setError('Please create your profile before posting a Job.');
   };
+
+  const fetchUserData = useCallback(async () => {
+    setError(null);
+    const data = await getProfile(user.username, 'Employer');
+    setUserData(data);
+    setLoading(false);
+  }, [user.username]);
+
+  useEffect(() => {
+    fetchUserData();
+  }, [fetchUserData]);
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
@@ -101,6 +123,11 @@ function CreateJob({ user }) {
       <div className="text-red-600 text-3xl font-bold m-auto">
         Please login as a Government organization to create a new Job.
       </div>
+    );
+
+  if (!userData || loading)
+    return (
+      <img className="loader" alt="loader" src={require('assets/loader.gif')} />
     );
 
   return (
@@ -344,6 +371,7 @@ function CreateJob({ user }) {
             <button className="mt-1" type="submit" disabled={pending}>
               {!pending ? 'Create Job' : 'Creating Job...'}
             </button>
+            {error && <p className="error">{error}</p>}
           </form>
         </>
       )}

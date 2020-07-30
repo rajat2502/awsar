@@ -48,14 +48,20 @@ function News() {
                     <p className="source">
                       <span>Source:</span> {n.source.name}
                     </p>
-                    <p className="author">
-                      <span>Author:</span> {n.author}
-                    </p>
+                    {n.author && (
+                      <p className="author">
+                        <span>Author:</span> {n.author}
+                      </p>
+                    )}
                     <p className="news-description">{n.description}</p>
                   </div>
                   <img
                     className="mb-2 sm:mb-0 sm:ml-3 h-40 sm:h-32 w-full sm:w-56"
-                    src={n.urlToImage}
+                    src={
+                      n.urlToImage
+                        ? n.urlToImage
+                        : 'https://www.trendingnews.news/wp-content/uploads/2019/03/Trending-News_Horizontal.png'
+                    }
                     alt={n.title}
                   />
                 </div>

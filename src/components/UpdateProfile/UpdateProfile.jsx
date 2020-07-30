@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 
-import { createProfile, uploadImage, getProfile } from 'api';
+import { updateProfile, uploadImage, getProfile } from 'api';
 
 import Icon from 'components/Icon';
 import { StyledForm } from 'components/StyledForm';
 
-function CreateProfile({ user }) {
+function UpdateProfile({ user }) {
   const history = useHistory();
 
   const [loading, setLoading] = useState(true);
@@ -126,7 +126,7 @@ function CreateProfile({ user }) {
       { user: user.username, email: user.email, image },
       user.role === 'Employee' ? employeeDetails : companyDetails,
     );
-    const data = await createProfile(dataObj, user.role);
+    const data = await updateProfile(user.username, user.role, dataObj);
     if (data.error) setError(data.error);
     else {
       user.role === 'Employee'
@@ -139,12 +139,14 @@ function CreateProfile({ user }) {
   const fetchUserProfile = useCallback(async () => {
     const { username, role } = user;
     const data = await getProfile(username, role);
-    if (!data.error)
-      role === 'Employee'
-        ? history.push(`/profile/${username}`)
-        : history.push(`/org/${username}`);
+    if (user.role === 'Employee') {
+      data.phone_number = data.phone_number && data.phone_number.substring(3);
+      setEmployeeDetails(data);
+    } else {
+      setCompanyDetails(data);
+    }
     setLoading(false);
-  }, [history, user]);
+  }, [user]);
 
   useEffect(() => {
     fetchUserProfile();
@@ -160,7 +162,7 @@ function CreateProfile({ user }) {
   return (
     <div className="rounded-lg bg-white mx-auto my-8 px-6 sm:px-8">
       <StyledForm className="shadow-none">
-        <h1>Profile</h1>
+        <h1>Update Profile</h1>
         <form onSubmit={handleSubmit}>
           {user.role === 'Employee' ? (
             <>
@@ -544,6 +546,7 @@ function CreateProfile({ user }) {
                     type="text"
                     placeholder="Eg: MHRD"
                     name="company_name"
+                    value={companyDetails.company_name}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -553,6 +556,7 @@ function CreateProfile({ user }) {
                     type="text"
                     placeholder="Eg: Oil and Natural Gas Corporation"
                     name="full_form"
+                    value={companyDetails.full_form}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -564,6 +568,7 @@ function CreateProfile({ user }) {
                     type="text"
                     placeholder="Eg: https://abc.com"
                     name="website"
+                    value={companyDetails.website}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -575,6 +580,7 @@ function CreateProfile({ user }) {
                     type="text"
                     placeholder="Eg: ADUPV1245D"
                     name="pan"
+                    value={companyDetails.pan}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -588,6 +594,7 @@ function CreateProfile({ user }) {
                     type="text"
                     placeholder="Eg: Delhi"
                     name="location"
+                    value={companyDetails.location}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -599,6 +606,7 @@ function CreateProfile({ user }) {
                     type="text"
                     placeholder="Eg: IT sector"
                     name="industry"
+                    value={companyDetails.industry}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -612,6 +620,7 @@ function CreateProfile({ user }) {
                     type="number"
                     placeholder="Eg: 200"
                     name="company_size"
+                    value={companyDetails.company_size}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -623,6 +632,7 @@ function CreateProfile({ user }) {
                     type="text"
                     placeholder="Eg: Central Government"
                     name="company_type"
+                    value={companyDetails.company_type}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -647,9 +657,10 @@ function CreateProfile({ user }) {
                   Description <span>*</span>
                 </label>
                 <textarea
-                  className="sm:w-full"
+                  className="h-20 sm:w-full"
                   placeholder="Company description..."
                   name="overview"
+                  value={companyDetails.overview}
                   onChange={(e) => handleCompanyDetails(e)}
                 />
               </div>
@@ -660,6 +671,7 @@ function CreateProfile({ user }) {
                     type="text"
                     placeholder="LinkedIn profile"
                     name="linkedin"
+                    value={companyDetails.linkedin}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -669,6 +681,7 @@ function CreateProfile({ user }) {
                     type="text"
                     placeholder="Twitter Profile"
                     name="twitter"
+                    value={companyDetails.twitter}
                     onChange={(e) => handleCompanyDetails(e)}
                   />
                 </div>
@@ -677,7 +690,7 @@ function CreateProfile({ user }) {
           )}
           {(user.role === 'Employer' || step === 4) && (
             <button type="submit" disabled={pending}>
-              {pending ? 'Submitting Details...' : 'Submit Details'}
+              {pending ? 'Updating Details...' : 'Update Details'}
             </button>
           )}
           {!pending && error && <p className="error">{error}</p>}
@@ -687,4 +700,4 @@ function CreateProfile({ user }) {
   );
 }
 
-export default CreateProfile;
+export default UpdateProfile;

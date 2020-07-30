@@ -62,9 +62,18 @@ const Navbar = ({ user, setUser }) => {
         <nav>
           <ul>
             <li>
+              {user.username && user.role === 'Employer' ? (
+                <Link
+                  to="/createJob"
+                  className="mx-2 font-bold text-blue-600 hover:text-blue-700">
+                  Post Job
+                </Link>
+              ) : null}
+            </li>
+            <li>
               {user.username ? (
                 <button className="profile-button">
-                  <span className="font-bold text-blue-600">
+                  <span className="uppercase font-bold text-blue-600">
                     {user.username}
                   </span>
                   &nbsp;
@@ -79,6 +88,9 @@ const Navbar = ({ user, setUser }) => {
                         }>
                         Profile
                       </Link>
+                    </li>
+                    <li className="text-sm hover:text-blue-600">
+                      <Link to="/updateProfile">Edit Profile</Link>
                     </li>
                     <li
                       className="text-sm hover:text-blue-600"

@@ -108,6 +108,11 @@ export const StyledContainer = styled.div.attrs({
     }
   }
 
+  input,
+  textarea {
+    ${tw`focus:outline-none focus:shadow-outline m-1 block border border-gray-300 rounded py-2 px-4 leading-normal border-gray-400`}
+  }
+
   button {
     ${tw`my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition ease-in duration-200`}
 
