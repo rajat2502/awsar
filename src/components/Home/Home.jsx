@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
+// import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
 
 import '@brainhubeu/react-carousel/lib/style.css';
 
@@ -8,7 +8,7 @@ import { getJobsByFilters } from 'api';
 import { StyledContainer } from 'components/StyledContainer';
 
 function Home() {
-  const [value, setValue] = useState(0);
+  // const [value, setValue] = useState(0);
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [jobs, setJobs] = useState([]);
@@ -33,9 +33,9 @@ function Home() {
     setLoading(false);
   }, []);
 
-  const onChange = (value) => {
-    setValue(value);
-  };
+  // const onChange = (value) => {
+  //   setValue(value);
+  // };
 
   useEffect(() => {
     fetchJobsAtMount();
@@ -43,7 +43,7 @@ function Home() {
 
   return (
     <div>
-      <Carousel
+      {/* <Carousel
         value={value}
         onChange={onChange}
         plugins={[
@@ -60,7 +60,7 @@ function Home() {
         <img src={require('assets/slider1.jpg')} alt="Carousel" />
         <img src={require('assets/slider2.jpg')} alt="Carousel" />
         <img src={require('assets/slider3.1.jpg')} alt="Carousel" />
-      </Carousel>
+      </Carousel> */}
       <StyledContainer>
         <h1 className="my-4 font-bold text-center text-3xl text-blue-600">
           Find the right Job
