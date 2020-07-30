@@ -6,10 +6,8 @@ import { StyledContainer } from 'components/StyledContainer';
 function Courses() {
   const [filteredCourses, setFilteredCourses] = useState(courses.edges);
   const [loading, setLoading] = useState(true);
-  const [title, setTitle] = useState('');
 
   const onTextChange = ({ target: { value } }) => {
-    setTitle(value);
     if (value.length > 0) {
       const regex = new RegExp(`^${value}`, 'i');
       const coursesArray = courses.edges.filter(({ node: n }) =>

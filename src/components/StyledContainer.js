@@ -190,6 +190,10 @@ export const StyledContainer = styled.div.attrs({
           ${tw`text-red-600 bg-red-200`}
         }
 
+        &.Withdrawn {
+          ${tw`text-gray-600 bg-gray-200`}
+        }
+
         &.change-status {
           ${tw`text-xs cursor-pointer hover:underline text-blue-600`}
         }

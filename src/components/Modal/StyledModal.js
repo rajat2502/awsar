@@ -13,13 +13,13 @@ const modalAnimation = keyframes`
 `;
 
 export const StyledModal = styled.main.attrs({
-  className: 'w-full h-full absolute flex justify-center items-center',
+  className: 'w-full h-full fixed flex justify-center items-center',
 })`
   & {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    zindex: 5;
+    z-index: 5;
     background: rgba(0, 0, 0, 0.6);
   }
 

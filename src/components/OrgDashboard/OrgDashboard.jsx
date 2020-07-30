@@ -43,7 +43,7 @@ function OrgDashboard({ user }) {
 
   if (!localStorage.getItem('token')) return <Redirect to="/login" />;
 
-  if (loading)
+  if (loading || !user.username)
     return (
       <img className="loader" alt="loader" src={require('assets/loader.gif')} />
     );
