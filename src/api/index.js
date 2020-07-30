@@ -228,7 +228,7 @@ export const getNews = async () => {
 
 export const sendEmail = async (id, org, body) => {
   const msg = await window.Email.send({
-    SecureToken: '00b62de4-c992-467c-8efc-3cfd3d8b207c',
+    SecureToken: process.env.REACT_APP_SMTP_SECURE_TOKEN,
     To: id,
     From: 'rajatverma5885045@gmail.com',
     Subject: `Regarding application at ${org}`,

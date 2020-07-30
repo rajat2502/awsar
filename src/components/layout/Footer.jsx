@@ -13,14 +13,14 @@ const Footer = () => {
           <div className="flex mb-1">
             <Link to="/">
               <img
-                src="https://i.ibb.co/F8xjMks/uttrakhand-logo.png"
+                src={require('assets/govt-uk.png')}
                 className="awsar-logo"
                 alt="uttarakhand government logo"
               />
             </Link>
             <Link to="/">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Emblem_of_India_%28Tira%E1%B9%85g%C4%81%29.svg"
+                src={require('assets/emblem.svg')}
                 alt="website-logo"
                 className="footer-logo"
               />

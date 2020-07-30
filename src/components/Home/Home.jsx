@@ -85,7 +85,7 @@ function Home() {
           </div>
           <button
             type="submit"
-            style={{ height: 41, minWidth: 200, marginTop: '23px' }}
+            style={{ height: 41, minWidth: 200, marginTop: 28 }}
             className="mx-2 bg-blue-600 hover:bg-blue-800 text-white font-bold py-1 px-4 rounded transition ease-in duration-200"
             disabled={loading}>
             {loading ? 'Searching Jobs...' : 'Search Jobs'}
@@ -157,7 +157,7 @@ function Home() {
         )}
       </StyledContainer>
       <div className="mt-4 p-4 sm:px-24 sm:py-8 bg-white">
-        <h1 className="my-2 font-bold text-center text-3xl text-blue-600">
+        <h1 className="my-2 font-bold text-center text-xl sm:text-3xl text-blue-600">
           Organizations hiring with us
         </h1>
         <img src={require('assets/footer.png')} alt="footer" />
