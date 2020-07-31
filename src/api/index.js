@@ -190,16 +190,10 @@ export const updateApplicationStatus = async (id, dataObj) => {
 
 // external APIs
 export const extractText = async (image, language = 'eng') => {
-  const input = {
-    image,
-    language,
-  };
-  const {
-    result: { prediction },
-  } = await window.Algorithmia.client(algorithmiaApiKey)
-    .algo('character_recognition/tesseract/0.3.0?timeout=300')
-    .pipe(input);
-  return prediction;
+  const { result } = await window.Algorithmia.client(algorithmiaApiKey)
+    .algo('ocr/RecognizeCharacters/0.3.0?timeout=300')
+    .pipe(image);
+  return result;
 };
 
 export const summarizeText = async (input) => {

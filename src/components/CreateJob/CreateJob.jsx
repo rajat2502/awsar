@@ -20,7 +20,6 @@ function CreateJob({ user }) {
   const [fileName, setFileName] = useState('Choose a Document');
   const [uploading, setUploading] = useState(false);
   const [extracting, setExtracting] = useState(false);
-  const [showExtracting, setShowExtracting] = useState(true);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1);
@@ -59,10 +58,16 @@ function CreateJob({ user }) {
     return imageData.image.url;
   };
 
-  const showExtractStart = (e) => {
+  const extractData = async (e) => {
     e.preventDefault();
     setExtracting(true);
-    setShowExtracting(true);
+    const { text, summarizedText } = await summarizeTextFromImage(
+      jobDetails.doc_url,
+    );
+    setJobDetails((state) => ({ ...state, summary: summarizedText }));
+    setJobDetails((state) => ({ ...state, description: text }));
+    setExtracting(false);
+    setStep(3);
   };
 
   const handleSubmit = async (e) => {
@@ -75,11 +80,6 @@ function CreateJob({ user }) {
         setJobDetails((state) => ({ ...state, doc_url: image }));
         setStep(2);
         setUploading(false);
-        const { text, summarizedText } = await summarizeTextFromImage(image);
-        setJobDetails((state) => ({ ...state, summary: summarizedText }));
-        setJobDetails((state) => ({ ...state, description: text }));
-        setExtracting(false);
-        setStep(3);
       } else setError('Please choose a document!');
     } else setError('Please create your profile before posting a Job.');
   };
@@ -178,7 +178,7 @@ function CreateJob({ user }) {
             <span className="text-black font-bold">Document Name: </span>
             &nbsp;{fileName}
           </p>
-          <form className="mt-2" onSubmit={showExtractStart}>
+          <form className="mt-2" onSubmit={extractData}>
             <p className="mx-1 text-lg text-gray-700">
               Please click the button below to Extract Job Description from the
               uploaded document.
@@ -191,7 +191,7 @@ function CreateJob({ user }) {
           </form>
         </>
       )}
-      {step === 3 && showExtracting && (
+      {step === 3 && (
         <>
           <h1>Edit Job Details</h1>
           <form onSubmit={handleCreateJob}>
@@ -317,7 +317,7 @@ function CreateJob({ user }) {
                   onChange={handleJobDetailsChange}
                   className="qual">
                   {getQualifications().map((q) => (
-                    <option>{q}</option>
+                    <option key={q}>{q}</option>
                   ))}
                 </select>
               </div>
