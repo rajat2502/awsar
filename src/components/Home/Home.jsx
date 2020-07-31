@@ -23,12 +23,12 @@ function Home() {
       const filteredData = await getJobsByFilters(location, title);
       setJobs(filteredData);
       setLoading(false);
-    } else setError("Location and Job title can't be empty");
+    } else setError("Location and Job Title can't be empty");
   };
 
   const fetchJobsAtMount = useCallback(async () => {
     setLoading(true);
-    const filteredData = await getJobsByFilters('Delhi', 'Engineer');
+    const filteredData = await getJobsByFilters(location, title);
     setJobs(filteredData);
     setLoading(false);
   }, []);
@@ -46,7 +46,7 @@ function Home() {
       </Carousel>
       <StyledContainer>
         <div>
-          <h1 className="my-4 font-bold text-center text-lg sm:text-3xl text-blue-600">
+          <h1 className="mb-4 font-bold text-center text-lg sm:text-3xl text-blue-600">
             Find the right Job for you
           </h1>
           <form
@@ -88,7 +88,7 @@ function Home() {
             />
           ) : jobs.length ? (
             <div>
-              {jobs.slice(0, 6).map((job) => (
+              {jobs.slice(0, 4).map((job) => (
                 <div
                   key={job.id}
                   className="relative w-full sm:inline-block sm:w-1/2 md:w-1/4 ">
@@ -158,35 +158,31 @@ function Home() {
       </div>
       <div className="flex flex-col sm:flex-row justify-around items-center p-8 sm:p-16">
         <div className="flex flex-col items-center justify-center">
-          <Icon name="job" />
+          <Icon name="job" height="120" width="120" />
           <p className="text-center flex flex-col text-xl">
-            <span className="font-extrabold text-2xl text-gray-900">
+            <span className="font-black text-3xl text-gray-900">
               10,286,729
             </span>
             Active Job Seekers
           </p>
         </div>
         <div className="mt-2 flex flex-col items-center justify-center">
-          <Icon name="people" />
+          <Icon name="people" height="120" width="120" />
           <p className="text-center flex flex-col text-xl">
-            <span className="font-extrabold text-2xl text-gray-900">
-              56,148
-            </span>
+            <span className="font-black text-3xl text-gray-900">56,148</span>
             Active Employers
           </p>
         </div>
         <div className="mt-2 flex flex-col items-center justify-center">
-          <Icon name="vacancy" />
+          <Icon name="vacancy" height="120" width="120" />
           <p className="text-center flex flex-col text-xl">
-            <span className="font-extrabold text-2xl text-gray-900">
-              175,689
-            </span>
+            <span className="font-black text-3xl text-gray-900">175,689</span>
             Active Vacancies
           </p>
         </div>
       </div>
       <div className="mt-2 shadow p-4 sm:px-24 sm:py-8 bg-white">
-        <h1 className="my-2 font-bold text-center text-xl sm:text-3xl text-blue-600">
+        <h1 className="my-2 font-bold text-center text-lg sm:text-3xl text-blue-600">
           Organizations hiring with us
         </h1>
         <img src={require('assets/footer.png')} alt="footer" />

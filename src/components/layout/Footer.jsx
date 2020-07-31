@@ -50,8 +50,8 @@ const Footer = () => {
       <div className="copyright-bar bg-blue-600">
         <h6 className="text-sm">@2020 Team Hashtag. All Rights Reserved.</h6>
         <div>
-          <Link to="/">About us</Link>
           <Link to="/">Contact us</Link>
+          <Link to="/">Provide feedback</Link>
           <Link to="/jobs">Jobs</Link>
         </div>
       </div>

@@ -27,7 +27,7 @@ const Navbar = ({ user, setUser }) => {
             <span className="text-base"> - NATIONAL WEB PORTAL FOR JOBS</span>
           </p>
         </div>
-        <div className="flex">
+        <div className="flex m-auto sm:m-0">
           <button className="mx-2" onClick={print} title="Print this page">
             <Icon name="print" />
           </button>
