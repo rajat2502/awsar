@@ -218,7 +218,7 @@ export const summarizeTextFromImage = async (image, language) => {
 export const getNews = async () => {
   try {
     const { data } = await axios.get(
-      `https://newsapi.org/v2/everything?q=govt-india-job&sortBy=publishedAt&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`,
+      `https://cors-anywhere.herokuapp.com/http://newsapi.org/v2/everything?q=govt-india-job&sortBy=publishedAt&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`,
     );
     return data.articles;
   } catch (err) {
