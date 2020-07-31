@@ -81,7 +81,9 @@ function Profile({ user }) {
                   <>
                     <tr>
                       <td className="px-4 font-bold">DOB</td>
-                      <td className="px-4">{userData.dob}</td>
+                      <td className="px-4">
+                        {new Date(userData.dob).toLocaleDateString()}
+                      </td>
                     </tr>
                     <tr>
                       <td className="px-4 font-bold">Age</td>

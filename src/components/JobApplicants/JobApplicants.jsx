@@ -114,7 +114,7 @@ function JobApplicants({ user }) {
                 </select>
               </div>
               <div className="mt-2">
-                <label>Email (and SMS) content:</label>
+                <label>Email content:</label>
                 <textarea
                   className="h-32"
                   value={content}

@@ -125,73 +125,76 @@ function OrgDashboard({ user }) {
       </h1>
       {jobs.length ? (
         <div>
-          {jobs.map((job) => (
-            <div
-              key={job.id}
-              className="relative w-full sm:inline-block sm:w-1/2 md:w-1/4 ">
-              <div className="text-gray-800 bg-white mx-4 my-2 sm:m-2 p-6 shadow rounded">
-                <Link
-                  to={`job/${job.id}`}
-                  className="hover:underline flex justify-center text-lg font-bold text-center text-blue-600">
-                  {job.title}
-                </Link>
-                <div className="mt-1 text-sm">
-                  <p>
-                    <span className="font-bold">Number of Applicants: </span>
-                    {110}
-                  </p>
-                  <p>
-                    <span className="font-bold">Vacancies: </span>
-                    {job.vacancies}
-                  </p>
-                  <p>
-                    <span className="font-bold">Location: </span>
-                    {job.location}
-                  </p>
-                  <p>
-                    <span className="font-bold">Salary: </span>
-                    {job.salary} (₹) (per month)
-                  </p>
-                  {job.job_for_women || job.job_for_disabled ? (
-                    <div className="mt-1">
-                      {job.job_for_women && (
-                        <button className="women-job">Jobs for Women</button>
-                      )}
-                      {job.job_for_disabled && (
-                        <button className="disabled-job">
-                          Jobs for Disabled
-                        </button>
-                      )}
-                    </div>
-                  ) : (
-                    <button className="general">General</button>
-                  )}
-                  <div style={{ position: 'absolute', top: 18, right: 18 }}>
-                    <Link
-                      to={`/updateJob/${job.id}`}
-                      title="Edit Job"
-                      className="transition ease-in duration-100 bg-gray-700 hover:bg-gray-900 rounded-full h-8 w-8 flex items-center justify-center">
-                      <Icon name="edit" />
-                    </Link>
-                    <span
-                      title="Delete Job"
-                      className="cursor-pointer mt-2 transition ease-in duration-100 bg-gray-700 hover:bg-gray-900 rounded-full h-8 w-8 flex items-center justify-center"
-                      onClick={() => {
-                        showModal();
-                        setJobId(job.id);
-                      }}>
-                      <Icon name="delete" />
-                    </span>
-                  </div>
+          {jobs
+            .slice()
+            .reverse()
+            .map((job) => (
+              <div
+                key={job.id}
+                className="relative w-full sm:inline-block sm:w-1/2 md:w-1/4 ">
+                <div className="text-gray-800 bg-white mx-4 my-2 sm:m-2 p-6 shadow rounded">
                   <Link
-                    to={`job/applicants/${job.id}`}
-                    className="block transition duration-150 ease-in-out rounded mt-1 py-1 px-2 border border-blue-600 text-center bg-blue-600 text-white hover:bg-white hover:text-blue-600">
-                    See Job Applications
+                    to={`job/${job.id}`}
+                    className="hover:underline flex justify-center text-lg font-bold text-center text-blue-600">
+                    {job.title}
                   </Link>
+                  <div className="mt-1 text-sm">
+                    <p>
+                      <span className="font-bold">Number of Applicants: </span>
+                      {110}
+                    </p>
+                    <p>
+                      <span className="font-bold">Vacancies: </span>
+                      {job.vacancies}
+                    </p>
+                    <p>
+                      <span className="font-bold">Location: </span>
+                      {job.location}
+                    </p>
+                    <p>
+                      <span className="font-bold">Salary: </span>
+                      {job.salary} (₹) (per month)
+                    </p>
+                    {job.job_for_women || job.job_for_disabled ? (
+                      <div className="mt-1">
+                        {job.job_for_women && (
+                          <button className="women-job">Jobs for Women</button>
+                        )}
+                        {job.job_for_disabled && (
+                          <button className="disabled-job">
+                            Jobs for Disabled
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      <button className="general">General</button>
+                    )}
+                    <div style={{ position: 'absolute', top: 18, right: 18 }}>
+                      <Link
+                        to={`/updateJob/${job.id}`}
+                        title="Edit Job"
+                        className="transition ease-in duration-100 bg-gray-700 hover:bg-gray-900 rounded-full h-8 w-8 flex items-center justify-center">
+                        <Icon name="edit" />
+                      </Link>
+                      <span
+                        title="Delete Job"
+                        className="cursor-pointer mt-2 transition ease-in duration-100 bg-gray-700 hover:bg-gray-900 rounded-full h-8 w-8 flex items-center justify-center"
+                        onClick={() => {
+                          showModal();
+                          setJobId(job.id);
+                        }}>
+                        <Icon name="delete" />
+                      </span>
+                    </div>
+                    <Link
+                      to={`job/applicants/${job.id}`}
+                      className="block transition duration-150 ease-in-out rounded mt-1 py-1 px-2 border border-blue-600 text-center bg-blue-600 text-white hover:bg-white hover:text-blue-600">
+                      See Job Applications
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       ) : (
         <div className="text-xl font-medium text-center">

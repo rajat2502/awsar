@@ -64,7 +64,7 @@ function CreateJob({ user }) {
     const { text, summarizedText } = await summarizeTextFromImage(
       jobDetails.doc_url,
     );
-    setJobDetails((state) => ({ ...state, summary: summarizedText }));
+    setJobDetails((state) => ({ ...state, summary: summarizedText.trim() }));
     setJobDetails((state) => ({ ...state, description: text }));
     setExtracting(false);
     setStep(3);
