@@ -59,8 +59,15 @@ const Navbar = ({ user, setUser }) => {
 
         <input id="nav" type="checkbox" />
         <label htmlFor="nav" />
-        <nav>
+        <nav className="text-lg">
           <ul>
+            <li>
+              <Link
+                to="/news"
+                className="sm:mr-3 font-bold text-blue-600 hover:text-blue-700">
+                News
+              </Link>
+            </li>
             <li>
               {user.username && user.role === 'Employer' ? (
                 <Link
@@ -101,15 +108,15 @@ const Navbar = ({ user, setUser }) => {
                 </button>
               ) : (
                 <>
-                  <Link to="/signup">
-                    <button className="mx-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                      Sign Up
-                    </button>
+                  <Link
+                    to="/signup"
+                    className="sm:mr-3 font-bold text-blue-600 hover:text-blue-700">
+                    SignUp
                   </Link>
-                  <Link to="/login">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                      Login
-                    </button>
+                  <Link
+                    to="/login"
+                    className="sm:mr-3 font-bold text-blue-600 hover:text-blue-700">
+                    Login
                   </Link>
                 </>
               )}
