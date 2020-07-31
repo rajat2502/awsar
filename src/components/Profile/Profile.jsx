@@ -41,6 +41,7 @@ function Profile({ user }) {
         )}
       </div>
     );
+
   if (!userData || loading)
     return (
       <img className="loader" alt="loader" src={require('assets/loader.gif')} />

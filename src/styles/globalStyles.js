@@ -39,7 +39,7 @@ export const GlobalStyles = createGlobalStyle`
 
   .loader {
     width: 110px;
-    margin:auto;
+    margin: auto;
   }
 
   .carousel-root {

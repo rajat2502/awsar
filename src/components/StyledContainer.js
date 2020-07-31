@@ -75,6 +75,22 @@ export const StyledContainer = styled.div.attrs({
         ${tw`capitalize`}
       }
     }
+
+    &.pagination {
+      ${tw`flex justify-center items-center my-3`}
+
+      span {
+        ${tw`cursor-pointer transition duration-200 ease-in-out hover:bg-blue-700 mx-2 flex justify-center items-center h-8 w-8 text-white font-bold bg-blue-500 rounded-full`}
+
+        &.current-page {
+          ${tw`bg-blue-700 hover:bg-blue-800`}
+        }
+      }
+
+      button {
+        ${tw`py-1 mx-2 bg-blue-600 hover:bg-blue-800 border border-blue-600`}
+      }
+    }
   }
 
   h1 {

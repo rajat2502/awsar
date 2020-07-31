@@ -1,21 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 import { courses } from 'utils/courses';
+import { usePagination } from 'utils/customHooks/usePaginate';
+
+import Icon from 'components/Icon';
 import { StyledContainer } from 'components/StyledContainer';
 
 function Courses() {
-  const [filteredCourses, setFilteredCourses] = useState(courses.edges);
   const [loading, setLoading] = useState(true);
+  const { next, prev, currentData, currentPage, maxPage } = usePagination(
+    courses.edges,
+    52,
+  );
+
+  let filteredCourses = useRef([]);
+  filteredCourses.current = currentData();
 
   const onTextChange = ({ target: { value } }) => {
     if (value.length > 0) {
-      const regex = new RegExp(`^${value}`, 'i');
-      const coursesArray = courses.edges.filter(({ node: n }) =>
-        regex.test(n.title),
+      const coursesArray = currentData().filter(({ node: n }) =>
+        n.title.includes(value),
       );
-      setFilteredCourses(coursesArray);
-    } else setFilteredCourses(courses.edges);
+      filteredCourses.current = coursesArray;
+    } else filteredCourses.current = currentData();
   };
+
+  const setCourses = useCallback(() => {
+    filteredCourses.current = currentData();
+  }, [currentData]);
+
+  useEffect(() => {
+    setCourses();
+  }, [setCourses]);
 
   useEffect(() => {
     const interval = setTimeout(() => setLoading(false), 1500);
@@ -35,7 +51,7 @@ function Courses() {
       <h1>Recommended courses for Government Jobs</h1>
       <div className="mx-3 flex flex-col sm:flex-row justify-between items-end">
         <p className="mb-1 font-bold text-gray-800 text-sm">
-          Total Results: {filteredCourses.length} courses
+          Total Results on this page: {filteredCourses.current.length} courses
         </p>
         <input
           type="text"
@@ -46,8 +62,8 @@ function Courses() {
         />
       </div>
       <div>
-        {filteredCourses.length ? (
-          filteredCourses.map(({ node: n }) => (
+        {filteredCourses.current.length ? (
+          filteredCourses.current.map(({ node: n }) => (
             <div className="course" key={n.id}>
               <a
                 href={`https://swayam.gov.in/${n.url}`}
@@ -84,6 +100,28 @@ function Courses() {
           ))
         ) : (
           <p className="text-2xl font-bold text-center">No Courses found!</p>
+        )}
+      </div>
+      <div className="pagination">
+        {currentPage !== 1 && (
+          <>
+            <button onClick={prev}>
+              {' '}
+              <Icon style={{ display: 'inline-block' }} name="chevron-left" />
+              Prev
+            </button>
+            <span onClick={prev}>{currentPage - 1}</span>
+          </>
+        )}
+        <span className="current-page">{currentPage}</span>
+        {currentPage !== maxPage && (
+          <>
+            <span onClick={next}>{currentPage + 1}</span>
+            <button onClick={next}>
+              Next{' '}
+              <Icon style={{ display: 'inline-block' }} name="chevron-right" />
+            </button>
+          </>
         )}
       </div>
     </StyledContainer>
