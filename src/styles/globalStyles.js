@@ -41,4 +41,28 @@ export const GlobalStyles = createGlobalStyle`
     width: 110px;
     margin:auto;
   }
+
+  .carousel-root {
+    padding-bottom: 6px;
+    border-bottom: 1px solid #c1c1c1;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  .thumb {
+    border: 3px solid #2b6bb0 !important;
+
+    &:hover {
+      border: 3px solid #727272 !important;
+    }
+
+    &.selected {
+      border: 3px solid #727272 !important;
+    }
+  }
+
+  .thumbs {
+    display: flex;
+    justify-content: center;
+  }
 `;
