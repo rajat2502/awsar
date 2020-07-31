@@ -106,9 +106,8 @@ function Courses() {
         {currentPage !== 1 && (
           <>
             <button onClick={prev}>
-              {' '}
-              <Icon style={{ display: 'inline-block' }} name="chevron-left" />
-              Prev
+              <Icon style={{ display: 'inline-block' }} name="chevron-left" />{' '}
+              &nbsp;Prev
             </button>
             <span onClick={prev}>{currentPage - 1}</span>
           </>
@@ -118,7 +117,7 @@ function Courses() {
           <>
             <span onClick={next}>{currentPage + 1}</span>
             <button onClick={next}>
-              Next{' '}
+              Next&nbsp;
               <Icon style={{ display: 'inline-block' }} name="chevron-right" />
             </button>
           </>

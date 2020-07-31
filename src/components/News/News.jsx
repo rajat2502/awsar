@@ -23,7 +23,6 @@ function News() {
       <img className="loader" alt="loader" src={require('assets/loader.gif')} />
     );
 
-  console.log(news);
   return (
     <StyledContainer>
       {news.length ? (

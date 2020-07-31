@@ -158,7 +158,7 @@ function Home() {
       </div>
       <div className="flex flex-col sm:flex-row justify-around items-center p-8 sm:p-16">
         <div className="flex flex-col items-center justify-center">
-          <Icon name="job-seeker-2" height="120" width="120" />
+          <Icon name="job" height="120" width="120" />
           <p className="text-center flex flex-col text-xl">
             <span className="font-black text-3xl text-gray-900">
               10,286,729
