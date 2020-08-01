@@ -117,6 +117,9 @@ function Jobs({ user }) {
             <div className="mt-3">
               <p className="font-bold text-sm">Category:</p>
               <select value={category} name="category" onChange={handleChange}>
+                <option disabled selected>
+                  select an option
+                </option>
                 {getDomains().map((d) => (
                   <option key={d}>{d}</option>
                 ))}
