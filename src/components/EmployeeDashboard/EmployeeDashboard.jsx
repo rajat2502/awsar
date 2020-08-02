@@ -160,7 +160,7 @@ function EmployeeDashboard({ user }) {
                           className="block mt-1 change-status"
                           title="Download Certificate"
                           onClick={() => showCertiModal(j.job)}>
-                          (See Certificate)
+                          (View Certificate)
                         </span>
                       )}
                     </td>
