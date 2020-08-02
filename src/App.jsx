@@ -22,6 +22,7 @@ import OrgDashboard from 'components/OrgDashboard';
 import JobApplicants from 'components/JobApplicants';
 import News from 'components/News';
 import Courses from 'components/Courses';
+import RecommendedJobs from 'components/RecommendedJobs';
 import Error404 from 'components/Error404';
 
 function App() {
@@ -91,6 +92,11 @@ function App() {
               exact
               path="/job/:id"
               render={(props) => <Job user={user} {...props} />}
+            />
+            <Route
+              exact
+              path="/recommended"
+              render={(props) => <RecommendedJobs user={user} {...props} />}
             />
             <Route
               exact

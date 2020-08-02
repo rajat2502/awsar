@@ -61,13 +61,15 @@ function CreateJob({ user }) {
   const extractData = async (e) => {
     e.preventDefault();
     setExtracting(true);
-    const { text, summarizedText } = await summarizeTextFromImage(
-      jobDetails.doc_url,
-    );
-    setJobDetails((state) => ({ ...state, summary: summarizedText.trim() }));
-    setJobDetails((state) => ({ ...state, description: text }));
-    setExtracting(false);
-    setStep(3);
+    const data = await summarizeTextFromImage(jobDetails.doc_url);
+    if (data.error) setError(data.error);
+    else {
+      const { text, summarizedText } = data;
+      setJobDetails((state) => ({ ...state, summary: summarizedText.trim() }));
+      setJobDetails((state) => ({ ...state, description: text }));
+      setExtracting(false);
+      setStep(3);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -269,7 +271,7 @@ function CreateJob({ user }) {
                 <label>Job Category</label>
                 <input
                   type="text"
-                  placeholder="Eg: CS/IT"
+                  placeholder="Eg: CS"
                   name="category"
                   value={jobDetails.category}
                   onChange={handleJobDetailsChange}

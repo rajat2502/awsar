@@ -204,9 +204,13 @@ export const summarizeText = async (input) => {
 };
 
 export const summarizeTextFromImage = async (image, language) => {
-  const text = await extractText(image, language);
-  const summarizedText = await summarizeText(text);
-  return { text, summarizedText };
+  try {
+    const text = await extractText(image, language);
+    const summarizedText = await summarizeText(text);
+    return { text, summarizedText };
+  } catch (err) {
+    return { error: 'Something went wrong, Please try again!' };
+  }
 };
 
 export const getNews = async () => {
