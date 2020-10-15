@@ -27,8 +27,6 @@
 
 ### How to Get Started?
 
-#### GitHub Repository Structure
-
 #### To setup the project and run server locally:
 - `cd awsar` - to switch to frontend folder
 - `npm install` - to install npm modules
